@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "WPZuaI0kOhI=",
+  "success": true,
+  "projectFilePath": "D:\\clean\\Flowtap_API\\Flowtap_Application\\Flowtap_Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Rajan\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "C:\\Users\\Rajan\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\Rajan\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.10\\microsoft.extensions.configuration.abstractions.9.0.10.nupkg.sha512",
+    "C:\\Users\\Rajan\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.10\\microsoft.extensions.dependencyinjection.abstractions.9.0.10.nupkg.sha512",
+    "C:\\Users\\Rajan\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.10\\microsoft.extensions.primitives.9.0.10.nupkg.sha512"
+  ],
+  "logs": []
+}
