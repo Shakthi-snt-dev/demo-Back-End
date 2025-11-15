@@ -64,7 +64,9 @@ public class AppUserRepository : IAppUserRepository
     public async Task<AppUser> AddAsync(AppUser appUser, CancellationToken cancellationToken = default)
     {
         await _context.AppUsers.AddAsync(appUser, cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken);
+        var changes = await _context.SaveChangesAsync(cancellationToken);
+        Console.WriteLine($"[REPOSITORY] AppUserRepository.AddAsync - SaveChanges returned: {changes} changes");
+        Console.WriteLine($"[REPOSITORY] Database type: {_context.Database.ProviderName}");
         return appUser;
     }
 

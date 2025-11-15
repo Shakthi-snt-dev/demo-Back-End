@@ -21,18 +21,33 @@ namespace Flowtap_Infrastructure
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                throw new InvalidOperationException("Connection string 'DefaultConnection' is not configured. Please check appsettings.json");
+            }
+
             services.AddDbContext<AppDbContext>(options =>
             {
-                if (!string.IsNullOrEmpty(connectionString) && connectionString.Contains("postgres", StringComparison.OrdinalIgnoreCase))
+                // Always use PostgreSQL - no fallback to in-memory
+                Console.WriteLine($"[DATABASE] Configuring PostgreSQL connection...");
+                Console.WriteLine($"[DATABASE] Connection string: {connectionString.Replace("Password=744888", "Password=***")}");
+                
+                options.UseNpgsql(connectionString, npgsqlOptions =>
                 {
-                    options.UseNpgsql(connectionString);
-                }
-                else
-                {
-                    // Fallback to in-memory for development
-                    options.UseInMemoryDatabase("FlowtapDb");
-                }
+                    npgsqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 3,
+                        maxRetryDelay: TimeSpan.FromSeconds(5),
+                        errorCodesToAdd: null);
+                });
+                
+                // Enable detailed logging in development
+                #if DEBUG
+                options.EnableSensitiveDataLogging();
+                options.EnableDetailedErrors();
+                #endif
             });
+            
+            Console.WriteLine("[DATABASE] PostgreSQL configuration completed successfully.");
 
             // Register all repositories
             services.AddScoped<IUserAccountRepository, UserAccountRepository>();

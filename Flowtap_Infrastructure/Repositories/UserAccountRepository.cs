@@ -56,7 +56,9 @@ public class UserAccountRepository : IUserAccountRepository
     public async Task<UserAccount> AddAsync(UserAccount userAccount, CancellationToken cancellationToken = default)
     {
         await _context.UserAccounts.AddAsync(userAccount, cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken);
+        var changes = await _context.SaveChangesAsync(cancellationToken);
+        Console.WriteLine($"[REPOSITORY] UserAccountRepository.AddAsync - SaveChanges returned: {changes} changes");
+        Console.WriteLine($"[REPOSITORY] Database type: {_context.Database.ProviderName}");
         return userAccount;
     }
 

@@ -88,8 +88,9 @@ public class RegistrationService : IRegistrationService
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow
         };
-
-        await _userAccountRepository.AddAsync(userAccount);
+        Console.WriteLine($"[REGISTRATION] Creating UserAccount: {userAccount.Email}, ID: {userAccount.Id}");
+        var saveResult = await _userAccountRepository.AddAsync(userAccount);
+        Console.WriteLine($"[REGISTRATION] UserAccount saved successfully. Result ID: {saveResult.Id}");
 
         // Create AppUser (inactive until email verified)
         var appUser = new AppUser
@@ -100,8 +101,9 @@ public class RegistrationService : IRegistrationService
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow
         };
-
-        await _appUserRepository.AddAsync(appUser);
+        Console.WriteLine($"[REGISTRATION] Creating AppUser: {appUser.Email}, ID: {appUser.Id}");
+        var appUserResult = await _appUserRepository.AddAsync(appUser);
+        Console.WriteLine($"[REGISTRATION] AppUser saved successfully. Result ID: {appUserResult.Id}");
 
         // Link UserAccount to AppUser
         userAccount.AppUserId = appUser.Id;
