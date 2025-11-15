@@ -1,8 +1,9 @@
 using Flowtap_Application.Interfaces;
-using Flowtap_Domain.BoundedContexts.Integration.Entities;
+using IntegrationEntity = Flowtap_Domain.BoundedContexts.Integration.Entities.Integration;
 using Flowtap_Domain.BoundedContexts.Integration.Interfaces;
 using Flowtap_Domain.DtoModel;
 using Flowtap_Domain.Exceptions;
+using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
 namespace Flowtap_Application.Services;
@@ -43,7 +44,7 @@ public class IntegrationService : IIntegrationService
             { "syncInterval", request.SyncInterval }
         };
 
-        var integration = new Integration
+        var integration = new IntegrationEntity
         {
             Id = Guid.NewGuid(),
             AppUserId = request.AppUserId,
@@ -83,7 +84,7 @@ public class IntegrationService : IIntegrationService
             { "syncInterval", request.SyncInterval }
         };
 
-        var integration = new Integration
+        var integration = new IntegrationEntity
         {
             Id = Guid.NewGuid(),
             AppUserId = request.AppUserId,
@@ -225,7 +226,7 @@ public class IntegrationService : IIntegrationService
         return await _integrationRepository.DeleteAsync(id);
     }
 
-    private static IntegrationResponseDto MapToDto(Integration integration)
+    private static IntegrationResponseDto MapToDto(IntegrationEntity integration)
     {
         var settings = new Dictionary<string, object>();
         try

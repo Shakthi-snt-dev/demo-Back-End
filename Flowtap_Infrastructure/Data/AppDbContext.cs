@@ -11,6 +11,7 @@ using Flowtap_Domain.BoundedContexts.Inventory.Entities;
 using Flowtap_Domain.BoundedContexts.Service.Entities;
 using Flowtap_Domain.BoundedContexts.Integration.Entities;
 using Flowtap_Domain.SharedKernel.ValueObjects;
+using Flowtap_Domain.SharedKernel.Enums;
 
 namespace Flowtap_Infrastructure.Data;
 
@@ -82,7 +83,7 @@ public class AppDbContext : DbContext
             entity.Property(e => e.Email).IsRequired().HasMaxLength(320);
             entity.Property(e => e.Currency).HasDefaultValue("USD");
             entity.Property(e => e.TimeZone).HasDefaultValue("UTC");
-            entity.Property(e => e.TrialStatus).HasDefaultValue(SharedKernel.Enums.TrialStatus.NotStarted);
+            entity.Property(e => e.TrialStatus).HasDefaultValue(TrialStatus.NotStarted);
             
             // Configure Address as owned entity
             entity.OwnsOne(e => e.Address, a =>
@@ -141,8 +142,8 @@ public class AppDbContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.AppUserId).IsRequired();
             entity.Property(e => e.PlanName).IsRequired().HasMaxLength(200);
-            entity.Property(e => e.Status).HasDefaultValue(SharedKernel.Enums.SubscriptionStatus.Active);
-            entity.Property(e => e.BillingInterval).HasDefaultValue(SharedKernel.Enums.BillingInterval.Monthly);
+            entity.Property(e => e.Status).HasDefaultValue(SubscriptionStatus.Active);
+            entity.Property(e => e.BillingInterval).HasDefaultValue(BillingInterval.Monthly);
             entity.Property(e => e.PricePerMonth).HasPrecision(18, 2);
             entity.HasIndex(e => e.ExternalSubscriptionId).IsUnique().HasFilter("[ExternalSubscriptionId] IS NOT NULL");
         });

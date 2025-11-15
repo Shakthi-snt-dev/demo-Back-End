@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\clean\\Flowtap_API\\Flowtap_Configuration\\Flowtap_Configuration.csproj": {}
+    "D:\\Cursor_clean\\Flowtap_Configuration\\Flowtap_Configuration.csproj": {}
   },
   "projects": {
-    "D:\\clean\\Flowtap_API\\Flowtap_Application\\Flowtap_Application.csproj": {
+    "D:\\Cursor_clean\\Flowtap_Application\\Flowtap_Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\clean\\Flowtap_API\\Flowtap_Application\\Flowtap_Application.csproj",
+        "projectUniqueName": "D:\\Cursor_clean\\Flowtap_Application\\Flowtap_Application.csproj",
         "projectName": "Flowtap_Application",
-        "projectPath": "D:\\clean\\Flowtap_API\\Flowtap_Application\\Flowtap_Application.csproj",
+        "projectPath": "D:\\Cursor_clean\\Flowtap_Application\\Flowtap_Application.csproj",
         "packagesPath": "C:\\Users\\Rajan\\.nuget\\packages\\",
-        "outputPath": "D:\\clean\\Flowtap_API\\Flowtap_Application\\obj\\",
+        "outputPath": "D:\\Cursor_clean\\Flowtap_Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,7 +32,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Cursor_clean\\Flowtap_Domain\\Flowtap_Domain.csproj": {
+                "projectPath": "D:\\Cursor_clean\\Flowtap_Domain\\Flowtap_Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -55,6 +59,10 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
               "version": "[9.0.10, )"
@@ -62,6 +70,18 @@
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
               "version": "[9.0.10, )"
+            },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.10, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[8.14.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.14.0, )"
             }
           },
           "imports": [
@@ -84,14 +104,14 @@
         }
       }
     },
-    "D:\\clean\\Flowtap_API\\Flowtap_Configuration\\Flowtap_Configuration.csproj": {
+    "D:\\Cursor_clean\\Flowtap_Configuration\\Flowtap_Configuration.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\clean\\Flowtap_API\\Flowtap_Configuration\\Flowtap_Configuration.csproj",
+        "projectUniqueName": "D:\\Cursor_clean\\Flowtap_Configuration\\Flowtap_Configuration.csproj",
         "projectName": "Flowtap_Configuration",
-        "projectPath": "D:\\clean\\Flowtap_API\\Flowtap_Configuration\\Flowtap_Configuration.csproj",
+        "projectPath": "D:\\Cursor_clean\\Flowtap_Configuration\\Flowtap_Configuration.csproj",
         "packagesPath": "C:\\Users\\Rajan\\.nuget\\packages\\",
-        "outputPath": "D:\\clean\\Flowtap_API\\Flowtap_Configuration\\obj\\",
+        "outputPath": "D:\\Cursor_clean\\Flowtap_Configuration\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -113,14 +133,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\clean\\Flowtap_API\\Flowtap_Application\\Flowtap_Application.csproj": {
-                "projectPath": "D:\\clean\\Flowtap_API\\Flowtap_Application\\Flowtap_Application.csproj"
+              "D:\\Cursor_clean\\Flowtap_Application\\Flowtap_Application.csproj": {
+                "projectPath": "D:\\Cursor_clean\\Flowtap_Application\\Flowtap_Application.csproj"
               },
-              "D:\\clean\\Flowtap_API\\Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj": {
-                "projectPath": "D:\\clean\\Flowtap_API\\Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj"
-              },
-              "D:\\clean\\Flowtap_API\\Flowtap_Presentation\\Flowtap_Presentation.csproj": {
-                "projectPath": "D:\\clean\\Flowtap_API\\Flowtap_Presentation\\Flowtap_Presentation.csproj"
+              "D:\\Cursor_clean\\Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj": {
+                "projectPath": "D:\\Cursor_clean\\Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj"
               }
             }
           }
@@ -160,6 +177,10 @@
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[8.14.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.6.2, )"
             }
           },
           "imports": [
@@ -182,14 +203,14 @@
         }
       }
     },
-    "D:\\clean\\Flowtap_API\\Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj": {
+    "D:\\Cursor_clean\\Flowtap_Domain\\Flowtap_Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\clean\\Flowtap_API\\Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj",
-        "projectName": "Flowtap_Infrastructure",
-        "projectPath": "D:\\clean\\Flowtap_API\\Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj",
+        "projectUniqueName": "D:\\Cursor_clean\\Flowtap_Domain\\Flowtap_Domain.csproj",
+        "projectName": "Flowtap_Domain",
+        "projectPath": "D:\\Cursor_clean\\Flowtap_Domain\\Flowtap_Domain.csproj",
         "packagesPath": "C:\\Users\\Rajan\\.nuget\\packages\\",
-        "outputPath": "D:\\clean\\Flowtap_API\\Flowtap_Infrastructure\\obj\\",
+        "outputPath": "D:\\Cursor_clean\\Flowtap_Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -211,6 +232,76 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Cursor_clean\\Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Cursor_clean\\Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj",
+        "projectName": "Flowtap_Infrastructure",
+        "projectPath": "D:\\Cursor_clean\\Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Rajan\\.nuget\\packages\\",
+        "outputPath": "D:\\Cursor_clean\\Flowtap_Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Rajan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "D:\\Cursor_clean\\Flowtap_Domain\\Flowtap_Domain.csproj": {
+                "projectPath": "D:\\Cursor_clean\\Flowtap_Domain\\Flowtap_Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -233,13 +324,17 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.10, )"
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[8.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.10, )"
+              "version": "[8.0.11, )"
             },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
@@ -251,7 +346,7 @@
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[9.0.4, )"
+              "version": "[8.0.11, )"
             }
           },
           "imports": [
@@ -266,89 +361,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "D:\\clean\\Flowtap_API\\Flowtap_Presentation\\Flowtap_Presentation.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\clean\\Flowtap_API\\Flowtap_Presentation\\Flowtap_Presentation.csproj",
-        "projectName": "Flowtap_Presentation",
-        "projectPath": "D:\\clean\\Flowtap_API\\Flowtap_Presentation\\Flowtap_Presentation.csproj",
-        "packagesPath": "C:\\Users\\Rajan\\.nuget\\packages\\",
-        "outputPath": "D:\\clean\\Flowtap_API\\Flowtap_Presentation\\obj\\",
-        "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
-        "configFilePaths": [
-          "C:\\Users\\Rajan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-        ],
-        "originalTargetFrameworks": [
-          "net8.0"
-        ],
-        "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
-      },
-      "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
-          "dependencies": {
-            "Microsoft.Extensions.DependencyInjection.Abstractions": {
-              "target": "Package",
-              "version": "[9.0.10, )"
-            },
-            "Serilog.AspNetCore": {
-              "target": "Package",
-              "version": "[9.0.0, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.6.2, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

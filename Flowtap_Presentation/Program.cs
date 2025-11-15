@@ -50,6 +50,8 @@ app.UseCors("CustomCorsPolicy");
 // Exception handling middleware
 app.UseMiddleware<Flowtap_Middleware.ExceptionMiddleware.RecoveryHandler>();
 
+// Authentication and Authorization (only if configured)
+// These will work even if JWT is not configured (they'll just be no-ops)
 app.UseAuthentication();
 app.UseAuthorization();
 

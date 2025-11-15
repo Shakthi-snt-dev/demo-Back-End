@@ -1,5 +1,6 @@
 using Flowtap_Application.Interfaces;
 using Flowtap_Domain.BoundedContexts.Identity.Entities;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

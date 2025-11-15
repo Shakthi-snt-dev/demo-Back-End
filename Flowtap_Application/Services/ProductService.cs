@@ -3,6 +3,7 @@ using Flowtap_Domain.BoundedContexts.Inventory.Entities;
 using Flowtap_Domain.BoundedContexts.Inventory.Interfaces;
 using Flowtap_Domain.DtoModel;
 using Flowtap_Domain.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace Flowtap_Application.Services;
 

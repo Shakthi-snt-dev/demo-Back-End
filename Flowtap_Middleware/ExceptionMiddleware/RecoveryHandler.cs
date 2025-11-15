@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Flowtap_Domain.Exceptions;
 
 namespace Flowtap_Middleware.ExceptionMiddleware;
@@ -65,7 +66,7 @@ public class RecoveryHandler
                 HttpStatusCode.BadRequest,
                 new HttpResponse("VALIDATION_ERROR", validation.GetMessage())
             ),
-            ApplicationException appEx => new ExceptionResponse(
+            Flowtap_Domain.Exceptions.ApplicationException appEx => new ExceptionResponse(
                 HttpStatusCode.BadRequest,
                 new HttpResponse("APPLICATION_ERROR", appEx.GetMessage())
             ),

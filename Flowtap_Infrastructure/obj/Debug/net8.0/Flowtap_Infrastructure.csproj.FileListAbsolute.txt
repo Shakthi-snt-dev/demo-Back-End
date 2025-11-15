@@ -1,0 +1,17 @@
+D:\Cursor_clean\Flowtap_Infrastructure\bin\Debug\net8.0\Flowtap_Infrastructure.deps.json
+D:\Cursor_clean\Flowtap_Infrastructure\bin\Debug\net8.0\Flowtap_Infrastructure.runtimeconfig.json
+D:\Cursor_clean\Flowtap_Infrastructure\bin\Debug\net8.0\Flowtap_Infrastructure.dll
+D:\Cursor_clean\Flowtap_Infrastructure\bin\Debug\net8.0\Flowtap_Infrastructure.pdb
+D:\Cursor_clean\Flowtap_Infrastructure\bin\Debug\net8.0\Flowtap_Domain.dll
+D:\Cursor_clean\Flowtap_Infrastructure\bin\Debug\net8.0\Flowtap_Domain.pdb
+D:\Cursor_clean\Flowtap_Infrastructure\obj\Debug\net8.0\Flowtap_Infrastructure.csproj.AssemblyReference.cache
+D:\Cursor_clean\Flowtap_Infrastructure\obj\Debug\net8.0\Flowtap_Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Cursor_clean\Flowtap_Infrastructure\obj\Debug\net8.0\Flowtap_Infrastructure.AssemblyInfoInputs.cache
+D:\Cursor_clean\Flowtap_Infrastructure\obj\Debug\net8.0\Flowtap_Infrastructure.AssemblyInfo.cs
+D:\Cursor_clean\Flowtap_Infrastructure\obj\Debug\net8.0\Flowtap_Infrastructure.csproj.CoreCompileInputs.cache
+D:\Cursor_clean\Flowtap_Infrastructure\obj\Debug\net8.0\Flowtap_.44EEDACA.Up2Date
+D:\Cursor_clean\Flowtap_Infrastructure\obj\Debug\net8.0\Flowtap_Infrastructure.dll
+D:\Cursor_clean\Flowtap_Infrastructure\obj\Debug\net8.0\refint\Flowtap_Infrastructure.dll
+D:\Cursor_clean\Flowtap_Infrastructure\obj\Debug\net8.0\Flowtap_Infrastructure.pdb
+D:\Cursor_clean\Flowtap_Infrastructure\obj\Debug\net8.0\Flowtap_Infrastructure.genruntimeconfig.cache
+D:\Cursor_clean\Flowtap_Infrastructure\obj\Debug\net8.0\ref\Flowtap_Infrastructure.dll

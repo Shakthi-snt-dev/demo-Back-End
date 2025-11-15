@@ -3,6 +3,7 @@ using Flowtap_Domain.BoundedContexts.Identity.Interfaces;
 using Flowtap_Domain.BoundedContexts.Owner.Interfaces;
 using Flowtap_Domain.DtoModel;
 using Flowtap_Domain.Exceptions;
+using Microsoft.Extensions.Logging;
 using System.Security.Cryptography;
 using System.Text;
 

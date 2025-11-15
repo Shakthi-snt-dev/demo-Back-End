@@ -1,7 +1,6 @@
 ﻿using Flowtap_Application;
 using Flowtap_Application.Mapping;
 using Flowtap_Infrastructure;
-using Flowtap_Presentation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,8 +21,8 @@ namespace Flowtap_Configuration
             #region Infrastructure
             services.AddInfrastructure(configuration);
             #endregion
-            #region Presentation
-            services.AddPresentation();
+            #region Controllers
+            services.AddControllers();
             #endregion
             services.AddEndpointsApiExplorer();
             #region ConfigCors
@@ -64,11 +63,32 @@ namespace Flowtap_Configuration
 
             });
             #endregion
+            #region ConfigAuthorization
+            // Always add authorization services (required for UseAuthorization middleware)
+            services.AddAuthorization();
+            #endregion
+
             #region ConfigJwtAsymmetric
+            var publicKeyPath = configuration.GetValue<string>("Tokens:PublicKey");
+            if (string.IsNullOrWhiteSpace(publicKeyPath))
+            {
+                // If no public key path is configured, add authentication without JWT
+                // This allows the app to run without JWT keys for development
+                services.AddAuthentication();
+                return services;
+            }
+
             RSA publicRsa = RSA.Create();
             var filePath = Path.Combine(Directory.GetCurrentDirectory(),
                 "Keys",
-                configuration.GetValue<string>("Tokens:PublicKey"));
+                publicKeyPath);
+            
+            if (!File.Exists(filePath))
+            {
+                // If key file doesn't exist, skip JWT configuration
+                return services;
+            }
+
             var data = File.ReadAllText(filePath);
             publicRsa.ImportFromPem(data);
             RsaSecurityKey signingKey = new RsaSecurityKey(publicRsa);

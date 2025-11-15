@@ -2,7 +2,7 @@ using Flowtap_Application.Interfaces;
 using Flowtap_Domain.BoundedContexts.Sales.Interfaces;
 using Flowtap_Domain.BoundedContexts.Inventory.Interfaces;
 using Flowtap_Domain.DtoModel;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Flowtap_Application.Services;
 

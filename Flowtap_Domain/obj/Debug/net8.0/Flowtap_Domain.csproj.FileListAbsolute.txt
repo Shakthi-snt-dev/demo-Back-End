@@ -1,0 +1,11 @@
+D:\Cursor_clean\Flowtap_Domain\bin\Debug\net8.0\Flowtap_Domain.deps.json
+D:\Cursor_clean\Flowtap_Domain\bin\Debug\net8.0\Flowtap_Domain.dll
+D:\Cursor_clean\Flowtap_Domain\bin\Debug\net8.0\Flowtap_Domain.pdb
+D:\Cursor_clean\Flowtap_Domain\obj\Debug\net8.0\Flowtap_Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Cursor_clean\Flowtap_Domain\obj\Debug\net8.0\Flowtap_Domain.AssemblyInfoInputs.cache
+D:\Cursor_clean\Flowtap_Domain\obj\Debug\net8.0\Flowtap_Domain.AssemblyInfo.cs
+D:\Cursor_clean\Flowtap_Domain\obj\Debug\net8.0\Flowtap_Domain.csproj.CoreCompileInputs.cache
+D:\Cursor_clean\Flowtap_Domain\obj\Debug\net8.0\Flowtap_Domain.dll
+D:\Cursor_clean\Flowtap_Domain\obj\Debug\net8.0\refint\Flowtap_Domain.dll
+D:\Cursor_clean\Flowtap_Domain\obj\Debug\net8.0\Flowtap_Domain.pdb
+D:\Cursor_clean\Flowtap_Domain\obj\Debug\net8.0\ref\Flowtap_Domain.dll

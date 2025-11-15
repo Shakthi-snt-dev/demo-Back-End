@@ -25,7 +25,7 @@ public class ApplicationException : Exception
     {
         if (Identifiers.Count == 0 && string.IsNullOrEmpty(Email))
         {
-            return Message ?? base.Message;
+            return Message ?? base.Message ?? string.Empty;
         }
 
         var message = string.IsNullOrEmpty(EntityName) ? "Entity" : EntityName;

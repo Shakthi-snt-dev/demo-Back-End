@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Flowtap_Domain.BoundedContexts.Store.Entities;
+using StoreEntity = Flowtap_Domain.BoundedContexts.Store.Entities.Store;
 using Flowtap_Domain.BoundedContexts.Store.Interfaces;
 using Flowtap_Infrastructure.Data;
 
@@ -14,14 +14,14 @@ public class StoreRepository : IStoreRepository
         _context = context;
     }
 
-    public async Task<Store?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<StoreEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await _context.Stores
             .Include(s => s.Settings)
             .FirstOrDefaultAsync(s => s.Id == id, cancellationToken);
     }
 
-    public async Task<IEnumerable<Store>> GetByAppUserIdAsync(Guid appUserId, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<StoreEntity>> GetByAppUserIdAsync(Guid appUserId, CancellationToken cancellationToken = default)
     {
         return await _context.Stores
             .Include(s => s.Settings)
@@ -29,7 +29,7 @@ public class StoreRepository : IStoreRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<IEnumerable<Store>> GetByStoreTypeAsync(string storeType, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<StoreEntity>> GetByStoreTypeAsync(string storeType, CancellationToken cancellationToken = default)
     {
         return await _context.Stores
             .Include(s => s.Settings)
@@ -37,7 +37,7 @@ public class StoreRepository : IStoreRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<IEnumerable<Store>> GetByStoreCategoryAsync(string category, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<StoreEntity>> GetByStoreCategoryAsync(string category, CancellationToken cancellationToken = default)
     {
         return await _context.Stores
             .Include(s => s.Settings)
@@ -45,14 +45,14 @@ public class StoreRepository : IStoreRepository
             .ToListAsync(cancellationToken);
     }
 
-    public async Task<Store> AddAsync(Store store, CancellationToken cancellationToken = default)
+    public async Task<StoreEntity> AddAsync(StoreEntity store, CancellationToken cancellationToken = default)
     {
         await _context.Stores.AddAsync(store, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
         return store;
     }
 
-    public async Task UpdateAsync(Store store, CancellationToken cancellationToken = default)
+    public async Task UpdateAsync(StoreEntity store, CancellationToken cancellationToken = default)
     {
         _context.Stores.Update(store);
         await _context.SaveChangesAsync(cancellationToken);

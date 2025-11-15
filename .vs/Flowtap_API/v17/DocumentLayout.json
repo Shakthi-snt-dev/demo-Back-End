@@ -1,0 +1,143 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Git\\demo-Back-End\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{393B2F65-DD7A-4E73-B02B-2A117F472C35}|Flowtap_Test\\Flowtap_Test.csproj|d:\\git\\demo-back-end\\flowtap_test\\flowtap_test.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{393B2F65-DD7A-4E73-B02B-2A117F472C35}|Flowtap_Test\\Flowtap_Test.csproj|solutionrelative:flowtap_test\\flowtap_test.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD7CF563-F5F2-425E-AFE1-56A44E30D248}|Flowtap_Presentation\\Flowtap_Presentation.csproj|d:\\git\\demo-back-end\\flowtap_presentation\\flowtap_presentation.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{BD7CF563-F5F2-425E-AFE1-56A44E30D248}|Flowtap_Presentation\\Flowtap_Presentation.csproj|solutionrelative:flowtap_presentation\\flowtap_presentation.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{348A2586-D5CF-4ADF-AB6F-7A582AD9465D}|Flowtap_Middleware\\Flowtap_Middleware.csproj|d:\\git\\demo-back-end\\flowtap_middleware\\flowtap_middleware.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{348A2586-D5CF-4ADF-AB6F-7A582AD9465D}|Flowtap_Middleware\\Flowtap_Middleware.csproj|solutionrelative:flowtap_middleware\\flowtap_middleware.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{59BFDD83-0CEA-47E8-B17A-02C8916C138F}|Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj|d:\\git\\demo-back-end\\flowtap_infrastructure\\flowtap_infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{59BFDD83-0CEA-47E8-B17A-02C8916C138F}|Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj|solutionrelative:flowtap_infrastructure\\flowtap_infrastructure.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{434E9483-D5C2-4363-B1F1-C7D662860E07}|Flowtap_Domain\\Flowtap_Domain.csproj|d:\\git\\demo-back-end\\flowtap_domain\\flowtap_domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{434E9483-D5C2-4363-B1F1-C7D662860E07}|Flowtap_Domain\\Flowtap_Domain.csproj|solutionrelative:flowtap_domain\\flowtap_domain.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD4F6F1D-F95B-482C-940E-237DEE05122A}|Flowtap_Configuration\\Flowtap_Configuration.csproj|d:\\git\\demo-back-end\\flowtap_configuration\\flowtap_configuration.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{BD4F6F1D-F95B-482C-940E-237DEE05122A}|Flowtap_Configuration\\Flowtap_Configuration.csproj|solutionrelative:flowtap_configuration\\flowtap_configuration.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{963DA843-17E1-40A2-96D7-F3794A7025DF}|Flowtap_Application\\Flowtap_Application.csproj|d:\\git\\demo-back-end\\flowtap_application\\flowtap_application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{963DA843-17E1-40A2-96D7-F3794A7025DF}|Flowtap_Application\\Flowtap_Application.csproj|solutionrelative:flowtap_application\\flowtap_application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Flowtap_Test",
+              "DocumentMoniker": "D:\\Git\\demo-Back-End\\Flowtap_Test\\Flowtap_Test.csproj",
+              "RelativeDocumentMoniker": "Flowtap_Test\\Flowtap_Test.csproj",
+              "ToolTip": "D:\\Git\\demo-Back-End\\Flowtap_Test\\Flowtap_Test.csproj",
+              "RelativeToolTip": "Flowtap_Test\\Flowtap_Test.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-14T18:44:51.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Flowtap_Presentation",
+              "DocumentMoniker": "D:\\Git\\demo-Back-End\\Flowtap_Presentation\\Flowtap_Presentation.csproj",
+              "RelativeDocumentMoniker": "Flowtap_Presentation\\Flowtap_Presentation.csproj",
+              "ToolTip": "D:\\Git\\demo-Back-End\\Flowtap_Presentation\\Flowtap_Presentation.csproj",
+              "RelativeToolTip": "Flowtap_Presentation\\Flowtap_Presentation.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-14T18:44:47.516Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Flowtap_Middleware",
+              "DocumentMoniker": "D:\\Git\\demo-Back-End\\Flowtap_Middleware\\Flowtap_Middleware.csproj",
+              "RelativeDocumentMoniker": "Flowtap_Middleware\\Flowtap_Middleware.csproj",
+              "ToolTip": "D:\\Git\\demo-Back-End\\Flowtap_Middleware\\Flowtap_Middleware.csproj",
+              "RelativeToolTip": "Flowtap_Middleware\\Flowtap_Middleware.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-14T18:44:45.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Flowtap_Infrastructure",
+              "DocumentMoniker": "D:\\Git\\demo-Back-End\\Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj",
+              "RelativeDocumentMoniker": "Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj",
+              "ToolTip": "D:\\Git\\demo-Back-End\\Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj",
+              "RelativeToolTip": "Flowtap_Infrastructure\\Flowtap_Infrastructure.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-14T18:44:42.707Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Flowtap_Domain",
+              "DocumentMoniker": "D:\\Git\\demo-Back-End\\Flowtap_Domain\\Flowtap_Domain.csproj",
+              "RelativeDocumentMoniker": "Flowtap_Domain\\Flowtap_Domain.csproj",
+              "ToolTip": "D:\\Git\\demo-Back-End\\Flowtap_Domain\\Flowtap_Domain.csproj",
+              "RelativeToolTip": "Flowtap_Domain\\Flowtap_Domain.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-14T18:44:40.175Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Flowtap_Configuration",
+              "DocumentMoniker": "D:\\Git\\demo-Back-End\\Flowtap_Configuration\\Flowtap_Configuration.csproj",
+              "RelativeDocumentMoniker": "Flowtap_Configuration\\Flowtap_Configuration.csproj",
+              "ToolTip": "D:\\Git\\demo-Back-End\\Flowtap_Configuration\\Flowtap_Configuration.csproj",
+              "RelativeToolTip": "Flowtap_Configuration\\Flowtap_Configuration.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-14T18:44:33.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Flowtap_Application",
+              "DocumentMoniker": "D:\\Git\\demo-Back-End\\Flowtap_Application\\Flowtap_Application.csproj",
+              "RelativeDocumentMoniker": "Flowtap_Application\\Flowtap_Application.csproj",
+              "ToolTip": "D:\\Git\\demo-Back-End\\Flowtap_Application\\Flowtap_Application.csproj",
+              "RelativeToolTip": "Flowtap_Application\\Flowtap_Application.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-14T18:43:37.426Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 using Flowtap_Application.Interfaces;
 using Flowtap_Domain.BoundedContexts.Owner.Interfaces;
 using Flowtap_Domain.BoundedContexts.Store.Interfaces;
+using Flowtap_Domain.BoundedContexts.Identity.Interfaces;
 using Flowtap_Domain.DtoModel;
 using Flowtap_Domain.Exceptions;
+using Microsoft.Extensions.Logging;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -58,7 +60,7 @@ public class SettingsService : ISettingsService
             Payment = new PaymentSettingsDto(),
             Security = new SecuritySettingsDto
             {
-                TwoFactorEnabled = userAccount?.IsTwoFactorEnabled ?? false
+                TwoFactorEnabled = userAccount?.TwoFactorEnabled ?? false
             }
         };
     }
@@ -130,7 +132,7 @@ public class SettingsService : ISettingsService
 
         var userAccount = await _userAccountRepository.GetByEmailAsync(appUser.Email);
         if (userAccount == null)
-            throw new EntityNotFoundException("UserAccount", appUser.Email);
+            throw new EntityNotFoundException("UserAccount", Guid.Empty);
 
         // Validate current password
         using var sha256 = SHA256.Create();
@@ -161,7 +163,7 @@ public class SettingsService : ISettingsService
 
         var userAccount = await _userAccountRepository.GetByEmailAsync(appUser.Email);
         if (userAccount == null)
-            throw new EntityNotFoundException("UserAccount", appUser.Email);
+            throw new EntityNotFoundException("UserAccount", Guid.Empty);
 
         userAccount.EnableTwoFactor();
         await _userAccountRepository.UpdateAsync(userAccount);

@@ -11,6 +11,7 @@ using Flowtap_Domain.DtoModel;
 using Flowtap_Domain.Exceptions;
 using Flowtap_Domain.SharedKernel.Enums;
 using Flowtap_Domain.SharedKernel.ValueObjects;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using System.Security.Cryptography;
 using System.Text;
