@@ -4197,11 +4197,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Cursor_clean\\Flowtap_Presentation\\Flowtap_Presentation.csproj",
+      "projectUniqueName": "D:\\Git\\demo-Back-End\\Flowtap_Presentation\\Flowtap_Presentation.csproj",
       "projectName": "Flowtap_Presentation",
-      "projectPath": "D:\\Cursor_clean\\Flowtap_Presentation\\Flowtap_Presentation.csproj",
+      "projectPath": "D:\\Git\\demo-Back-End\\Flowtap_Presentation\\Flowtap_Presentation.csproj",
       "packagesPath": "C:\\Users\\Rajan\\.nuget\\packages\\",
-      "outputPath": "D:\\Cursor_clean\\Flowtap_Presentation\\obj\\",
+      "outputPath": "D:\\Git\\demo-Back-End\\Flowtap_Presentation\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4223,14 +4223,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\Cursor_clean\\Flowtap_Application\\Flowtap_Application.csproj": {
-              "projectPath": "D:\\Cursor_clean\\Flowtap_Application\\Flowtap_Application.csproj"
+            "D:\\Git\\demo-Back-End\\Flowtap_Application\\Flowtap_Application.csproj": {
+              "projectPath": "D:\\Git\\demo-Back-End\\Flowtap_Application\\Flowtap_Application.csproj"
             },
-            "D:\\Cursor_clean\\Flowtap_Configuration\\Flowtap_Configuration.csproj": {
-              "projectPath": "D:\\Cursor_clean\\Flowtap_Configuration\\Flowtap_Configuration.csproj"
+            "D:\\Git\\demo-Back-End\\Flowtap_Configuration\\Flowtap_Configuration.csproj": {
+              "projectPath": "D:\\Git\\demo-Back-End\\Flowtap_Configuration\\Flowtap_Configuration.csproj"
             },
-            "D:\\Cursor_clean\\Flowtap_Middleware\\Flowtap_Middleware.csproj": {
-              "projectPath": "D:\\Cursor_clean\\Flowtap_Middleware\\Flowtap_Middleware.csproj"
+            "D:\\Git\\demo-Back-End\\Flowtap_Middleware\\Flowtap_Middleware.csproj": {
+              "projectPath": "D:\\Git\\demo-Back-End\\Flowtap_Middleware\\Flowtap_Middleware.csproj"
             }
           }
         }

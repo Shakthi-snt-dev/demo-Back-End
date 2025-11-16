@@ -9,9 +9,9 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbConte
 {
     public AppDbContext CreateDbContext(string[] args)
     {
-        // Build configuration from appsettings.json
+        // Build configuration from appsettings.json in the startup project (Flowtap_Presentation)
         var configuration = new ConfigurationBuilder()
-            .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "..", "Flowtap_Configuration"))
+            .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "..", "Flowtap_Presentation"))
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
             .Build();

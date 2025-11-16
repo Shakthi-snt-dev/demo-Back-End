@@ -4,6 +4,7 @@ using Flowtap_Domain.BoundedContexts.Owner.Interfaces;
 using Flowtap_Domain.DtoModel;
 using Flowtap_Domain.Exceptions;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -82,8 +83,15 @@ public class LoginService : ILoginService
             ? await _appUserRepository.GetByIdAsync(userAccount.AppUserId.Value)
             : null;
 
-        // Generate JWT token
-        var token = _jwtService.GenerateToken(userAccount);
+        // Get primary store ID (first store from StoreIds collection)
+        Guid? primaryStoreId = null;
+        if (appUser != null && appUser.StoreIds != null && appUser.StoreIds.Any())
+        {
+            primaryStoreId = appUser.StoreIds.FirstOrDefault();
+        }
+
+        // Generate JWT token with store ID
+        var token = _jwtService.GenerateToken(userAccount, userAccount.AppUserId, primaryStoreId);
 
         _logger.LogInformation("Successful login for email: {Email}, UserId: {UserId}", request.Email, userAccount.Id);
 

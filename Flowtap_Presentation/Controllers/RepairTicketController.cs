@@ -184,7 +184,7 @@ public class RepairTicketController : ControllerBase
             return Ok(ApiResponseDto<object>.Failure("Ticket not found", null));
         }
 
-        return Ok(ApiResponseDto<object>.Success(null, "Ticket deleted successfully"));
+        return Ok(ApiResponseDto<object?>.Success(null, "Ticket deleted successfully"));
     }
 }
 

@@ -170,7 +170,7 @@ public class OrderController : ControllerBase
             return Ok(ApiResponseDto<object>.Failure("Order not found", null));
         }
 
-        return Ok(ApiResponseDto<object>.Success(null, "Order deleted successfully"));
+        return Ok(ApiResponseDto<object?>.Success(null, "Order deleted successfully"));
     }
 }
 

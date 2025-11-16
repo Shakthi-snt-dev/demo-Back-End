@@ -173,7 +173,7 @@ public class IntegrationController : ControllerBase
             return Ok(ApiResponseDto<object>.Failure("Integration not found", null));
         }
 
-        return Ok(ApiResponseDto<object>.Success(null, "Integration deleted successfully"));
+        return Ok(ApiResponseDto<object?>.Success(null, "Integration deleted successfully"));
     }
 }
 

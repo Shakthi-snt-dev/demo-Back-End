@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EoDmk+3sKw4=",
+  "dgSpecHash": "Y2jDvVK+D80=",
   "success": true,
-  "projectFilePath": "D:\\Cursor_clean\\Flowtap_Configuration\\Flowtap_Configuration.csproj",
+  "projectFilePath": "D:\\Git\\demo-Back-End\\Flowtap_Configuration\\Flowtap_Configuration.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rajan\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\Rajan\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

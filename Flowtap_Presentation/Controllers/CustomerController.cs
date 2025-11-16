@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Flowtap_Application.Interfaces;
 using Flowtap_Domain.DtoModel;
+using System.Security.Claims;
 
 namespace Flowtap_Presentation.Controllers;
 
@@ -29,6 +30,21 @@ public class CustomerController : ControllerBase
         if (!ModelState.IsValid)
         {
             return Ok(ApiResponseDto<CustomerResponseDto>.Failure("Invalid request data", null));
+        }
+
+        // Extract storeId from JWT token claims
+        var storeIdClaim = User.FindFirst("store_id")?.Value;
+        if (string.IsNullOrEmpty(storeIdClaim) || !Guid.TryParse(storeIdClaim, out var storeId))
+        {
+            return BadRequest(ApiResponseDto<CustomerResponseDto>.Failure("StoreId is required. Please ensure you are authenticated and have a valid store.", null));
+        }
+
+        // Override request.StoreId with the one from token
+        request.StoreId = storeId;
+
+        if (string.IsNullOrWhiteSpace(request.Name))
+        {
+            return BadRequest(ApiResponseDto<CustomerResponseDto>.Failure("Name is required", null));
         }
 
         var result = await _customerService.CreateCustomerAsync(request);
@@ -124,7 +140,7 @@ public class CustomerController : ControllerBase
             return Ok(ApiResponseDto<object>.Failure("Customer not found", null));
         }
 
-        return Ok(ApiResponseDto<object>.Success(null, "Customer deleted successfully"));
+        return Ok(ApiResponseDto<object?>.Success(null, "Customer deleted successfully"));
     }
 }
 

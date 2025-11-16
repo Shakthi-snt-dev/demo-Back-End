@@ -162,7 +162,7 @@ public class ProductController : ControllerBase
             return Ok(ApiResponseDto<object>.Failure("Product not found", null));
         }
 
-        return Ok(ApiResponseDto<object>.Success(null, "Product deleted successfully"));
+        return Ok(ApiResponseDto<object?>.Success(null, "Product deleted successfully"));
     }
 }
 

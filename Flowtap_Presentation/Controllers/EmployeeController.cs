@@ -141,7 +141,7 @@ public class EmployeeController : ControllerBase
             return Ok(ApiResponseDto<object>.Failure("Employee not found", null));
         }
 
-        return Ok(ApiResponseDto<object>.Success(null, "Employee deleted successfully"));
+        return Ok(ApiResponseDto<object?>.Success(null, "Employee deleted successfully"));
     }
 }
 

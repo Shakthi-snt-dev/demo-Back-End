@@ -107,7 +107,7 @@ public class SettingsController : ControllerBase
         }
 
         var result = await _settingsService.UpdatePasswordAsync(appUserId, request);
-        return Ok(ApiResponseDto<object>.Success(null, "Password updated successfully"));
+        return Ok(ApiResponseDto<object?>.Success(null, "Password updated successfully"));
     }
 
     /// <summary>
@@ -118,7 +118,7 @@ public class SettingsController : ControllerBase
     public async Task<ActionResult<ApiResponseDto<object>>> EnableTwoFactor(Guid appUserId)
     {
         var result = await _settingsService.EnableTwoFactorAsync(appUserId);
-        return Ok(ApiResponseDto<object>.Success(null, "Two-factor authentication enabled successfully"));
+        return Ok(ApiResponseDto<object?>.Success(null, "Two-factor authentication enabled successfully"));
     }
 }
 

@@ -4,7 +4,7 @@ namespace Flowtap_Domain.DtoModel;
 
 public class CreateCustomerRequestDto
 {
-    [Required]
+    // StoreId is optional - will be extracted from JWT token if not provided
     public Guid StoreId { get; set; }
 
     [Required, MaxLength(200)]

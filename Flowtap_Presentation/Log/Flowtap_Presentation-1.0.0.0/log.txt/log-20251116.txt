@@ -1,0 +1,527 @@
+2025-11-16 13:44:25.265 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-16 13:44:25.297 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-16 13:44:25.300 +05:30 [INF] Hosting environment: Development
+2025-11-16 13:44:25.301 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-16 13:44:50.488 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/index.html - null null
+2025-11-16 13:44:50.706 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/index.html - 200 null text/html;charset=utf-8 220.1066ms
+2025-11-16 13:44:50.869 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - null null
+2025-11-16 13:44:51.285 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 416.2749ms
+2025-11-16 13:45:21.923 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/Auth/login - null null
+2025-11-16 13:45:21.940 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-11-16 13:45:21.946 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:45:21.951 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/Auth/login - 204 null null 27.9321ms
+2025-11-16 13:45:21.965 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/Auth/login - application/json 54
+2025-11-16 13:45:21.982 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:45:22.000 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation)'
+2025-11-16 13:45:22.084 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.LoginResponseDto]]] Login(Flowtap_Domain.DtoModel.LoginRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-16 13:45:24.126 +05:30 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-11-16 13:45:24.170 +05:30 [WRN] The property 'AppUser.StoreIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-16 13:45:24.175 +05:30 [WRN] The property 'AppUserAdmin.Permissions' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-16 13:45:24.177 +05:30 [WRN] The property 'Store.EmployeeIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-16 13:45:25.022 +05:30 [INF] Executed DbCommand (66ms) [Parameters=[@__email_0='shakthi@snt.group.ca'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-16 13:45:25.083 +05:30 [WRN] Login attempt with non-existent email: shakthi@snt.group.ca
+2025-11-16 13:45:25.091 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.LoginResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-16 13:45:25.149 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation) in 3052.5556ms
+2025-11-16 13:45:25.153 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation)'
+2025-11-16 13:45:25.165 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/Auth/login - 200 null application/json; charset=utf-8 3200.0965ms
+2025-11-16 13:45:36.718 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/Auth/login - null null
+2025-11-16 13:45:36.727 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:45:36.734 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/Auth/login - 204 null null 16.1796ms
+2025-11-16 13:45:36.744 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/Auth/login - application/json 54
+2025-11-16 13:45:36.753 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:45:36.757 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation)'
+2025-11-16 13:45:36.761 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.LoginResponseDto]]] Login(Flowtap_Domain.DtoModel.LoginRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-16 13:45:36.815 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__email_0='shakthi@snt.group.ca'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-16 13:45:36.822 +05:30 [WRN] Login attempt with non-existent email: shakthi@snt.group.ca
+2025-11-16 13:45:36.825 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.LoginResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-16 13:45:36.828 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation) in 59.8324ms
+2025-11-16 13:45:36.834 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation)'
+2025-11-16 13:45:36.836 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/Auth/login - 200 null application/json; charset=utf-8 92.0869ms
+2025-11-16 13:46:27.379 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/Auth/register - null null
+2025-11-16 13:46:27.386 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:46:27.388 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/Auth/register - 204 null null 9.1831ms
+2025-11-16 13:46:27.397 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/Auth/register - application/json 118
+2025-11-16 13:46:27.404 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:46:27.408 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-16 13:46:27.423 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.RegisterResponseDto]]] Register(Flowtap_Domain.DtoModel.RegisterRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-16 13:46:27.548 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__email_0='antonyraj.snt.work@gmail.com'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-16 13:46:27.586 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__username_0='AntonyRaj'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "UserAccounts" AS u
+    WHERE u."Username" = @__username_0)
+2025-11-16 13:46:27.840 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@p0='0f005a44-0365-46b0-88bd-5fac0d778ce2', @p1=NULL (DbType = Guid), @p2='2025-11-16T08:16:27.6155016Z' (DbType = DateTime), @p3='antonyraj.snt.work@gmail.com' (Nullable = false), @p4='ZxGUbB7dHFyqPysDHTjFuGFhDtDh8Zw72jLU4C5Wgjk', @p5='2025-11-17T08:16:27.6152007Z' (Nullable = true) (DbType = DateTime), @p6=NULL (DbType = Guid), @p7=NULL, @p8=NULL, @p9='True', @p10='False', @p11=NULL (DbType = DateTime), @p12='UzFscISecsDwHck6TXpRAbs7FheRwBkKc3/HL+vpE8A=' (Nullable = false), @p13='jGVnbqHVL+QkbqCSSURGvQ==', @p14='False', @p15='2025-11-16T08:16:27.6155185Z' (DbType = DateTime), @p16='0', @p17='AntonyRaj'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UserAccounts" ("Id", "AppUserId", "CreatedAt", "Email", "EmailVerificationToken", "EmailVerificationTokenExpiry", "EmployeeId", "ExternalProvider", "ExternalProviderId", "IsActive", "IsEmailVerified", "LastLoginAt", "PasswordHash", "PasswordSalt", "TwoFactorEnabled", "UpdatedAt", "UserType", "Username")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17);
+2025-11-16 13:46:27.962 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@p0='d916a4a1-34cd-43e1-a02b-0e6bb9e1df6d', @p1=NULL, @p2=NULL, @p3='2025-11-16T08:16:27.8570801Z' (DbType = DateTime), @p4='USD' (Nullable = false), @p5='antonyraj.snt.work@gmail.com' (Nullable = false), @p6=NULL, @p7=NULL, @p8=NULL, @p9='' (Nullable = false), @p10=NULL (DbType = Guid), @p11='UTC' (Nullable = false), @p12=NULL (DbType = DateTime), @p13=NULL (DbType = DateTime), @p14='2025-11-16T08:16:27.8571054Z' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AppUsers" ("Id", "BusinessName", "Country", "CreatedAt", "Currency", "Email", "FirstName", "LastName", "PhoneNumber", "StoreIds", "SubscriptionId", "TimeZone", "TrialEndDate", "TrialStartDate", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14)
+RETURNING "TrialStatus";
+2025-11-16 13:46:28.002 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p17='0f005a44-0365-46b0-88bd-5fac0d778ce2', @p0='d916a4a1-34cd-43e1-a02b-0e6bb9e1df6d' (Nullable = true), @p1='2025-11-16T08:16:27.6155016Z' (DbType = DateTime), @p2='antonyraj.snt.work@gmail.com' (Nullable = false), @p3='ZxGUbB7dHFyqPysDHTjFuGFhDtDh8Zw72jLU4C5Wgjk', @p4='2025-11-17T08:16:27.6152007Z' (Nullable = true) (DbType = DateTime), @p5=NULL (DbType = Guid), @p6=NULL, @p7=NULL, @p8='True', @p9='False', @p10=NULL (DbType = DateTime), @p11='UzFscISecsDwHck6TXpRAbs7FheRwBkKc3/HL+vpE8A=' (Nullable = false), @p12='jGVnbqHVL+QkbqCSSURGvQ==', @p13='False', @p14='2025-11-16T08:16:27.6155185Z' (DbType = DateTime), @p15='0', @p16='AntonyRaj'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-16 13:46:28.011 +05:30 [INF] Sending verification email to antonyraj.snt.work@gmail.com with link: http://localhost:5000/api/auth/verify-email?token=ZxGUbB7dHFyqPysDHTjFuGFhDtDh8Zw72jLU4C5Wgjk
+2025-11-16 13:46:28.119 +05:30 [INF] Verification email sent successfully to antonyraj.snt.work@gmail.com
+2025-11-16 13:46:28.125 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.RegisterResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-16 13:46:28.133 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation) in 703.316ms
+2025-11-16 13:46:28.138 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-16 13:46:28.140 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/Auth/register - 200 null application/json; charset=utf-8 743.1073ms
+2025-11-16 13:46:39.941 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/Auth/login - null null
+2025-11-16 13:46:39.945 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:46:39.948 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/Auth/login - 204 null null 6.0595ms
+2025-11-16 13:46:39.954 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/Auth/login - application/json 64
+2025-11-16 13:46:39.958 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:46:39.960 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation)'
+2025-11-16 13:46:39.961 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.LoginResponseDto]]] Login(Flowtap_Domain.DtoModel.LoginRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-16 13:46:39.966 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__email_0='antonyraj.snt.work@gmail.com'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-16 13:46:39.982 +05:30 [WRN] Login attempt with unverified email: antonyraj.snt.work@gmail.com
+2025-11-16 13:46:39.990 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation) in 27.6914ms
+2025-11-16 13:46:39.996 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation)'
+2025-11-16 13:46:40.003 +05:30 [ERR] An unexpected error occurred.
+UserAccount with Email => antonyraj.snt.work@gmail.com for user - antonyraj.snt.work@gmail.com
+2025-11-16 13:46:40.028 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/Auth/login - 403 null application/json 73.9633ms
+2025-11-16 13:48:42.670 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/Auth/login - null null
+2025-11-16 13:48:42.679 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:48:42.682 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/Auth/login - 204 null null 12.1604ms
+2025-11-16 13:48:42.698 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/Auth/login - application/json 64
+2025-11-16 13:48:42.710 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:48:42.712 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation)'
+2025-11-16 13:48:42.717 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.LoginResponseDto]]] Login(Flowtap_Domain.DtoModel.LoginRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-16 13:48:42.728 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__email_0='antonyraj.snt.work@gmail.com'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-16 13:48:42.741 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p17='0f005a44-0365-46b0-88bd-5fac0d778ce2', @p0='d916a4a1-34cd-43e1-a02b-0e6bb9e1df6d' (Nullable = true), @p1='2025-11-16T08:16:27.6155010Z' (DbType = DateTime), @p2='antonyraj.snt.work@gmail.com' (Nullable = false), @p3='ZxGUbB7dHFyqPysDHTjFuGFhDtDh8Zw72jLU4C5Wgjk', @p4='2025-11-17T08:16:27.6152000Z' (Nullable = true) (DbType = DateTime), @p5=NULL (DbType = Guid), @p6=NULL, @p7=NULL, @p8='True', @p9='True', @p10='2025-11-16T08:18:42.7374810Z' (Nullable = true) (DbType = DateTime), @p11='UzFscISecsDwHck6TXpRAbs7FheRwBkKc3/HL+vpE8A=' (Nullable = false), @p12='jGVnbqHVL+QkbqCSSURGvQ==', @p13='False', @p14='2025-11-16T08:18:42.7375627Z' (DbType = DateTime), @p15='0', @p16='AntonyRaj'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-16 13:48:42.920 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__id_0='d916a4a1-34cd-43e1-a02b-0e6bb9e1df6d'], CommandType='"Text"', CommandTimeout='30']
+SELECT t."Id", t."BusinessName", t."Country", t."CreatedAt", t."Currency", t."Email", t."FirstName", t."LastName", t."PhoneNumber", t."StoreIds", t."SubscriptionId", t."TimeZone", t."TrialEndDate", t."TrialStartDate", t."TrialStatus", t."UpdatedAt", t."City", t."PostalCode", t."State", t."StreetName", t."StreetNumber", a0."Id", a0."AppUserId", a0."CreatedAt", a0."Email", a0."FullName", a0."IsPrimaryOwner", a0."PasswordHash", a0."Permissions", a0."City", a0."PostalCode", a0."State", a0."StreetName", a0."StreetNumber"
+FROM (
+    SELECT a."Id", a."BusinessName", a."Country", a."CreatedAt", a."Currency", a."Email", a."FirstName", a."LastName", a."PhoneNumber", a."StoreIds", a."SubscriptionId", a."TimeZone", a."TrialEndDate", a."TrialStartDate", a."TrialStatus", a."UpdatedAt", a."City", a."PostalCode", a."State", a."StreetName", a."StreetNumber"
+    FROM "AppUsers" AS a
+    WHERE a."Id" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN "AppUserAdmins" AS a0 ON t."Id" = a0."AppUserId"
+ORDER BY t."Id"
+2025-11-16 13:48:43.404 +05:30 [WRN] Private key file not found at D:\Git\demo-Back-End\Flowtap_Presentation\Keys\privatekey.pem, using symmetric key fallback
+2025-11-16 13:48:44.531 +05:30 [INF] Successful login for email: antonyraj.snt.work@gmail.com, UserId: "0f005a44-0365-46b0-88bd-5fac0d778ce2"
+2025-11-16 13:48:44.535 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.LoginResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-16 13:48:44.542 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation) in 1818.4705ms
+2025-11-16 13:48:44.548 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation)'
+2025-11-16 13:48:44.550 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/Auth/login - 200 null application/json; charset=utf-8 1852.0029ms
+2025-11-16 13:48:49.169 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/inventory?page=1&limit=100 - null null
+2025-11-16 13:48:49.170 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 13:48:49.171 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/inventory?page=1&limit=100 - null null
+2025-11-16 13:48:49.172 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 13:48:49.176 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:48:49.184 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:48:49.190 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:48:49.194 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:48:49.197 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/inventory?page=1&limit=100 - 204 null null 28.8378ms
+2025-11-16 13:48:49.199 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 29.1422ms
+2025-11-16 13:48:49.201 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/inventory?page=1&limit=100 - 204 null null 30.427ms
+2025-11-16 13:48:49.203 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 30.335ms
+2025-11-16 13:48:49.210 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/inventory?page=1&limit=100 - application/json null
+2025-11-16 13:48:49.212 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 13:48:49.229 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:48:49.230 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:48:49.231 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/inventory?page=1&limit=100 - 404 0 null 21.1241ms
+2025-11-16 13:48:49.232 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 404 0 null 19.2417ms
+2025-11-16 13:48:49.233 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/inventory?page=1&limit=100 - application/json null
+2025-11-16 13:48:49.238 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/inventory, Response status code: 404
+2025-11-16 13:48:49.243 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/customers, Response status code: 404
+2025-11-16 13:48:49.246 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:48:49.250 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 13:48:49.254 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/inventory?page=1&limit=100 - 404 0 null 20.7676ms
+2025-11-16 13:48:49.257 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:48:49.260 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/inventory, Response status code: 404
+2025-11-16 13:48:49.260 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 404 0 null 10.0388ms
+2025-11-16 13:48:49.266 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/customers, Response status code: 404
+2025-11-16 13:53:33.455 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 13:53:33.456 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 13:53:33.459 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 13:53:33.459 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 13:53:33.466 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:33.475 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:33.484 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:33.491 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:33.493 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 37.9135ms
+2025-11-16 13:53:33.495 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 38.0172ms
+2025-11-16 13:53:33.498 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 39.2641ms
+2025-11-16 13:53:33.501 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 42.1409ms
+2025-11-16 13:53:33.513 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 13:53:33.526 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:33.527 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 404 0 null 14.5117ms
+2025-11-16 13:53:33.529 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 13:53:33.531 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/customers, Response status code: 404
+2025-11-16 13:53:33.534 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:33.536 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 404 0 null 7.0167ms
+2025-11-16 13:53:33.538 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 13:53:33.541 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/customers, Response status code: 404
+2025-11-16 13:53:33.543 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:33.546 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 404 0 null 7.9981ms
+2025-11-16 13:53:33.547 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 13:53:33.550 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/customers, Response status code: 404
+2025-11-16 13:53:33.554 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:33.557 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 404 0 null 10.1151ms
+2025-11-16 13:53:33.561 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/customers, Response status code: 404
+2025-11-16 13:53:35.529 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/inventory?page=1&limit=100 - null null
+2025-11-16 13:53:35.529 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/inventory?page=1&limit=100 - null null
+2025-11-16 13:53:35.536 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:35.540 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:35.540 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/inventory?page=1&limit=100 - 204 null null 11.8804ms
+2025-11-16 13:53:35.541 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/inventory?page=1&limit=100 - 204 null null 12.2297ms
+2025-11-16 13:53:35.550 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/inventory?page=1&limit=100 - application/json null
+2025-11-16 13:53:35.553 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:35.554 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/inventory?page=1&limit=100 - 404 0 null 4.6972ms
+2025-11-16 13:53:35.556 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/inventory?page=1&limit=100 - application/json null
+2025-11-16 13:53:35.558 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/inventory, Response status code: 404
+2025-11-16 13:53:35.562 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:35.565 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/inventory?page=1&limit=100 - 404 0 null 9.4343ms
+2025-11-16 13:53:35.569 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/inventory, Response status code: 404
+2025-11-16 13:53:37.264 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/inventory?page=1&limit=100 - application/json null
+2025-11-16 13:53:37.265 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 13:53:37.268 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:37.275 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:37.278 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/inventory?page=1&limit=100 - 404 0 null 13.7745ms
+2025-11-16 13:53:37.280 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 404 0 null 14.4936ms
+2025-11-16 13:53:37.281 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 13:53:37.285 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/inventory, Response status code: 404
+2025-11-16 13:53:37.288 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/customers, Response status code: 404
+2025-11-16 13:53:37.291 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:37.294 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/inventory?page=1&limit=100 - application/json null
+2025-11-16 13:53:37.297 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 404 0 null 16.014ms
+2025-11-16 13:53:37.300 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:53:37.303 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/customers, Response status code: 404
+2025-11-16 13:53:37.305 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/inventory?page=1&limit=100 - 404 0 null 11.4931ms
+2025-11-16 13:53:37.311 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/inventory, Response status code: 404
+2025-11-16 13:54:21.891 +05:30 [INF] Application is shutting down...
+2025-11-16 13:58:52.399 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-16 13:58:52.430 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-16 13:58:52.432 +05:30 [INF] Hosting environment: Development
+2025-11-16 13:58:52.433 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-16 13:59:09.364 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers - null null
+2025-11-16 13:59:09.544 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-11-16 13:59:09.552 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:59:09.575 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers - 204 null null 214.5464ms
+2025-11-16 13:59:09.601 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/customers - application/json 115
+2025-11-16 13:59:09.621 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:59:09.633 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation)'
+2025-11-16 13:59:09.716 +05:30 [INF] Route matched with {action = "Create", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]] Create(Flowtap_Domain.DtoModel.CreateCustomerRequestDto) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 13:59:10.860 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2025-11-16 13:59:10.992 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation) in 1265.8332ms
+2025-11-16 13:59:10.998 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation)'
+2025-11-16 13:59:11.006 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/customers - 400 null application/problem+json; charset=utf-8 1406.056ms
+2025-11-16 13:59:11.071 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 13:59:11.077 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:59:11.079 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 7.8496ms
+2025-11-16 13:59:11.083 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 13:59:11.102 +05:30 [INF] CORS policy execution successful.
+2025-11-16 13:59:11.125 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 13:59:11.217 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 13:59:12.893 +05:30 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-11-16 13:59:13.050 +05:30 [WRN] The property 'AppUser.StoreIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-16 13:59:13.054 +05:30 [WRN] The property 'AppUserAdmin.Permissions' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-16 13:59:13.058 +05:30 [WRN] The property 'Store.EmployeeIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-16 13:59:14.534 +05:30 [INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 13:59:14.733 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 13:59:14.760 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 3531.395ms
+2025-11-16 13:59:14.766 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 13:59:14.782 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 3699.0904ms
+2025-11-16 14:01:24.074 +05:30 [INF] Application is shutting down...
+2025-11-16 14:01:38.632 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-16 14:01:38.671 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-16 14:01:38.676 +05:30 [INF] Hosting environment: Development
+2025-11-16 14:01:38.677 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-16 14:01:53.985 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers - null null
+2025-11-16 14:01:54.082 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-11-16 14:01:54.088 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:01:54.099 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers - 204 null null 116.4508ms
+2025-11-16 14:01:54.112 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/customers - application/json 115
+2025-11-16 14:01:54.122 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:01:54.135 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation)'
+2025-11-16 14:01:54.180 +05:30 [INF] Route matched with {action = "Create", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]] Create(Flowtap_Domain.DtoModel.CreateCustomerRequestDto) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:01:54.669 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2025-11-16 14:01:54.755 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation) in 567.7958ms
+2025-11-16 14:01:54.762 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation)'
+2025-11-16 14:01:54.769 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/customers - 400 null application/problem+json; charset=utf-8 656.7676ms
+2025-11-16 14:01:54.823 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 14:01:54.834 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:01:54.838 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 14.7488ms
+2025-11-16 14:01:54.843 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 14:01:54.854 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:01:54.856 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:01:54.872 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:01:56.197 +05:30 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-11-16 14:01:56.232 +05:30 [WRN] The property 'AppUser.StoreIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-16 14:01:56.237 +05:30 [WRN] The property 'AppUserAdmin.Permissions' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-16 14:01:56.242 +05:30 [WRN] The property 'Store.EmployeeIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-16 14:01:57.300 +05:30 [INF] Executed DbCommand (33ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 14:01:57.415 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 14:01:57.450 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 2574.0775ms
+2025-11-16 14:01:57.454 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:01:57.468 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 2624.6669ms
+2025-11-16 14:03:20.178 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 14:03:20.186 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:03:20.188 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 11.3055ms
+2025-11-16 14:03:20.194 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 14:03:20.197 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 14:03:20.204 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:03:20.213 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:03:20.213 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 19.0411ms
+2025-11-16 14:03:20.221 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:03:20.229 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:03:20.309 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 14:03:20.313 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 14:03:20.317 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 81.9194ms
+2025-11-16 14:03:20.321 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 14:03:20.323 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:03:20.329 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:03:20.333 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 135.8462ms
+2025-11-16 14:03:20.334 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:03:20.339 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:03:20.448 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 14:03:20.455 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 14:03:20.459 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 118.2319ms
+2025-11-16 14:03:20.464 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:03:20.470 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 148.4169ms
+2025-11-16 14:04:55.015 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers - null null
+2025-11-16 14:04:55.021 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:04:55.023 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers - 204 null null 8.0072ms
+2025-11-16 14:04:55.028 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/customers - application/json 245
+2025-11-16 14:04:55.032 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:04:55.034 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation)'
+2025-11-16 14:04:55.036 +05:30 [INF] Route matched with {action = "Create", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]] Create(Flowtap_Domain.DtoModel.CreateCustomerRequestDto) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:04:55.086 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-16 14:04:55.101 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation) in 61.4834ms
+2025-11-16 14:04:55.104 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation)'
+2025-11-16 14:04:55.108 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/customers - 400 null application/json; charset=utf-8 80.39ms
+2025-11-16 14:04:55.162 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 14:04:55.167 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:04:55.168 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 6.0165ms
+2025-11-16 14:04:55.177 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 14:04:55.183 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:04:55.185 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:04:55.189 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:04:55.199 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 14:04:55.205 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 14:04:55.207 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 13.0215ms
+2025-11-16 14:04:55.210 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:04:55.212 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 35.5941ms
+2025-11-16 14:05:14.350 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers - null null
+2025-11-16 14:05:14.395 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:05:14.397 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers - 204 null null 47.1643ms
+2025-11-16 14:05:14.405 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/customers - application/json 251
+2025-11-16 14:05:14.421 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:05:14.428 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation)'
+2025-11-16 14:05:14.430 +05:30 [INF] Route matched with {action = "Create", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]] Create(Flowtap_Domain.DtoModel.CreateCustomerRequestDto) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:05:14.437 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-16 14:05:14.448 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation) in 12.6793ms
+2025-11-16 14:05:14.452 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation)'
+2025-11-16 14:05:14.453 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/customers - 400 null application/json; charset=utf-8 48.047ms
+2025-11-16 14:05:14.505 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 14:05:14.510 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:05:14.512 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 6.5274ms
+2025-11-16 14:05:14.530 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 14:05:14.536 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:05:14.539 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:05:14.541 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:05:14.550 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 14:05:14.554 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 14:05:14.557 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 12.0321ms
+2025-11-16 14:05:14.560 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:05:14.562 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 31.9574ms
+2025-11-16 14:12:27.133 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 14:12:27.133 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 14:12:27.140 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:12:27.142 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:12:27.145 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 12.5091ms
+2025-11-16 14:12:27.145 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 12.5078ms
+2025-11-16 14:12:27.155 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 14:12:27.159 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:12:27.161 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:12:27.163 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:12:27.379 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 14:12:27.382 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 14:12:27.384 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 218.8373ms
+2025-11-16 14:12:27.385 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 14:12:27.386 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:12:27.389 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:12:27.390 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 234.6396ms
+2025-11-16 14:12:27.390 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:12:27.395 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:12:27.399 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 14:12:27.403 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 14:12:27.404 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 7.3808ms
+2025-11-16 14:12:27.406 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:12:27.407 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 21.7584ms
+2025-11-16 14:12:29.132 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 14:12:29.142 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:12:29.145 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:12:29.151 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:12:29.169 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 14:12:29.178 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 14:12:29.183 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 27.5743ms
+2025-11-16 14:12:29.188 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 14:12:29.188 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:12:29.191 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:12:29.194 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 62.1052ms
+2025-11-16 14:12:29.195 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:12:29.204 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:12:29.221 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 14:12:29.228 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 14:12:29.231 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 17.4949ms
+2025-11-16 14:12:29.237 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:12:29.240 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 51.9853ms
+2025-11-16 14:13:50.348 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers - null null
+2025-11-16 14:13:50.357 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:13:50.359 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers - 204 null null 11.7958ms
+2025-11-16 14:13:50.366 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/customers - application/json 120
+2025-11-16 14:13:50.372 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:13:50.374 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation)'
+2025-11-16 14:13:50.377 +05:30 [INF] Route matched with {action = "Create", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]] Create(Flowtap_Domain.DtoModel.CreateCustomerRequestDto) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:13:50.409 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-16 14:13:50.413 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation) in 31.6529ms
+2025-11-16 14:13:50.416 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation)'
+2025-11-16 14:13:50.418 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/customers - 400 null application/json; charset=utf-8 51.3582ms
+2025-11-16 14:13:50.465 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 14:13:50.469 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:13:50.472 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 6.8592ms
+2025-11-16 14:13:50.477 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 14:13:50.485 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:13:50.488 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:13:50.490 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:13:50.505 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 14:13:50.511 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 14:13:50.513 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 20.39ms
+2025-11-16 14:13:50.516 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:13:50.518 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 40.83ms
+2025-11-16 14:14:07.033 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers - null null
+2025-11-16 14:14:07.046 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:14:07.048 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers - 204 null null 15.1286ms
+2025-11-16 14:14:07.055 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/customers - application/json 120
+2025-11-16 14:14:07.063 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:14:07.066 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation)'
+2025-11-16 14:14:07.069 +05:30 [INF] Route matched with {action = "Create", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]] Create(Flowtap_Domain.DtoModel.CreateCustomerRequestDto) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:14:07.076 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-16 14:14:07.078 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation) in 5.7607ms
+2025-11-16 14:14:07.080 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation)'
+2025-11-16 14:14:07.082 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/customers - 400 null application/json; charset=utf-8 26.8638ms
+2025-11-16 14:14:07.134 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 14:14:07.137 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:14:07.139 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 4.9114ms
+2025-11-16 14:14:07.144 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 14:14:07.149 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:14:07.150 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:14:07.151 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:14:07.168 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 14:14:07.172 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 14:14:07.176 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 22.0216ms
+2025-11-16 14:14:07.178 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:14:07.179 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 35.0442ms
+2025-11-16 14:18:44.198 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 14:18:44.205 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:18:44.205 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 14:18:44.206 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 8.4596ms
+2025-11-16 14:18:44.212 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:18:44.222 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 14:18:44.223 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 17.776ms
+2025-11-16 14:18:44.227 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:18:44.233 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:18:44.239 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:18:44.614 +05:30 [INF] Executed DbCommand (28ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 14:18:44.619 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 14:18:44.625 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 380.5713ms
+2025-11-16 14:18:44.629 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:18:44.629 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 14:18:44.631 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 408.8118ms
+2025-11-16 14:18:44.637 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:18:44.643 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:18:44.647 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:18:44.685 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 14:18:44.694 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 14:18:44.697 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 42.0672ms
+2025-11-16 14:18:44.699 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:18:44.702 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 72.2504ms
+2025-11-16 14:19:55.652 +05:30 [INF] Application is shutting down...
+2025-11-16 14:20:39.963 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-16 14:20:39.991 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-16 14:20:39.993 +05:30 [INF] Hosting environment: Development
+2025-11-16 14:20:39.993 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-16 14:20:52.925 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers - null null
+2025-11-16 14:20:53.159 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-11-16 14:20:53.161 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:20:53.177 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers - 204 null null 256.7729ms
+2025-11-16 14:20:53.212 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/customers - application/json 71
+2025-11-16 14:20:53.235 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:20:53.259 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation)'
+2025-11-16 14:20:53.333 +05:30 [INF] Route matched with {action = "Create", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]] Create(Flowtap_Domain.DtoModel.CreateCustomerRequestDto) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:20:54.520 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-16 14:20:54.651 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation) in 1305.8939ms
+2025-11-16 14:20:54.656 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.Create (Flowtap_Presentation)'
+2025-11-16 14:20:54.665 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/customers - 400 null application/json; charset=utf-8 1454.5116ms
+2025-11-16 14:20:54.775 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - null null
+2025-11-16 14:20:54.782 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:20:54.784 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/customers?page=1&limit=100 - 204 null null 9.5686ms
+2025-11-16 14:20:54.790 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - application/json null
+2025-11-16 14:20:54.811 +05:30 [INF] CORS policy execution successful.
+2025-11-16 14:20:54.814 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:20:54.853 +05:30 [INF] Route matched with {action = "GetAll", controller = "Customers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[System.Collections.Generic.IEnumerable`1[Flowtap_Domain.DtoModel.CustomerResponseDto]]]] GetAll(System.Nullable`1[System.Int32], System.Nullable`1[System.Int32], System.String) on controller Flowtap_Presentation.Controllers.CustomersController (Flowtap_Presentation).
+2025-11-16 14:20:56.562 +05:30 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-11-16 14:20:56.714 +05:30 [WRN] The property 'AppUser.StoreIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-16 14:20:56.721 +05:30 [WRN] The property 'AppUserAdmin.Permissions' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-16 14:20:56.727 +05:30 [WRN] The property 'Store.EmployeeIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-16 14:20:58.031 +05:30 [INF] Executed DbCommand (35ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Email", c."Name", c."Phone", c."Status", c."StoreId", c."TotalOrders", c."TotalSpent", c."UpdatedAt", c."City", c."PostalCode", c."State", c."StreetName", c."StreetNumber"
+FROM "Customers" AS c
+2025-11-16 14:20:58.251 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[System.Collections.Generic.IEnumerable`1[[Flowtap_Domain.DtoModel.CustomerResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-11-16 14:20:58.262 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation) in 3403.0075ms
+2025-11-16 14:20:58.265 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.CustomersController.GetAll (Flowtap_Presentation)'
+2025-11-16 14:20:58.285 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/customers?page=1&limit=100 - 200 null application/json; charset=utf-8 3494.6589ms
+2025-11-16 14:36:20.322 +05:30 [INF] Application is shutting down...
