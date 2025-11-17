@@ -29,8 +29,21 @@ public class UserAccountRepository : IUserAccountRepository
 
     public async Task<UserAccount?> GetByVerificationTokenAsync(string token, CancellationToken cancellationToken = default)
     {
-        return await _context.UserAccounts
+        if (string.IsNullOrWhiteSpace(token))
+            return null;
+
+        // Try exact match first
+        var userAccount = await _context.UserAccounts
             .FirstOrDefaultAsync(u => u.EmailVerificationToken == token, cancellationToken);
+        
+        // If not found, try trimming whitespace (in case of encoding issues)
+        if (userAccount == null)
+        {
+            userAccount = await _context.UserAccounts
+                .FirstOrDefaultAsync(u => u.EmailVerificationToken != null && u.EmailVerificationToken.Trim() == token.Trim(), cancellationToken);
+        }
+        
+        return userAccount;
     }
 
     public async Task<UserAccount?> GetByExternalProviderAsync(string provider, string providerId, CancellationToken cancellationToken = default)

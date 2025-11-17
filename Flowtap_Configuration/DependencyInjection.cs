@@ -24,6 +24,9 @@ namespace Flowtap_Configuration
             #region Controllers
             services.AddControllers();
             #endregion
+            #region HttpContextAccessor
+            services.AddHttpContextAccessor();
+            #endregion
             services.AddEndpointsApiExplorer();
             #region ConfigCors
             services.AddCors(option => option.AddPolicy("CustomCorsPolicy", x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));

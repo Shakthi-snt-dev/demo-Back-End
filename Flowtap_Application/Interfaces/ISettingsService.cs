@@ -11,5 +11,10 @@ public interface ISettingsService
     Task<PaymentSettingsDto> UpdatePaymentSettingsAsync(Guid storeId, UpdatePaymentSettingsRequestDto request);
     Task<bool> UpdatePasswordAsync(Guid appUserId, UpdateSecuritySettingsRequestDto request);
     Task<bool> EnableTwoFactorAsync(Guid appUserId);
+    Task<UserProfileDto> GetUserProfileAsync(Guid appUserId);
+    Task<UserProfileDto> UpdateUserProfileAsync(Guid appUserId, UpdateUserProfileRequestDto request);
+    Task<StoreSettingsDto> GetStoreSettingsAsync(Guid storeId);
+    Task<StoreSettingsDto> UpdateStoreSettingsAsync(Guid storeId, UpdateStoreSettingsRequestDto request);
+    Task<string> ResetApiKeyAsync(Guid storeId);
 }
 

@@ -1,9 +1,12 @@
 using Flowtap_Application.Interfaces;
 using Flowtap_Domain.BoundedContexts.HR.Entities;
 using Flowtap_Domain.BoundedContexts.HR.Interfaces;
+using Flowtap_Domain.BoundedContexts.Store.Interfaces;
+using Flowtap_Domain.BoundedContexts.Owner.Interfaces;
 using Flowtap_Domain.DtoModel;
 using Flowtap_Domain.Exceptions;
 using Flowtap_Domain.SharedKernel.ValueObjects;
+using Flowtap_Domain.SharedKernel.Enums;
 using Microsoft.Extensions.Logging;
 
 namespace Flowtap_Application.Services;
@@ -11,13 +14,19 @@ namespace Flowtap_Application.Services;
 public class EmployeeService : IEmployeeService
 {
     private readonly IEmployeeRepository _employeeRepository;
+    private readonly IStoreRepository _storeRepository;
+    private readonly IAppUserRepository _appUserRepository;
     private readonly ILogger<EmployeeService> _logger;
 
     public EmployeeService(
         IEmployeeRepository employeeRepository,
+        IStoreRepository storeRepository,
+        IAppUserRepository appUserRepository,
         ILogger<EmployeeService> logger)
     {
         _employeeRepository = employeeRepository;
+        _storeRepository = storeRepository;
+        _appUserRepository = appUserRepository;
         _logger = logger;
     }
 
@@ -134,7 +143,7 @@ public class EmployeeService : IEmployeeService
             employee.UpdateAddress(address);
         }
 
-        if (!string.IsNullOrWhiteSpace(request.EmergencyContactName))
+        if (!string.IsNullOrWhiteSpace(request.EmergencyContactName) && !string.IsNullOrWhiteSpace(request.EmergencyContactPhone))
             employee.UpdateEmergencyContact(request.EmergencyContactName, request.EmergencyContactPhone);
 
         if (request.IsActive.HasValue)
@@ -175,6 +184,69 @@ public class EmployeeService : IEmployeeService
     {
         await _employeeRepository.DeleteAsync(id);
         return true;
+    }
+
+    /// <summary>
+    /// Adds a partner/admin to a store. Only the owner (AppUser who owns the subscription) can add partners.
+    /// </summary>
+    public async Task<EmployeeResponseDto> AddPartnerAsync(Guid ownerAppUserId, AddPartnerRequestDto request)
+    {
+        // Verify the owner owns the store
+        var store = await _storeRepository.GetByIdAsync(request.StoreId);
+        if (store == null)
+            throw new EntityNotFoundException("Store", request.StoreId);
+
+        if (store.AppUserId != ownerAppUserId)
+            throw new UnauthorizedException("Only the store owner can add partners/admins");
+
+        // Verify the owner is an employee with Owner role
+        var ownerEmployees = await _employeeRepository.GetByLinkedAppUserIdAsync(ownerAppUserId);
+        var ownerEmployee = ownerEmployees.FirstOrDefault(e => e.StoreId == request.StoreId && e.Role == EmployeeRole.Owner.ToString());
+        if (ownerEmployee == null)
+            throw new UnauthorizedException("You must be the owner of this store to add partners");
+
+        // Validate role - only Partner, Admin, or SuperAdmin can be added
+        var validRoles = new[] { EmployeeRole.Partner.ToString(), EmployeeRole.Admin.ToString(), EmployeeRole.SuperAdmin.ToString() };
+        if (!validRoles.Contains(request.Role))
+            throw new ArgumentException($"Invalid role. Only {string.Join(", ", validRoles)} can be added as partners/admins");
+
+        // Check if email already exists as employee in this store
+        var existingEmployee = await _employeeRepository.GetByEmailAsync(request.Email);
+        if (existingEmployee != null && existingEmployee.StoreId == request.StoreId)
+            throw new Flowtap_Domain.Exceptions.InvalidOperationException(
+                $"Employee with email {request.Email} already exists in this store",
+                "Employee",
+                new Dictionary<string, string> { { "Email", request.Email } });
+
+        // Create employee record
+        var employee = new Employee
+        {
+            Id = Guid.NewGuid(),
+            StoreId = request.StoreId,
+            FullName = request.FullName,
+            Email = request.Email,
+            Role = request.Role,
+            LinkedAppUserId = request.LinkedAppUserId,
+            IsActive = true,
+            CanSwitchRole = request.Role == EmployeeRole.Partner.ToString() || request.Role == EmployeeRole.SuperAdmin.ToString(), // Partners and SuperAdmins can switch roles
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
+
+        if (request.Address != null)
+        {
+            employee.Address = new Address(
+                request.Address.StreetNumber,
+                request.Address.StreetName,
+                request.Address.City,
+                request.Address.State,
+                request.Address.PostalCode);
+        }
+
+        var created = await _employeeRepository.AddAsync(employee);
+        _logger.LogInformation("Added {Role} {Email} to Store {StoreId} by Owner {OwnerAppUserId}", request.Role, request.Email, request.StoreId, ownerAppUserId);
+
+        return MapToDto(created);
     }
 
     private static EmployeeResponseDto MapToDto(Employee employee)

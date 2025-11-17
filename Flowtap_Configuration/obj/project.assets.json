@@ -868,7 +868,10 @@
         },
         "runtime": {
           "bin/placeholder/Flowtap_Application.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "Flowtap_Domain/1.0.0": {
         "type": "project",

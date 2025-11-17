@@ -153,24 +153,32 @@ public class EmailService : IEmailService
                         }}
                         .button-container {{
                             text-align: center;
-                            margin: 40px 0;
+                            margin: 50px 0;
+                            padding: 20px 0;
                         }}
                         .verify-button {{
                             display: inline-block;
-                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
                             color: #ffffff !important;
-                            padding: 18px 48px;
+                            padding: 24px 64px;
                             text-decoration: none;
-                            border-radius: 12px;
-                            font-weight: 700;
-                            font-size: 18px;
-                            letter-spacing: 0.5px;
-                            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-                            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                            border-radius: 16px;
+                            font-weight: 800;
+                            font-size: 22px;
+                            letter-spacing: 1px;
+                            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.5), 
+                                        0 4px 12px rgba(118, 75, 162, 0.3),
+                                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+                            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                             position: relative;
                             overflow: hidden;
                             text-transform: uppercase;
-                            border: none;
+                            border: 2px solid rgba(255, 255, 255, 0.2);
+                            min-width: 320px;
+                            text-align: center;
+                            line-height: 1.5;
+                            cursor: pointer;
+                            font-family: inherit;
                         }}
                         .verify-button::before {{
                             content: '';
@@ -179,23 +187,33 @@ public class EmailService : IEmailService
                             left: -100%;
                             width: 100%;
                             height: 100%;
-                            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-                            transition: left 0.5s;
+                            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+                            transition: left 0.6s ease-in-out;
                         }}
                         .verify-button:hover::before {{
                             left: 100%;
                         }}
                         .verify-button:hover {{
-                            transform: translateY(-3px);
-                            box-shadow: 0 12px 30px rgba(102, 126,234, 0.5);
-                            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+                            transform: translateY(-5px) scale(1.02);
+                            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.6), 
+                                        0 8px 20px rgba(118, 75, 162, 0.4),
+                                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+                            background: linear-gradient(135deg, #764ba2 0%, #667eea 50%, #764ba2 100%);
                         }}
                         .verify-button:active {{
-                            transform: translateY(-1px);
+                            transform: translateY(-2px) scale(0.98);
+                            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
                         }}
                         .button-icon {{
-                            margin-right: 8px;
-                            font-size: 20px;
+                            margin-right: 12px;
+                            font-size: 28px;
+                            vertical-align: middle;
+                            display: inline-block;
+                            animation: sparkle 2s ease-in-out infinite;
+                        }}
+                        @keyframes sparkle {{
+                            0%, 100% {{ transform: scale(1) rotate(0deg); opacity: 1; }}
+                            50% {{ transform: scale(1.2) rotate(180deg); opacity: 0.8; }}
                         }}
                         .link-alternative {{
                             text-align: center;
@@ -269,8 +287,13 @@ public class EmailService : IEmailService
                                 font-size: 28px;
                             }}
                             .verify-button {{
-                                padding: 16px 36px;
-                                font-size: 16px;
+                                padding: 20px 48px;
+                                font-size: 18px;
+                                min-width: 280px;
+                            }}
+                            .button-icon {{
+                                font-size: 24px;
+                                margin-right: 10px;
                             }}
                         }}
                     </style>
@@ -290,7 +313,9 @@ public class EmailService : IEmailService
                                 <p>Thank you for joining Flowtap! We're thrilled to have you on board. To get started and unlock all features, please verify your email address by clicking the button below.</p>
                                 
                                 <div class='button-container'>
-                                    <a href='{verificationLink}' class='verify-button'>
+                                    <a href='{verificationLink}' 
+                                       class='verify-button' 
+                                       style='display: inline-block; text-decoration: none; cursor: pointer;'>
                                         <span class='button-icon'>✨</span>
                                         Verify Email Address
                                     </a>

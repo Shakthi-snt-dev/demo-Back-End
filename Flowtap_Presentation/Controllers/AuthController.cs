@@ -52,7 +52,15 @@ public class AuthController : ControllerBase
             return Ok(ApiResponseDto<VerifyEmailResponseDto>.Failure("Verification token is required", null));
         }
 
-        var result = await _registrationService.VerifyEmailAsync(token);
+        // ASP.NET Core automatically URL-decodes query parameters, but handle edge cases
+        // Remove any whitespace that might have been introduced
+        var cleanToken = token?.Trim();
+        
+        // Log token info for debugging (don't log full token for security)
+        _logger.LogInformation("Verification request received. Token length: {Length}, First 10 chars: {Preview}", 
+            cleanToken?.Length ?? 0, cleanToken?.Length > 10 ? cleanToken.Substring(0, 10) : cleanToken ?? "null");
+
+        var result = await _registrationService.VerifyEmailAsync(cleanToken);
         
         if (!result.IsVerified)
         {

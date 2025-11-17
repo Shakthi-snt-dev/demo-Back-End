@@ -14,5 +14,6 @@ public interface IEmployeeService
     Task<EmployeeResponseDto> ActivateEmployeeAsync(Guid id);
     Task<EmployeeResponseDto> DeactivateEmployeeAsync(Guid id);
     Task<bool> DeleteEmployeeAsync(Guid id);
+    Task<EmployeeResponseDto> AddPartnerAsync(Guid ownerAppUserId, AddPartnerRequestDto request);
 }
 

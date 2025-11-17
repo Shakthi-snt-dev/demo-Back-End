@@ -108,7 +108,7 @@ public class EmployeesController : ControllerBase
     [ProducesResponseType(typeof(ApiResponseDto<EmployeeResponseDto>), StatusCodes.Status200OK)]
     public async Task<ActionResult<ApiResponseDto<EmployeeResponseDto>>> UpdateRole(
         Guid id,
-        [FromBody] UpdateRoleRequestDto request)
+        [FromBody] UpdateEmployeeRoleRequestDto request)
     {
         // Get employee first to update role
         var employee = await _employeeService.GetEmployeeByIdAsync(id);
@@ -120,18 +120,34 @@ public class EmployeesController : ControllerBase
         // Update employee with new role
         var updateRequest = new UpdateEmployeeRequestDto
         {
-            // Map existing properties and update role
-            // Note: This assumes UpdateEmployeeRequestDto has a Role property
-            // Adjust based on actual DTO structure
+            Role = request.Role
         };
 
         var result = await _employeeService.UpdateEmployeeAsync(id, updateRequest);
         return Ok(ApiResponseDto<EmployeeResponseDto>.Success(result, "Employee role updated successfully"));
     }
+
+    /// <summary>
+    /// Add a partner/admin to a store (only owner can add partners)
+    /// </summary>
+    [HttpPost("partners")]
+    [ProducesResponseType(typeof(ApiResponseDto<EmployeeResponseDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<ApiResponseDto<EmployeeResponseDto>>> AddPartner(
+        [FromQuery] Guid ownerAppUserId,
+        [FromBody] AddPartnerRequestDto request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return Ok(ApiResponseDto<EmployeeResponseDto>.Failure("Invalid request data", null));
+        }
+
+        var result = await _employeeService.AddPartnerAsync(ownerAppUserId, request);
+        return Ok(ApiResponseDto<EmployeeResponseDto>.Success(result, "Partner/Admin added successfully"));
+    }
 }
 
-// DTO for role update
-public class UpdateRoleRequestDto
+// DTO for employee role update
+public class UpdateEmployeeRoleRequestDto
 {
     public string Role { get; set; } = string.Empty;
 }

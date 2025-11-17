@@ -35,6 +35,21 @@ namespace Flowtap_Application
             // Settings
             services.AddScoped<ISettingsService, SettingsService>();
 
+            // AppUserAdmin
+            services.AddScoped<IAppUserAdminService, AppUserAdminService>();
+
+            // Form Configuration
+            services.AddScoped<IFormConfigurationService, FormConfigurationService>();
+
+            // Store
+            services.AddScoped<IStoreService, StoreService>();
+
+            // Role
+            services.AddScoped<IRoleService, RoleService>();
+
+            // HTTP Accessor
+            services.AddScoped<IHttpAccessorService, HttpAccessorService>();
+
             return services;
         }
     }

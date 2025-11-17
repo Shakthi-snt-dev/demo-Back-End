@@ -23,29 +23,29 @@ public class UserController : ControllerBase
     /// Get user profile
     /// </summary>
     [HttpGet("profile")]
-    [ProducesResponseType(typeof(ApiResponseDto<GeneralSettingsDto>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<ApiResponseDto<GeneralSettingsDto>>> GetProfile([FromQuery] Guid appUserId)
+    [ProducesResponseType(typeof(ApiResponseDto<UserProfileDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<ApiResponseDto<UserProfileDto>>> GetProfile([FromQuery] Guid appUserId)
     {
-        var settings = await _settingsService.GetSettingsAsync(appUserId);
-        return Ok(ApiResponseDto<GeneralSettingsDto>.Success(settings.General, "Profile retrieved successfully"));
+        var result = await _settingsService.GetUserProfileAsync(appUserId);
+        return Ok(ApiResponseDto<UserProfileDto>.Success(result, "Profile retrieved successfully"));
     }
 
     /// <summary>
     /// Update user profile
     /// </summary>
     [HttpPut("profile")]
-    [ProducesResponseType(typeof(ApiResponseDto<GeneralSettingsDto>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<ApiResponseDto<GeneralSettingsDto>>> UpdateProfile(
+    [ProducesResponseType(typeof(ApiResponseDto<UserProfileDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<ApiResponseDto<UserProfileDto>>> UpdateProfile(
         [FromQuery] Guid appUserId,
-        [FromBody] UpdateGeneralSettingsRequestDto request)
+        [FromBody] UpdateUserProfileRequestDto request)
     {
         if (!ModelState.IsValid)
         {
-            return Ok(ApiResponseDto<GeneralSettingsDto>.Failure("Invalid request data", null));
+            return Ok(ApiResponseDto<UserProfileDto>.Failure("Invalid request data", null));
         }
 
-        var result = await _settingsService.UpdateGeneralSettingsAsync(appUserId, request);
-        return Ok(ApiResponseDto<GeneralSettingsDto>.Success(result, "Profile updated successfully"));
+        var result = await _settingsService.UpdateUserProfileAsync(appUserId, request);
+        return Ok(ApiResponseDto<UserProfileDto>.Success(result, "Profile updated successfully"));
     }
 
     /// <summary>

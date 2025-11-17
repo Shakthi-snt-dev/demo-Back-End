@@ -7,6 +7,8 @@ using Flowtap_Domain.BoundedContexts.Store.Entities;
 using Flowtap_Domain.BoundedContexts.Store.Interfaces;
 using Flowtap_Domain.BoundedContexts.Billing.Entities;
 using Flowtap_Domain.BoundedContexts.Billing.Interfaces;
+using Flowtap_Domain.BoundedContexts.HR.Entities;
+using Flowtap_Domain.BoundedContexts.HR.Interfaces;
 using Flowtap_Domain.DtoModel;
 using Flowtap_Domain.Exceptions;
 using Flowtap_Domain.SharedKernel.Enums;
@@ -24,6 +26,7 @@ public class RegistrationService : IRegistrationService
     private readonly IAppUserRepository _appUserRepository;
     private readonly IStoreRepository _storeRepository;
     private readonly ISubscriptionRepository _subscriptionRepository;
+    private readonly IEmployeeRepository _employeeRepository;
     private readonly IEmailService _emailService;
     private readonly IConfiguration _configuration;
     private readonly ILogger<RegistrationService> _logger;
@@ -33,6 +36,7 @@ public class RegistrationService : IRegistrationService
         IAppUserRepository appUserRepository,
         IStoreRepository storeRepository,
         ISubscriptionRepository subscriptionRepository,
+        IEmployeeRepository employeeRepository,
         IEmailService emailService,
         IConfiguration configuration,
         ILogger<RegistrationService> logger)
@@ -41,6 +45,7 @@ public class RegistrationService : IRegistrationService
         _appUserRepository = appUserRepository;
         _storeRepository = storeRepository;
         _subscriptionRepository = subscriptionRepository;
+        _employeeRepository = employeeRepository;
         _emailService = emailService;
         _configuration = configuration;
         _logger = logger;
@@ -110,8 +115,8 @@ public class RegistrationService : IRegistrationService
         await _userAccountRepository.UpdateAsync(userAccount);
 
         // Send verification email
-        var baseUrl = _configuration["AppSettings:BaseUrl"] ?? "http://localhost:5113/api";
-        var verificationLink = $"{baseUrl}/api/auth/verify-email?token={verificationToken}";
+        var frontendUrl = _configuration["AppSettings:FrontendUrl"] ?? "http://localhost:5173";
+        var verificationLink = $"{frontendUrl}/steps?token={verificationToken}";
 
         var emailSent = await _emailService.SendVerificationEmailAsync(
             request.Email,
@@ -132,16 +137,38 @@ public class RegistrationService : IRegistrationService
 
     public async Task<VerifyEmailResponseDto> VerifyEmailAsync(string token)
     {
-        var userAccount = await _userAccountRepository.GetByVerificationTokenAsync(token);
+        if (string.IsNullOrWhiteSpace(token))
+        {
+            _logger.LogWarning("VerifyEmailAsync called with null or empty token");
+            return new VerifyEmailResponseDto
+            {
+                IsVerified = false,
+                Message = "Verification token is required."
+            };
+        }
+
+        // Clean the token (remove whitespace)
+        var cleanToken = token.Trim();
+
+        _logger.LogInformation("Attempting to verify email with token (length: {Length}, first 10: {Preview})", 
+            cleanToken.Length, cleanToken.Length > 10 ? cleanToken.Substring(0, 10) : cleanToken);
+
+        var userAccount = await _userAccountRepository.GetByVerificationTokenAsync(cleanToken);
         
         if (userAccount == null)
         {
+            _logger.LogWarning("No user account found with verification token (length: {Length}, first 10: {Preview})", 
+                cleanToken.Length, cleanToken.Length > 10 ? cleanToken.Substring(0, 10) : cleanToken);
+            
             return new VerifyEmailResponseDto
             {
                 IsVerified = false,
                 Message = "Invalid verification token."
             };
         }
+
+        _logger.LogInformation("User account found: {Email}, IsEmailVerified: {IsVerified}, TokenExpiry: {Expiry}", 
+            userAccount.Email, userAccount.IsEmailVerified, userAccount.EmailVerificationTokenExpiry);
 
         if (userAccount.IsEmailVerified)
         {
@@ -168,6 +195,26 @@ public class RegistrationService : IRegistrationService
         userAccount.VerifyEmail();
         await _userAccountRepository.UpdateAsync(userAccount);
 
+        // Ensure AppUserId is set - if not, try to get it from the linked AppUser
+        Guid? appUserId = userAccount.AppUserId;
+        if (!appUserId.HasValue)
+        {
+            // Try to find AppUser by email as fallback
+            var appUser = await _appUserRepository.GetByEmailAsync(userAccount.Email);
+            if (appUser != null)
+            {
+                appUserId = appUser.Id;
+                // Update UserAccount with AppUserId if it was missing
+                userAccount.AppUserId = appUser.Id;
+                await _userAccountRepository.UpdateAsync(userAccount);
+                _logger.LogInformation("Linked AppUserId {AppUserId} to UserAccount {UserAccountId} during verification", appUser.Id, userAccount.Id);
+            }
+            else
+            {
+                _logger.LogWarning("AppUserId is null for UserAccount {UserAccountId} and no AppUser found with email {Email}", userAccount.Id, userAccount.Email);
+            }
+        }
+
         // Send welcome email
         await _emailService.SendWelcomeEmailAsync(userAccount.Email, userAccount.Username ?? userAccount.Email);
 
@@ -175,7 +222,7 @@ public class RegistrationService : IRegistrationService
         {
             IsVerified = true,
             Message = "Email verified successfully. You can now complete your profile setup.",
-            AppUserId = userAccount.AppUserId,
+            AppUserId = appUserId,
             OnboardingStep = 1
         };
     }
@@ -261,6 +308,34 @@ public class RegistrationService : IRegistrationService
         // Link store to app user
         appUser.AddStore(store.Id);
         await _appUserRepository.UpdateAsync(appUser);
+
+        // Create Employee record for the AppUser as Owner
+        var userAccount = await _userAccountRepository.GetByEmailAsync(appUser.Email);
+        if (userAccount != null)
+        {
+            var employee = new Employee
+            {
+                Id = Guid.NewGuid(),
+                StoreId = store.Id,
+                FullName = $"{appUser.FirstName} {appUser.LastName}".Trim(),
+                Email = appUser.Email,
+                Role = EmployeeRole.Owner.ToString(), // Set as Owner role
+                LinkedAppUserId = appUser.Id,
+                IsActive = true,
+                CanSwitchRole = true, // Owner can switch roles
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            // Set employee address if available
+            if (appUser.Address != null)
+            {
+                employee.Address = appUser.Address;
+            }
+
+            await _employeeRepository.AddAsync(employee);
+            _logger.LogInformation("Created Employee record for AppUser {AppUserId} as Owner in Store {StoreId}", appUser.Id, store.Id);
+        }
 
         return new OnboardingResponseDto
         {

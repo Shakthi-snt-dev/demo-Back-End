@@ -1,6 +1,128 @@
 using System.ComponentModel.DataAnnotations;
+using Flowtap_Domain.SharedKernel.ValueObjects;
+using Flowtap_Domain.SharedKernel.Enums;
 
 namespace Flowtap_Domain.DtoModel;
+
+// User Profile Update DTO
+public class UpdateUserProfileRequestDto
+{
+    [MaxLength(50)]
+    public string? Username { get; set; }
+
+    [MaxLength(320)]
+    [EmailAddress]
+    public string? Email { get; set; }
+
+    [MaxLength(10)]
+    public string? AccessPin { get; set; }
+
+    [MaxLength(50)]
+    public string? Language { get; set; }
+
+    public string? ProfilePictureUrl { get; set; }
+
+    public Guid? DefaultStoreId { get; set; }
+
+    [MaxLength(20)]
+    public string? Phone { get; set; }
+
+    [MaxLength(20)]
+    public string? Mobile { get; set; }
+
+    public Address? Address { get; set; }
+
+    public bool? EnableTwoFactor { get; set; }
+
+    public UserType? UserType { get; set; }
+}
+
+// Store Settings Update DTO
+public class UpdateStoreSettingsRequestDto
+{
+    [MaxLength(200)]
+    public string? BusinessName { get; set; }
+
+    [MaxLength(320)]
+    [EmailAddress]
+    public string? StoreEmail { get; set; }
+
+    [MaxLength(200)]
+    public string? AlternateName { get; set; }
+
+    public string? StoreLogoUrl { get; set; }
+
+    [MaxLength(20)]
+    public string? Phone { get; set; }
+
+    [MaxLength(20)]
+    public string? Mobile { get; set; }
+
+    [MaxLength(500)]
+    public string? Website { get; set; }
+
+    public Address? Address { get; set; }
+
+    [MaxLength(100)]
+    public string? TimeZone { get; set; }
+
+    [MaxLength(20)]
+    public string? TimeFormat { get; set; }
+
+    [MaxLength(50)]
+    public string? Language { get; set; }
+
+    [MaxLength(10)]
+    public string? DefaultCurrency { get; set; }
+
+    [MaxLength(50)]
+    public string? PriceFormat { get; set; }
+
+    [MaxLength(20)]
+    public string? DecimalFormat { get; set; }
+
+    public bool? ChargeSalesTax { get; set; }
+
+    [MaxLength(100)]
+    public string? DefaultTaxClass { get; set; }
+
+    public decimal? TaxPercentage { get; set; }
+
+    [MaxLength(100)]
+    public string? RegistrationNumber { get; set; }
+
+    [MaxLength(10)]
+    public string? StartTime { get; set; }
+
+    [MaxLength(10)]
+    public string? EndTime { get; set; }
+
+    public Address? DefaultAddress { get; set; }
+
+    [MaxLength(500)]
+    public string? ApiKey { get; set; }
+
+    [MaxLength(50)]
+    public string? AccountingMethod { get; set; } // "Cash Basis" or "Accrual Basis"
+
+    [MaxLength(320)]
+    [EmailAddress]
+    public string? CompanyEmail { get; set; }
+
+    public bool? CompanyEmailVerified { get; set; }
+
+    public bool? EmailNotifications { get; set; }
+
+    public bool? RequireTwoFactorForAllUsers { get; set; }
+
+    public bool? ChargeRestockingFee { get; set; }
+
+    public decimal? DiagnosticBenchFee { get; set; }
+
+    public bool? ChargeDepositOnRepairs { get; set; }
+
+    public int? LockScreenTimeoutMinutes { get; set; }
+}
 
 public class UpdateGeneralSettingsRequestDto
 {
@@ -97,6 +219,56 @@ public class SettingsResponseDto
     public NotificationSettingsDto Notifications { get; set; } = new NotificationSettingsDto();
     public PaymentSettingsDto Payment { get; set; } = new PaymentSettingsDto();
     public SecuritySettingsDto Security { get; set; } = new SecuritySettingsDto();
+}
+
+public class UserProfileDto
+{
+    public string? Username { get; set; }
+    public string? Email { get; set; }
+    public string? AccessPin { get; set; }
+    public string? Language { get; set; }
+    public string? ProfilePictureUrl { get; set; }
+    public Guid? DefaultStoreId { get; set; }
+    public string? Phone { get; set; }
+    public string? Mobile { get; set; }
+    public Address? Address { get; set; }
+    public bool EnableTwoFactor { get; set; } = false;
+    public UserType UserType { get; set; } = UserType.AppUser;
+}
+
+public class StoreSettingsDto
+{
+    public string? BusinessName { get; set; }
+    public string? StoreEmail { get; set; }
+    public string? AlternateName { get; set; }
+    public string? StoreLogoUrl { get; set; }
+    public string? Phone { get; set; }
+    public string? Mobile { get; set; }
+    public string? Website { get; set; }
+    public Address? Address { get; set; }
+    public string TimeZone { get; set; } = "UTC";
+    public string TimeFormat { get; set; } = "12h";
+    public string Language { get; set; } = "en";
+    public string DefaultCurrency { get; set; } = "USD";
+    public string PriceFormat { get; set; } = "$0.00";
+    public string DecimalFormat { get; set; } = "2";
+    public bool ChargeSalesTax { get; set; } = false;
+    public string? DefaultTaxClass { get; set; }
+    public decimal TaxPercentage { get; set; } = 0;
+    public string? RegistrationNumber { get; set; }
+    public string? StartTime { get; set; }
+    public string? EndTime { get; set; }
+    public Address? DefaultAddress { get; set; }
+    public string? ApiKey { get; set; }
+    public string AccountingMethod { get; set; } = "Cash Basis";
+    public string? CompanyEmail { get; set; }
+    public bool CompanyEmailVerified { get; set; } = false;
+    public bool EmailNotifications { get; set; } = true;
+    public bool RequireTwoFactorForAllUsers { get; set; } = false;
+    public bool ChargeRestockingFee { get; set; } = false;
+    public decimal DiagnosticBenchFee { get; set; } = 0;
+    public bool ChargeDepositOnRepairs { get; set; } = false;
+    public int LockScreenTimeoutMinutes { get; set; } = 15;
 }
 
 public class GeneralSettingsDto

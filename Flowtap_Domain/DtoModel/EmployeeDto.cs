@@ -86,3 +86,31 @@ public class EmployeeResponseDto
     public DateTime UpdatedAt { get; set; }
 }
 
+/// <summary>
+/// DTO for adding a partner/admin to a store
+/// Only the owner (AppUser who owns the subscription) can add partners
+/// </summary>
+public class AddPartnerRequestDto
+{
+    [Required]
+    public Guid StoreId { get; set; }
+
+    [Required, MaxLength(320)]
+    [EmailAddress]
+    public string Email { get; set; } = string.Empty;
+
+    [MaxLength(200)]
+    public string? FullName { get; set; }
+
+    [MaxLength(20)]
+    public string? Phone { get; set; }
+
+    [Required]
+    [MaxLength(100)]
+    public string Role { get; set; } = string.Empty; // Partner, Admin, SuperAdmin
+
+    public AddressDto? Address { get; set; }
+
+    public Guid? LinkedAppUserId { get; set; } // If linking to existing AppUser account
+}
+

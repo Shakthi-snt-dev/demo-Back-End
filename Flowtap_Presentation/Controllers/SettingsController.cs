@@ -120,5 +120,45 @@ public class SettingsController : ControllerBase
         var result = await _settingsService.EnableTwoFactorAsync(appUserId);
         return Ok(ApiResponseDto<object?>.Success(null, "Two-factor authentication enabled successfully"));
     }
+
+    /// <summary>
+    /// Get store settings
+    /// </summary>
+    [HttpGet("store/{storeId}")]
+    [ProducesResponseType(typeof(ApiResponseDto<StoreSettingsDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<ApiResponseDto<StoreSettingsDto>>> GetStoreSettings(Guid storeId)
+    {
+        var result = await _settingsService.GetStoreSettingsAsync(storeId);
+        return Ok(ApiResponseDto<StoreSettingsDto>.Success(result, "Store settings retrieved successfully"));
+    }
+
+    /// <summary>
+    /// Update store settings
+    /// </summary>
+    [HttpPut("store/{storeId}")]
+    [ProducesResponseType(typeof(ApiResponseDto<StoreSettingsDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<ApiResponseDto<StoreSettingsDto>>> UpdateStoreSettings(
+        Guid storeId,
+        [FromBody] UpdateStoreSettingsRequestDto request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return Ok(ApiResponseDto<StoreSettingsDto>.Failure("Invalid request data", null));
+        }
+
+        var result = await _settingsService.UpdateStoreSettingsAsync(storeId, request);
+        return Ok(ApiResponseDto<StoreSettingsDto>.Success(result, "Store settings updated successfully"));
+    }
+
+    /// <summary>
+    /// Reset API key for store
+    /// </summary>
+    [HttpPost("store/{storeId}/api-key/reset")]
+    [ProducesResponseType(typeof(ApiResponseDto<object>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<ApiResponseDto<object>>> ResetApiKey(Guid storeId)
+    {
+        var result = await _settingsService.ResetApiKeyAsync(storeId);
+        return Ok(ApiResponseDto<object>.Success(new { apiKey = result }, "API key reset successfully"));
+    }
 }
 

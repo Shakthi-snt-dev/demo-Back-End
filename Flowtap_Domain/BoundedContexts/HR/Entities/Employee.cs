@@ -19,6 +19,12 @@ public class Employee
 
     public string? AccessPinHash { get; set; }
 
+    /// <summary>
+    /// Links to either AppUser.Id (subscription owner) or AppUserAdmin.Id (business owner)
+    /// - If LinkedAppUserId exists in AppUser table → subscription owner
+    /// - If LinkedAppUserId exists in AppUserAdmin table → business owner
+    /// Both have Owner role but LinkedAppUserId distinguishes the type
+    /// </summary>
     public Guid? LinkedAppUserId { get; set; }
 
     public bool IsActive { get; set; } = true;
