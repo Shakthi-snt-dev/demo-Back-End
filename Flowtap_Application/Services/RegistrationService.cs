@@ -110,7 +110,7 @@ public class RegistrationService : IRegistrationService
         await _userAccountRepository.UpdateAsync(userAccount);
 
         // Send verification email
-        var baseUrl = _configuration["AppSettings:BaseUrl"] ?? "http://localhost:5000";
+        var baseUrl = _configuration["AppSettings:BaseUrl"] ?? "http://localhost:5113/api";
         var verificationLink = $"{baseUrl}/api/auth/verify-email?token={verificationToken}";
 
         var emailSent = await _emailService.SendVerificationEmailAsync(

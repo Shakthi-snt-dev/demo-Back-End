@@ -1,0 +1,267 @@
+2025-11-17 09:17:14.380 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-17 09:17:14.441 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 09:17:14.446 +05:30 [INF] Hosting environment: Development
+2025-11-17 09:17:14.450 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-17 09:17:42.602 +05:30 [INF] Application is shutting down...
+2025-11-17 09:17:58.709 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-17 09:17:59.107 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 09:17:59.289 +05:30 [INF] Hosting environment: Development
+2025-11-17 09:17:59.462 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-17 09:20:46.480 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/auth/register - null null
+2025-11-17 09:20:46.670 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-11-17 09:20:46.679 +05:30 [INF] CORS policy execution successful.
+2025-11-17 09:20:46.705 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/auth/register - 204 null null 230.0537ms
+2025-11-17 09:20:46.730 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/auth/register - application/json 111
+2025-11-17 09:20:46.749 +05:30 [INF] CORS policy execution successful.
+2025-11-17 09:20:46.765 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-17 09:20:46.854 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.RegisterResponseDto]]] Register(Flowtap_Domain.DtoModel.RegisterRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 09:20:49.934 +05:30 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-11-17 09:20:49.984 +05:30 [WRN] The property 'AppUser.StoreIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:20:49.990 +05:30 [WRN] The property 'AppUserAdmin.Permissions' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:20:49.996 +05:30 [WRN] The property 'Store.EmployeeIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:20:51.384 +05:30 [INF] Executed DbCommand (90ms) [Parameters=[@__email_0='testflowtap@yopmail.com'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-17 09:20:51.509 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__username_0='flowtap'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "UserAccounts" AS u
+    WHERE u."Username" = @__username_0)
+2025-11-17 09:20:51.894 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[@p0='ab34d388-e82c-4ecb-bf16-2e299c03da6e', @p1=NULL (DbType = Guid), @p2='2025-11-17T03:50:51.5427728Z' (DbType = DateTime), @p3='testflowtap@yopmail.com' (Nullable = false), @p4='5Mw3070-cEjd3tmcA_mW87Hn5FoheZWVajZnXnu_-ro', @p5='2025-11-18T03:50:51.5420701Z' (Nullable = true) (DbType = DateTime), @p6=NULL (DbType = Guid), @p7=NULL, @p8=NULL, @p9='True', @p10='False', @p11=NULL (DbType = DateTime), @p12='pk97qUGY21WePdbnFmi2cPpD2UKtY4/KRe1D4+SAoWk=' (Nullable = false), @p13='GV2k91RTGKSqQMo3l4gGxA==', @p14='False', @p15='2025-11-17T03:50:51.5428395Z' (DbType = DateTime), @p16='0', @p17='flowtap'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UserAccounts" ("Id", "AppUserId", "CreatedAt", "Email", "EmailVerificationToken", "EmailVerificationTokenExpiry", "EmployeeId", "ExternalProvider", "ExternalProviderId", "IsActive", "IsEmailVerified", "LastLoginAt", "PasswordHash", "PasswordSalt", "TwoFactorEnabled", "UpdatedAt", "UserType", "Username")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17);
+2025-11-17 09:20:52.064 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@p0='d6dd4949-4771-4d4b-8d58-698025154001', @p1=NULL, @p2=NULL, @p3='2025-11-17T03:50:51.9187025Z' (DbType = DateTime), @p4='USD' (Nullable = false), @p5='testflowtap@yopmail.com' (Nullable = false), @p6=NULL, @p7=NULL, @p8=NULL, @p9='' (Nullable = false), @p10=NULL (DbType = Guid), @p11='UTC' (Nullable = false), @p12=NULL (DbType = DateTime), @p13=NULL (DbType = DateTime), @p14='2025-11-17T03:50:51.9187381Z' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AppUsers" ("Id", "BusinessName", "Country", "CreatedAt", "Currency", "Email", "FirstName", "LastName", "PhoneNumber", "StoreIds", "SubscriptionId", "TimeZone", "TrialEndDate", "TrialStartDate", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14)
+RETURNING "TrialStatus";
+2025-11-17 09:20:52.133 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@p17='ab34d388-e82c-4ecb-bf16-2e299c03da6e', @p0='d6dd4949-4771-4d4b-8d58-698025154001' (Nullable = true), @p1='2025-11-17T03:50:51.5427728Z' (DbType = DateTime), @p2='testflowtap@yopmail.com' (Nullable = false), @p3='5Mw3070-cEjd3tmcA_mW87Hn5FoheZWVajZnXnu_-ro', @p4='2025-11-18T03:50:51.5420701Z' (Nullable = true) (DbType = DateTime), @p5=NULL (DbType = Guid), @p6=NULL, @p7=NULL, @p8='True', @p9='False', @p10=NULL (DbType = DateTime), @p11='pk97qUGY21WePdbnFmi2cPpD2UKtY4/KRe1D4+SAoWk=' (Nullable = false), @p12='GV2k91RTGKSqQMo3l4gGxA==', @p13='False', @p14='2025-11-17T03:50:51.5428395Z' (DbType = DateTime), @p15='0', @p16='flowtap'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-17 09:20:52.152 +05:30 [INF] Sending verification email to testflowtap@yopmail.com with link: http://localhost:5000/api/auth/verify-email?token=5Mw3070-cEjd3tmcA_mW87Hn5FoheZWVajZnXnu_-ro
+2025-11-17 09:20:56.638 +05:30 [INF] Email sent successfully via SMTP to testflowtap@yopmail.com
+2025-11-17 09:20:56.648 +05:30 [INF] Verification email sent successfully to testflowtap@yopmail.com
+2025-11-17 09:20:56.666 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.RegisterResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 09:20:56.747 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation) in 9880.5345ms
+2025-11-17 09:20:56.750 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-17 09:20:56.763 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/auth/register - 200 null application/json; charset=utf-8 10034.2927ms
+2025-11-17 09:26:54.152 +05:30 [INF] Application is shutting down...
+2025-11-17 09:27:17.648 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-17 09:27:17.713 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 09:27:17.719 +05:30 [INF] Hosting environment: Development
+2025-11-17 09:27:17.720 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-17 09:28:32.382 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/auth/register - null null
+2025-11-17 09:28:32.587 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-11-17 09:28:32.590 +05:30 [INF] CORS policy execution successful.
+2025-11-17 09:28:32.608 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/auth/register - 204 null null 226.0637ms
+2025-11-17 09:28:32.621 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/auth/register - application/json 111
+2025-11-17 09:28:32.641 +05:30 [INF] CORS policy execution successful.
+2025-11-17 09:28:32.672 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-17 09:28:32.734 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.RegisterResponseDto]]] Register(Flowtap_Domain.DtoModel.RegisterRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 09:28:35.053 +05:30 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-11-17 09:28:35.255 +05:30 [WRN] The property 'AppUser.StoreIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:28:35.260 +05:30 [WRN] The property 'AppUserAdmin.Permissions' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:28:35.267 +05:30 [WRN] The property 'Store.EmployeeIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:28:36.785 +05:30 [INF] Executed DbCommand (119ms) [Parameters=[@__email_0='testflowtap@yopmail.com'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-17 09:28:36.997 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__username_0='flowtap'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "UserAccounts" AS u
+    WHERE u."Username" = @__username_0)
+2025-11-17 09:28:37.429 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@p0='c14ea7a7-5e05-4d1c-ba15-65ed1bc8d3e2', @p1=NULL (DbType = Guid), @p2='2025-11-17T03:58:37.0603810Z' (DbType = DateTime), @p3='testflowtap@yopmail.com' (Nullable = false), @p4='yklDCZckG8hSP9N_s5WIum64uBn8bML0YFpAo9jINZU', @p5='2025-11-18T03:58:37.0596697Z' (Nullable = true) (DbType = DateTime), @p6=NULL (DbType = Guid), @p7=NULL, @p8=NULL, @p9='True', @p10='False', @p11=NULL (DbType = DateTime), @p12='mSzdGZtOCRhu+GUXummFUVvPA/Sw/t4ppsHEz8VIy58=' (Nullable = false), @p13='RQ5epHv1M1Rauixw8DntCA==', @p14='False', @p15='2025-11-17T03:58:37.0604167Z' (DbType = DateTime), @p16='0', @p17='flowtap'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UserAccounts" ("Id", "AppUserId", "CreatedAt", "Email", "EmailVerificationToken", "EmailVerificationTokenExpiry", "EmployeeId", "ExternalProvider", "ExternalProviderId", "IsActive", "IsEmailVerified", "LastLoginAt", "PasswordHash", "PasswordSalt", "TwoFactorEnabled", "UpdatedAt", "UserType", "Username")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17);
+2025-11-17 09:28:37.651 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='73f1b086-3af9-4fb3-af9a-a43f06fc15dc', @p1=NULL, @p2=NULL, @p3='2025-11-17T03:58:37.5023192Z' (DbType = DateTime), @p4='USD' (Nullable = false), @p5='testflowtap@yopmail.com' (Nullable = false), @p6=NULL, @p7=NULL, @p8=NULL, @p9='' (Nullable = false), @p10=NULL (DbType = Guid), @p11='UTC' (Nullable = false), @p12=NULL (DbType = DateTime), @p13=NULL (DbType = DateTime), @p14='2025-11-17T03:58:37.5027471Z' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AppUsers" ("Id", "BusinessName", "Country", "CreatedAt", "Currency", "Email", "FirstName", "LastName", "PhoneNumber", "StoreIds", "SubscriptionId", "TimeZone", "TrialEndDate", "TrialStartDate", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14)
+RETURNING "TrialStatus";
+2025-11-17 09:28:37.732 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p17='c14ea7a7-5e05-4d1c-ba15-65ed1bc8d3e2', @p0='73f1b086-3af9-4fb3-af9a-a43f06fc15dc' (Nullable = true), @p1='2025-11-17T03:58:37.0603810Z' (DbType = DateTime), @p2='testflowtap@yopmail.com' (Nullable = false), @p3='yklDCZckG8hSP9N_s5WIum64uBn8bML0YFpAo9jINZU', @p4='2025-11-18T03:58:37.0596697Z' (Nullable = true) (DbType = DateTime), @p5=NULL (DbType = Guid), @p6=NULL, @p7=NULL, @p8='True', @p9='False', @p10=NULL (DbType = DateTime), @p11='mSzdGZtOCRhu+GUXummFUVvPA/Sw/t4ppsHEz8VIy58=' (Nullable = false), @p12='RQ5epHv1M1Rauixw8DntCA==', @p13='False', @p14='2025-11-17T03:58:37.0604167Z' (DbType = DateTime), @p15='0', @p16='flowtap'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-17 09:28:37.751 +05:30 [INF] Sending verification email to testflowtap@yopmail.com with link: http://localhost:5000/api/auth/verify-email?token=yklDCZckG8hSP9N_s5WIum64uBn8bML0YFpAo9jINZU
+2025-11-17 09:28:41.108 +05:30 [INF] Email sent successfully via SMTP to testflowtap@yopmail.com
+2025-11-17 09:28:41.114 +05:30 [INF] Verification email sent successfully to testflowtap@yopmail.com
+2025-11-17 09:28:41.132 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.RegisterResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 09:28:41.339 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation) in 8595.4713ms
+2025-11-17 09:28:41.349 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-17 09:28:41.383 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/auth/register - 200 null application/json; charset=utf-8 8762.3043ms
+2025-11-17 09:29:47.975 +05:30 [INF] Application is shutting down...
+2025-11-17 09:29:56.512 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-17 09:29:56.786 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 09:29:56.793 +05:30 [INF] Hosting environment: Development
+2025-11-17 09:29:56.798 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-17 09:30:41.318 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/auth/register - null null
+2025-11-17 09:30:41.420 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-11-17 09:30:41.423 +05:30 [INF] CORS policy execution successful.
+2025-11-17 09:30:41.431 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/auth/register - 204 null null 116.8859ms
+2025-11-17 09:30:41.443 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/auth/register - application/json 107
+2025-11-17 09:30:41.448 +05:30 [INF] CORS policy execution successful.
+2025-11-17 09:30:41.454 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-17 09:30:41.504 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.RegisterResponseDto]]] Register(Flowtap_Domain.DtoModel.RegisterRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 09:30:44.637 +05:30 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-11-17 09:30:44.687 +05:30 [WRN] The property 'AppUser.StoreIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:30:44.691 +05:30 [WRN] The property 'AppUserAdmin.Permissions' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:30:44.695 +05:30 [WRN] The property 'Store.EmployeeIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:30:45.938 +05:30 [INF] Executed DbCommand (89ms) [Parameters=[@__email_0='testflowtap@yopmail.com'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-17 09:30:46.044 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__username_0='flowtap'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "UserAccounts" AS u
+    WHERE u."Username" = @__username_0)
+2025-11-17 09:30:46.430 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@p0='4351de9a-7c1d-4fbd-b859-f64486042ec8', @p1=NULL (DbType = Guid), @p2='2025-11-17T04:00:46.0757637Z' (DbType = DateTime), @p3='testflowtap@yopmail.com' (Nullable = false), @p4='Gg9qRtaNoIcq_cucv85nT8pMjY4rzVubRd69dIPdtYk', @p5='2025-11-18T04:00:46.0750445Z' (Nullable = true) (DbType = DateTime), @p6=NULL (DbType = Guid), @p7=NULL, @p8=NULL, @p9='True', @p10='False', @p11=NULL (DbType = DateTime), @p12='SlQ+mngtxE+NGHuPrk4iDu+DWNjwaSrrYiWDmGJrrqI=' (Nullable = false), @p13='vPYf+kJxAZ+/l4Z8DBFWXg==', @p14='False', @p15='2025-11-17T04:00:46.0758097Z' (DbType = DateTime), @p16='0', @p17='flowtap'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UserAccounts" ("Id", "AppUserId", "CreatedAt", "Email", "EmailVerificationToken", "EmailVerificationTokenExpiry", "EmployeeId", "ExternalProvider", "ExternalProviderId", "IsActive", "IsEmailVerified", "LastLoginAt", "PasswordHash", "PasswordSalt", "TwoFactorEnabled", "UpdatedAt", "UserType", "Username")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17);
+2025-11-17 09:30:46.621 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p0='8db688de-d546-435c-bdae-60445bdf98e3', @p1=NULL, @p2=NULL, @p3='2025-11-17T04:00:46.4769920Z' (DbType = DateTime), @p4='USD' (Nullable = false), @p5='testflowtap@yopmail.com' (Nullable = false), @p6=NULL, @p7=NULL, @p8=NULL, @p9='' (Nullable = false), @p10=NULL (DbType = Guid), @p11='UTC' (Nullable = false), @p12=NULL (DbType = DateTime), @p13=NULL (DbType = DateTime), @p14='2025-11-17T04:00:46.4770395Z' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AppUsers" ("Id", "BusinessName", "Country", "CreatedAt", "Currency", "Email", "FirstName", "LastName", "PhoneNumber", "StoreIds", "SubscriptionId", "TimeZone", "TrialEndDate", "TrialStartDate", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14)
+RETURNING "TrialStatus";
+2025-11-17 09:30:46.686 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p17='4351de9a-7c1d-4fbd-b859-f64486042ec8', @p0='8db688de-d546-435c-bdae-60445bdf98e3' (Nullable = true), @p1='2025-11-17T04:00:46.0757637Z' (DbType = DateTime), @p2='testflowtap@yopmail.com' (Nullable = false), @p3='Gg9qRtaNoIcq_cucv85nT8pMjY4rzVubRd69dIPdtYk', @p4='2025-11-18T04:00:46.0750445Z' (Nullable = true) (DbType = DateTime), @p5=NULL (DbType = Guid), @p6=NULL, @p7=NULL, @p8='True', @p9='False', @p10=NULL (DbType = DateTime), @p11='SlQ+mngtxE+NGHuPrk4iDu+DWNjwaSrrYiWDmGJrrqI=' (Nullable = false), @p12='vPYf+kJxAZ+/l4Z8DBFWXg==', @p13='False', @p14='2025-11-17T04:00:46.0758097Z' (DbType = DateTime), @p15='0', @p16='flowtap'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-17 09:30:46.696 +05:30 [INF] Sending verification email to testflowtap@yopmail.com with link: http://localhost:5113/api/api/auth/verify-email?token=Gg9qRtaNoIcq_cucv85nT8pMjY4rzVubRd69dIPdtYk
+2025-11-17 09:30:50.240 +05:30 [INF] Email sent successfully via SMTP to testflowtap@yopmail.com
+2025-11-17 09:30:50.252 +05:30 [INF] Verification email sent successfully to testflowtap@yopmail.com
+2025-11-17 09:30:50.272 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.RegisterResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 09:30:50.369 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation) in 8854.4259ms
+2025-11-17 09:30:50.376 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-17 09:30:50.399 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/auth/register - 200 null application/json; charset=utf-8 8955.614ms
+2025-11-17 09:30:58.441 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/api/auth/verify-email?token=Gg9qRtaNoIcq_cucv85nT8pMjY4rzVubRd69dIPdtYk - null null
+2025-11-17 09:30:58.465 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/api/auth/verify-email?token=Gg9qRtaNoIcq_cucv85nT8pMjY4rzVubRd69dIPdtYk - 404 0 null 23.7951ms
+2025-11-17 09:30:58.474 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/api/api/auth/verify-email, Response status code: 404
+2025-11-17 09:31:22.878 +05:30 [INF] Application is shutting down...
+2025-11-17 09:31:28.124 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-17 09:31:28.153 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 09:31:28.155 +05:30 [INF] Hosting environment: Development
+2025-11-17 09:31:28.156 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-17 09:32:00.203 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/auth/register - null null
+2025-11-17 09:32:00.305 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-11-17 09:32:00.317 +05:30 [INF] CORS policy execution successful.
+2025-11-17 09:32:00.330 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/auth/register - 204 null null 129.4156ms
+2025-11-17 09:32:00.352 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/auth/register - application/json 107
+2025-11-17 09:32:00.373 +05:30 [INF] CORS policy execution successful.
+2025-11-17 09:32:00.386 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-17 09:32:00.440 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.RegisterResponseDto]]] Register(Flowtap_Domain.DtoModel.RegisterRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 09:32:02.262 +05:30 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-11-17 09:32:02.318 +05:30 [WRN] The property 'AppUser.StoreIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:32:02.323 +05:30 [WRN] The property 'AppUserAdmin.Permissions' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:32:02.327 +05:30 [WRN] The property 'Store.EmployeeIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:32:03.477 +05:30 [INF] Executed DbCommand (93ms) [Parameters=[@__email_0='testflowtap@yopmail.com'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-17 09:32:03.590 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__username_0='flowtap'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "UserAccounts" AS u
+    WHERE u."Username" = @__username_0)
+2025-11-17 09:32:03.918 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p0='a752f577-9eca-42d4-a07b-55f3c1cea848', @p1=NULL (DbType = Guid), @p2='2025-11-17T04:02:03.6160076Z' (DbType = DateTime), @p3='testflowtap@yopmail.com' (Nullable = false), @p4='es1W7FwOAJXtuDIAaCYTIQSahaEITl_rHh-YLdXrWJo', @p5='2025-11-18T04:02:03.6152055Z' (Nullable = true) (DbType = DateTime), @p6=NULL (DbType = Guid), @p7=NULL, @p8=NULL, @p9='True', @p10='False', @p11=NULL (DbType = DateTime), @p12='KD+m7BdNNur9txYNxwlSwIguqP80e84zAy6wOAiLi5s=' (Nullable = false), @p13='UN0L0QlLKb/C+YfECqRkuw==', @p14='False', @p15='2025-11-17T04:02:03.6160647Z' (DbType = DateTime), @p16='0', @p17='flowtap'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UserAccounts" ("Id", "AppUserId", "CreatedAt", "Email", "EmailVerificationToken", "EmailVerificationTokenExpiry", "EmployeeId", "ExternalProvider", "ExternalProviderId", "IsActive", "IsEmailVerified", "LastLoginAt", "PasswordHash", "PasswordSalt", "TwoFactorEnabled", "UpdatedAt", "UserType", "Username")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17);
+2025-11-17 09:32:04.097 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='1d3b7a4d-2772-4df5-8a45-fb2843fa5721', @p1=NULL, @p2=NULL, @p3='2025-11-17T04:02:03.9497859Z' (DbType = DateTime), @p4='USD' (Nullable = false), @p5='testflowtap@yopmail.com' (Nullable = false), @p6=NULL, @p7=NULL, @p8=NULL, @p9='' (Nullable = false), @p10=NULL (DbType = Guid), @p11='UTC' (Nullable = false), @p12=NULL (DbType = DateTime), @p13=NULL (DbType = DateTime), @p14='2025-11-17T04:02:03.9499061Z' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AppUsers" ("Id", "BusinessName", "Country", "CreatedAt", "Currency", "Email", "FirstName", "LastName", "PhoneNumber", "StoreIds", "SubscriptionId", "TimeZone", "TrialEndDate", "TrialStartDate", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14)
+RETURNING "TrialStatus";
+2025-11-17 09:32:04.162 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p17='a752f577-9eca-42d4-a07b-55f3c1cea848', @p0='1d3b7a4d-2772-4df5-8a45-fb2843fa5721' (Nullable = true), @p1='2025-11-17T04:02:03.6160076Z' (DbType = DateTime), @p2='testflowtap@yopmail.com' (Nullable = false), @p3='es1W7FwOAJXtuDIAaCYTIQSahaEITl_rHh-YLdXrWJo', @p4='2025-11-18T04:02:03.6152055Z' (Nullable = true) (DbType = DateTime), @p5=NULL (DbType = Guid), @p6=NULL, @p7=NULL, @p8='True', @p9='False', @p10=NULL (DbType = DateTime), @p11='KD+m7BdNNur9txYNxwlSwIguqP80e84zAy6wOAiLi5s=' (Nullable = false), @p12='UN0L0QlLKb/C+YfECqRkuw==', @p13='False', @p14='2025-11-17T04:02:03.6160647Z' (DbType = DateTime), @p15='0', @p16='flowtap'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-17 09:32:04.180 +05:30 [INF] Sending verification email to testflowtap@yopmail.com with link: http://localhost:5113/api/auth/verify-email?token=es1W7FwOAJXtuDIAaCYTIQSahaEITl_rHh-YLdXrWJo
+2025-11-17 09:32:07.408 +05:30 [INF] Email sent successfully via SMTP to testflowtap@yopmail.com
+2025-11-17 09:32:07.415 +05:30 [INF] Verification email sent successfully to testflowtap@yopmail.com
+2025-11-17 09:32:07.429 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.RegisterResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 09:32:07.521 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation) in 7058.8303ms
+2025-11-17 09:32:07.527 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-17 09:32:07.550 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/auth/register - 200 null application/json; charset=utf-8 7198.4654ms
+2025-11-17 09:32:16.902 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=es1W7FwOAJXtuDIAaCYTIQSahaEITl_rHh-YLdXrWJo - null null
+2025-11-17 09:32:16.919 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 09:32:16.973 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 09:32:17.045 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='es1W7FwOAJXtuDIAaCYTIQSahaEITl_rHh-YLdXrWJo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 09:32:17.062 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p17='a752f577-9eca-42d4-a07b-55f3c1cea848', @p0='1d3b7a4d-2772-4df5-8a45-fb2843fa5721' (Nullable = true), @p1='2025-11-17T04:02:03.6160070Z' (DbType = DateTime), @p2='testflowtap@yopmail.com' (Nullable = false), @p3=NULL, @p4=NULL (DbType = DateTime), @p5=NULL (DbType = Guid), @p6=NULL, @p7=NULL, @p8='True', @p9='True', @p10=NULL (DbType = DateTime), @p11='KD+m7BdNNur9txYNxwlSwIguqP80e84zAy6wOAiLi5s=' (Nullable = false), @p12='UN0L0QlLKb/C+YfECqRkuw==', @p13='False', @p14='2025-11-17T04:02:17.0592408Z' (DbType = DateTime), @p15='0', @p16='flowtap'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-17 09:32:17.068 +05:30 [INF] Sending welcome email to testflowtap@yopmail.com
+2025-11-17 09:32:19.984 +05:30 [INF] Email sent successfully via SMTP to testflowtap@yopmail.com
+2025-11-17 09:32:19.990 +05:30 [INF] Welcome email sent successfully to testflowtap@yopmail.com
+2025-11-17 09:32:20.017 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 09:32:20.045 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 3068.1043ms
+2025-11-17 09:32:20.049 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 09:32:20.052 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=es1W7FwOAJXtuDIAaCYTIQSahaEITl_rHh-YLdXrWJo - 200 null application/json; charset=utf-8 3149.4303ms
+2025-11-17 09:32:20.130 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/favicon.ico - null null
+2025-11-17 09:32:20.136 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/favicon.ico - 404 0 null 6.0354ms
+2025-11-17 09:32:20.142 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5113/favicon.ico, Response status code: 404
+2025-11-17 09:33:14.553 +05:30 [INF] Application is shutting down...
+2025-11-17 09:40:36.255 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-17 09:40:36.397 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 09:40:36.404 +05:30 [INF] Hosting environment: Development
+2025-11-17 09:40:36.408 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-17 09:41:12.606 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/auth/register - null null
+2025-11-17 09:41:12.880 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-11-17 09:41:12.885 +05:30 [INF] CORS policy execution successful.
+2025-11-17 09:41:12.913 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/auth/register - 204 null null 310.723ms
+2025-11-17 09:41:12.937 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/auth/register - application/json 107
+2025-11-17 09:41:12.978 +05:30 [INF] CORS policy execution successful.
+2025-11-17 09:41:13.013 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-17 09:41:13.132 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.RegisterResponseDto]]] Register(Flowtap_Domain.DtoModel.RegisterRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 09:41:17.005 +05:30 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-11-17 09:41:17.171 +05:30 [WRN] The property 'AppUser.StoreIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:41:17.181 +05:30 [WRN] The property 'AppUserAdmin.Permissions' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:41:17.195 +05:30 [WRN] The property 'Store.EmployeeIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 09:41:19.057 +05:30 [INF] Executed DbCommand (123ms) [Parameters=[@__email_0='testflowtap@yopmail.com'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-17 09:41:19.281 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__username_0='flowtap'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "UserAccounts" AS u
+    WHERE u."Username" = @__username_0)
+2025-11-17 09:41:19.708 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[@p0='1ee1a7ab-fbab-47b4-a0dc-bdfc0d945ef4', @p1=NULL (DbType = Guid), @p2='2025-11-17T04:11:19.3014758Z' (DbType = DateTime), @p3='testflowtap@yopmail.com' (Nullable = false), @p4='aWPGNmSIoshBuTvFkIWhhgjOdBJwjUVEtz92W2VI0i0', @p5='2025-11-18T04:11:19.3005667Z' (Nullable = true) (DbType = DateTime), @p6=NULL (DbType = Guid), @p7=NULL, @p8=NULL, @p9='True', @p10='False', @p11=NULL (DbType = DateTime), @p12='uyieZR4Nad0AZ8YnHqaPCLCdtgiWfcqoMVcjrxnTVDc=' (Nullable = false), @p13='VCiJyTRgIfHEar9hcHLKTA==', @p14='False', @p15='2025-11-17T04:11:19.3015040Z' (DbType = DateTime), @p16='0', @p17='flowtap'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UserAccounts" ("Id", "AppUserId", "CreatedAt", "Email", "EmailVerificationToken", "EmailVerificationTokenExpiry", "EmployeeId", "ExternalProvider", "ExternalProviderId", "IsActive", "IsEmailVerified", "LastLoginAt", "PasswordHash", "PasswordSalt", "TwoFactorEnabled", "UpdatedAt", "UserType", "Username")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17);
+2025-11-17 09:41:19.902 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p0='fab21744-7af3-4d0c-89b5-5ed730907290', @p1=NULL, @p2=NULL, @p3='2025-11-17T04:11:19.7564375Z' (DbType = DateTime), @p4='USD' (Nullable = false), @p5='testflowtap@yopmail.com' (Nullable = false), @p6=NULL, @p7=NULL, @p8=NULL, @p9='' (Nullable = false), @p10=NULL (DbType = Guid), @p11='UTC' (Nullable = false), @p12=NULL (DbType = DateTime), @p13=NULL (DbType = DateTime), @p14='2025-11-17T04:11:19.7564875Z' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AppUsers" ("Id", "BusinessName", "Country", "CreatedAt", "Currency", "Email", "FirstName", "LastName", "PhoneNumber", "StoreIds", "SubscriptionId", "TimeZone", "TrialEndDate", "TrialStartDate", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14)
+RETURNING "TrialStatus";
+2025-11-17 09:41:19.989 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@p17='1ee1a7ab-fbab-47b4-a0dc-bdfc0d945ef4', @p0='fab21744-7af3-4d0c-89b5-5ed730907290' (Nullable = true), @p1='2025-11-17T04:11:19.3014758Z' (DbType = DateTime), @p2='testflowtap@yopmail.com' (Nullable = false), @p3='aWPGNmSIoshBuTvFkIWhhgjOdBJwjUVEtz92W2VI0i0', @p4='2025-11-18T04:11:19.3005667Z' (Nullable = true) (DbType = DateTime), @p5=NULL (DbType = Guid), @p6=NULL, @p7=NULL, @p8='True', @p9='False', @p10=NULL (DbType = DateTime), @p11='uyieZR4Nad0AZ8YnHqaPCLCdtgiWfcqoMVcjrxnTVDc=' (Nullable = false), @p12='VCiJyTRgIfHEar9hcHLKTA==', @p13='False', @p14='2025-11-17T04:11:19.3015040Z' (DbType = DateTime), @p15='0', @p16='flowtap'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-17 09:41:20.016 +05:30 [INF] Sending verification email to testflowtap@yopmail.com with link: http://localhost:5113/api/auth/verify-email?token=aWPGNmSIoshBuTvFkIWhhgjOdBJwjUVEtz92W2VI0i0
+2025-11-17 09:41:23.802 +05:30 [INF] Email sent successfully via SMTP to testflowtap@yopmail.com
+2025-11-17 09:41:23.809 +05:30 [INF] Verification email sent successfully to testflowtap@yopmail.com
+2025-11-17 09:41:23.851 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.RegisterResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 09:41:24.051 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation) in 10907.8265ms
+2025-11-17 09:41:24.059 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-17 09:41:24.095 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/auth/register - 200 null application/json; charset=utf-8 11158.2603ms
+2025-11-17 09:41:49.411 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=aWPGNmSIoshBuTvFkIWhhgjOdBJwjUVEtz92W2VI0i0 - null null
+2025-11-17 09:41:49.470 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 09:41:49.628 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 09:41:49.805 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='aWPGNmSIoshBuTvFkIWhhgjOdBJwjUVEtz92W2VI0i0'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 09:41:49.824 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p17='1ee1a7ab-fbab-47b4-a0dc-bdfc0d945ef4', @p0='fab21744-7af3-4d0c-89b5-5ed730907290' (Nullable = true), @p1='2025-11-17T04:11:19.3014750Z' (DbType = DateTime), @p2='testflowtap@yopmail.com' (Nullable = false), @p3=NULL, @p4=NULL (DbType = DateTime), @p5=NULL (DbType = Guid), @p6=NULL, @p7=NULL, @p8='True', @p9='True', @p10=NULL (DbType = DateTime), @p11='uyieZR4Nad0AZ8YnHqaPCLCdtgiWfcqoMVcjrxnTVDc=' (Nullable = false), @p12='VCiJyTRgIfHEar9hcHLKTA==', @p13='False', @p14='2025-11-17T04:11:49.8203246Z' (DbType = DateTime), @p15='0', @p16='flowtap'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-17 09:41:49.848 +05:30 [INF] Sending welcome email to testflowtap@yopmail.com
+2025-11-17 09:41:52.838 +05:30 [INF] Email sent successfully via SMTP to testflowtap@yopmail.com
+2025-11-17 09:41:52.845 +05:30 [INF] Welcome email sent successfully to testflowtap@yopmail.com
+2025-11-17 09:41:52.901 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 09:41:53.076 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 3417.1418ms
+2025-11-17 09:41:53.082 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 09:41:53.087 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=aWPGNmSIoshBuTvFkIWhhgjOdBJwjUVEtz92W2VI0i0 - 200 null application/json; charset=utf-8 3675.7077ms
+2025-11-17 09:42:20.037 +05:30 [INF] Application is shutting down...
