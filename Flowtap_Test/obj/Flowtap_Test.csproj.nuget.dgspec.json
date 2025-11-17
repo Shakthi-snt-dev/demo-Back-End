@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Cursor_clean\\Flowtap_Test\\Flowtap_Test.csproj": {}
+    "D:\\Git\\demo-Back-End\\Flowtap_Test\\Flowtap_Test.csproj": {}
   },
   "projects": {
-    "D:\\Cursor_clean\\Flowtap_Test\\Flowtap_Test.csproj": {
+    "D:\\Git\\demo-Back-End\\Flowtap_Test\\Flowtap_Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Cursor_clean\\Flowtap_Test\\Flowtap_Test.csproj",
+        "projectUniqueName": "D:\\Git\\demo-Back-End\\Flowtap_Test\\Flowtap_Test.csproj",
         "projectName": "Flowtap_Test",
-        "projectPath": "D:\\Cursor_clean\\Flowtap_Test\\Flowtap_Test.csproj",
+        "projectPath": "D:\\Git\\demo-Back-End\\Flowtap_Test\\Flowtap_Test.csproj",
         "packagesPath": "C:\\Users\\Rajan\\.nuget\\packages\\",
-        "outputPath": "D:\\Cursor_clean\\Flowtap_Test\\obj\\",
+        "outputPath": "D:\\Git\\demo-Back-End\\Flowtap_Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

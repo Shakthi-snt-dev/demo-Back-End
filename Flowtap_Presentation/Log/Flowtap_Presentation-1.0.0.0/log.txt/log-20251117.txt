@@ -2927,3 +2927,1021 @@ LIMIT 1
 2025-11-17 21:12:51.613 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 89.8182ms
 2025-11-17 21:12:51.616 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
 2025-11-17 21:12:51.620 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 169.358ms
+2025-11-17 21:56:47.175 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - null null
+2025-11-17 21:56:47.175 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - null null
+2025-11-17 21:56:47.217 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:47.217 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:47.234 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 204 null null 60.5802ms
+2025-11-17 21:56:47.234 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 204 null null 60.63ms
+2025-11-17 21:56:47.258 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:47.265 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:47.271 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:47.278 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:47.314 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:47.316 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:47.526 +05:30 [INF] Executed DbCommand (26ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:47.577 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:47.584 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:47.591 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:47.606 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:47.608 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 325.5877ms
+2025-11-17 21:56:47.622 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:47.626 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:47.627 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:47.630 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 371.8726ms
+2025-11-17 21:56:47.633 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:47.648 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:47.652 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:47.662 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:47.677 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:47.699 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:47.715 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:47.740 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 97.0486ms
+2025-11-17 21:56:47.745 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:47.748 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:47.759 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 153.161ms
+2025-11-17 21:56:47.760 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:47.789 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:47.792 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:47.795 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:47.798 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:47.808 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:47.823 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:47.835 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:47.837 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:47.842 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 48.4322ms
+2025-11-17 21:56:47.848 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:47.849 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:47.857 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:47.858 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 113.1976ms
+2025-11-17 21:56:47.860 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:47.871 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:47.879 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:47.882 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:47.898 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:47.917 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:47.925 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:47.930 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:47.933 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 57.0714ms
+2025-11-17 21:56:47.935 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:47.936 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:47.940 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:47.944 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 95.7158ms
+2025-11-17 21:56:47.950 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:47.959 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:47.969 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:47.971 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:47.975 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:48.004 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:48.007 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.019 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:48.024 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 56.188ms
+2025-11-17 21:56:48.027 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:48.037 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.056 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:48.058 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 122.762ms
+2025-11-17 21:56:48.058 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.070 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:48.079 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:48.083 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.096 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:48.112 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:48.122 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.127 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:48.134 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 60.8708ms
+2025-11-17 21:56:48.136 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:48.136 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.150 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:48.155 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 128.8866ms
+2025-11-17 21:56:48.157 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.171 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:48.175 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:48.185 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.198 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:48.203 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:48.208 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.209 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:48.212 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 38.5165ms
+2025-11-17 21:56:48.212 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:48.214 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.217 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:48.218 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 82.5346ms
+2025-11-17 21:56:48.219 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.224 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:48.227 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:48.228 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.232 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:48.239 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:48.257 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.260 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:48.265 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 38.9962ms
+2025-11-17 21:56:48.267 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:48.268 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.276 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:48.279 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 66.676ms
+2025-11-17 21:56:48.281 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.286 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:48.299 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:48.301 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.305 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:48.314 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:48.323 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.327 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:48.329 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 33.4807ms
+2025-11-17 21:56:48.331 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:48.332 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.340 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:48.344 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 77.004ms
+2025-11-17 21:56:48.350 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.359 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:48.382 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:48.386 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.393 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:48.412 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:48.420 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.422 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:48.432 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 64.1652ms
+2025-11-17 21:56:48.434 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:48.435 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.443 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 112.2848ms
+2025-11-17 21:56:48.440 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:48.456 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.458 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:48.467 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:48.469 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.479 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:48.487 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:48.494 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.503 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:48.508 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 45.7494ms
+2025-11-17 21:56:48.511 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:48.515 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.523 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:48.524 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 89.6978ms
+2025-11-17 21:56:48.525 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.537 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:48.543 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:48.550 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.563 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:48.573 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:48.583 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.587 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:48.593 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 52.2772ms
+2025-11-17 21:56:48.594 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:48.595 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.599 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:48.606 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 94.4338ms
+2025-11-17 21:56:48.609 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.614 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:48.624 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:48.627 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.632 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:48.640 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:48.647 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.657 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:48.661 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 42.8977ms
+2025-11-17 21:56:48.665 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.667 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:48.669 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 74.6548ms
+2025-11-17 21:56:48.673 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:48.685 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.687 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:48.701 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:48.702 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.706 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:48.720 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:48.737 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.752 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:48.757 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 60.5163ms
+2025-11-17 21:56:48.761 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:48.772 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.775 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:48.778 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 110.9882ms
+2025-11-17 21:56:48.779 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.797 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:48.802 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:48.804 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.810 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:48.819 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:48.823 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.833 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:48.836 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 34.5273ms
+2025-11-17 21:56:48.840 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:48.841 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.849 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:48.851 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 90.3115ms
+2025-11-17 21:56:48.853 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.862 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:48.875 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:48.879 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.892 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:48.909 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:48.922 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.924 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:48.931 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 59.0364ms
+2025-11-17 21:56:48.934 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.934 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:48.940 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 99.3031ms
+2025-11-17 21:56:48.947 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:48.952 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:48.954 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:48.965 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:48.966 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.970 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:48.982 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:48.988 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:48.990 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:49.001 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 38.5267ms
+2025-11-17 21:56:49.003 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:49.003 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.012 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:49.015 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 80.1402ms
+2025-11-17 21:56:49.018 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.031 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:49.035 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:49.038 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.049 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:49.053 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:49.073 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.077 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:49.078 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 44.1551ms
+2025-11-17 21:56:49.080 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:49.084 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.090 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:49.093 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 90.4787ms
+2025-11-17 21:56:49.095 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.117 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:49.129 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:49.132 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.135 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:49.149 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:49.153 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.155 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:49.157 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 31.0648ms
+2025-11-17 21:56:49.159 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:49.160 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.169 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:49.172 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 91.7994ms
+2025-11-17 21:56:49.177 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.193 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:49.199 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:49.203 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.212 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:49.231 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:49.235 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.237 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:49.243 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 45.6051ms
+2025-11-17 21:56:49.247 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:49.249 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.260 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:49.263 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 104.0881ms
+2025-11-17 21:56:49.266 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.280 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:49.284 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:49.287 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.292 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:49.302 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:49.315 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.318 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:49.321 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 38.1166ms
+2025-11-17 21:56:49.322 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:49.322 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.332 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:49.334 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 86.1161ms
+2025-11-17 21:56:49.335 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.342 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:49.352 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:49.361 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.367 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:49.380 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:49.384 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.390 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:49.394 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 43.4222ms
+2025-11-17 21:56:49.397 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.397 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:49.400 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 77.4118ms
+2025-11-17 21:56:49.406 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:49.424 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.426 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:49.444 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:49.446 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.455 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:49.462 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:49.466 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.470 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:49.479 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 36.7787ms
+2025-11-17 21:56:49.481 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:49.482 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.490 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:49.493 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 94.9046ms
+2025-11-17 21:56:49.495 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.500 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:49.511 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:49.514 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.517 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:49.530 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:49.535 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.537 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:49.540 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 34.19ms
+2025-11-17 21:56:49.543 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:49.545 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.552 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:49.557 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 74.9797ms
+2025-11-17 21:56:49.559 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.569 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:49.573 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:49.576 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.598 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:49.607 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:49.616 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.628 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:49.658 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 86.1674ms
+2025-11-17 21:56:49.661 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - application/json null
+2025-11-17 21:56:49.661 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.665 +05:30 [INF] CORS policy execution successful.
+2025-11-17 21:56:49.667 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 124.3549ms
+2025-11-17 21:56:49.670 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.680 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 21:56:49.684 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: jvdKqutAGI
+2025-11-17 21:56:49.688 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.698 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 21:56:49.714 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__Trim_0='jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 21:56:49.741 +05:30 [WRN] No user account found with verification token (length: 43, first 10: jvdKqutAGI)
+2025-11-17 21:56:49.744 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 21:56:49.753 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 68.734ms
+2025-11-17 21:56:49.759 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 21:56:49.763 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=jvdKqutAGIkslOG1kL-B3nwV-LNcaMMXsuqOL4og6mo - 200 null application/json; charset=utf-8 102.1417ms
+2025-11-17 22:10:20.187 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/auth/register - null null
+2025-11-17 22:10:20.219 +05:30 [INF] CORS policy execution successful.
+2025-11-17 22:10:20.229 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/auth/register - 204 null null 46.1403ms
+2025-11-17 22:10:20.241 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/auth/register - application/json 107
+2025-11-17 22:10:20.249 +05:30 [INF] CORS policy execution successful.
+2025-11-17 22:10:20.254 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-17 22:10:20.259 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.RegisterResponseDto]]] Register(Flowtap_Domain.DtoModel.RegisterRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 22:10:20.480 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[@__email_0='testflowtap@yopmail.com'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-17 22:10:20.492 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__username_0='flowtap'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "UserAccounts" AS u
+    WHERE u."Username" = @__username_0)
+2025-11-17 22:10:20.545 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@p0='222218d2-71a1-4c79-9e25-8e3c987b1bb2', @p1=NULL (DbType = Guid), @p2='2025-11-17T16:40:20.5039126Z' (DbType = DateTime), @p3='testflowtap@yopmail.com' (Nullable = false), @p4='JFZdn0rRFzjFeBO6z1wCbsDRBToyCo3qM3GSkPOww80', @p5='2025-11-18T16:40:20.5035625Z' (Nullable = true) (DbType = DateTime), @p6=NULL (DbType = Guid), @p7=NULL, @p8=NULL, @p9='True', @p10='False', @p11=NULL (DbType = DateTime), @p12='oXUYJDbgdlRzQ1bC7bntMtpE/BCM7doSZAHfbBCf67I=' (Nullable = false), @p13='t0jkdv+i7QJtGWzWCl7idg==', @p14='False', @p15='2025-11-17T16:40:20.5039128Z' (DbType = DateTime), @p16='0', @p17='flowtap'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UserAccounts" ("Id", "AppUserId", "CreatedAt", "Email", "EmailVerificationToken", "EmailVerificationTokenExpiry", "EmployeeId", "ExternalProvider", "ExternalProviderId", "IsActive", "IsEmailVerified", "LastLoginAt", "PasswordHash", "PasswordSalt", "TwoFactorEnabled", "UpdatedAt", "UserType", "Username")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17);
+2025-11-17 22:10:20.569 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='e213068e-3236-4cc9-a515-75834a868ada', @p1=NULL, @p2=NULL, @p3='2025-11-17T16:40:20.5522561Z' (DbType = DateTime), @p4='USD' (Nullable = false), @p5='testflowtap@yopmail.com' (Nullable = false), @p6=NULL, @p7=NULL, @p8=NULL, @p9='' (Nullable = false), @p10=NULL (DbType = Guid), @p11='UTC' (Nullable = false), @p12=NULL (DbType = DateTime), @p13=NULL (DbType = DateTime), @p14='2025-11-17T16:40:20.5522565Z' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AppUsers" ("Id", "BusinessName", "Country", "CreatedAt", "Currency", "Email", "FirstName", "LastName", "PhoneNumber", "StoreIds", "SubscriptionId", "TimeZone", "TrialEndDate", "TrialStartDate", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14)
+RETURNING "TrialStatus";
+2025-11-17 22:10:20.580 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p17='222218d2-71a1-4c79-9e25-8e3c987b1bb2', @p0='e213068e-3236-4cc9-a515-75834a868ada' (Nullable = true), @p1='2025-11-17T16:40:20.5039126Z' (DbType = DateTime), @p2='testflowtap@yopmail.com' (Nullable = false), @p3='JFZdn0rRFzjFeBO6z1wCbsDRBToyCo3qM3GSkPOww80', @p4='2025-11-18T16:40:20.5035625Z' (Nullable = true) (DbType = DateTime), @p5=NULL (DbType = Guid), @p6=NULL, @p7=NULL, @p8='True', @p9='False', @p10=NULL (DbType = DateTime), @p11='oXUYJDbgdlRzQ1bC7bntMtpE/BCM7doSZAHfbBCf67I=' (Nullable = false), @p12='t0jkdv+i7QJtGWzWCl7idg==', @p13='False', @p14='2025-11-17T16:40:20.5039128Z' (DbType = DateTime), @p15='0', @p16='flowtap'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-17 22:10:20.586 +05:30 [INF] Sending verification email to testflowtap@yopmail.com with link: http://localhost:5173/steps?token=JFZdn0rRFzjFeBO6z1wCbsDRBToyCo3qM3GSkPOww80
+2025-11-17 22:10:23.682 +05:30 [INF] Email sent successfully via SMTP to testflowtap@yopmail.com
+2025-11-17 22:10:23.683 +05:30 [INF] Verification email sent successfully to testflowtap@yopmail.com
+2025-11-17 22:10:23.686 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.RegisterResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 22:10:23.691 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation) in 3428.1267ms
+2025-11-17 22:10:23.693 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-17 22:10:23.694 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/auth/register - 200 null application/json; charset=utf-8 3452.8846ms
+2025-11-17 22:11:09.950 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/auth/verify-email?token=JFZdn0rRFzjFeBO6z1wCbsDRBToyCo3qM3GSkPOww80 - null null
+2025-11-17 22:11:09.952 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/auth/verify-email?token=JFZdn0rRFzjFeBO6z1wCbsDRBToyCo3qM3GSkPOww80 - null null
+2025-11-17 22:11:09.954 +05:30 [INF] CORS policy execution successful.
+2025-11-17 22:11:09.956 +05:30 [INF] CORS policy execution successful.
+2025-11-17 22:11:09.957 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/auth/verify-email?token=JFZdn0rRFzjFeBO6z1wCbsDRBToyCo3qM3GSkPOww80 - 204 null null 7.6852ms
+2025-11-17 22:11:09.958 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/auth/verify-email?token=JFZdn0rRFzjFeBO6z1wCbsDRBToyCo3qM3GSkPOww80 - 204 null null 6.3983ms
+2025-11-17 22:11:09.967 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=JFZdn0rRFzjFeBO6z1wCbsDRBToyCo3qM3GSkPOww80 - application/json null
+2025-11-17 22:11:09.981 +05:30 [INF] CORS policy execution successful.
+2025-11-17 22:11:09.983 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 22:11:09.988 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 22:11:10.000 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: JFZdn0rRFz
+2025-11-17 22:11:10.003 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: JFZdn0rRFz)
+2025-11-17 22:11:10.010 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__token_0='JFZdn0rRFzjFeBO6z1wCbsDRBToyCo3qM3GSkPOww80'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 22:11:10.018 +05:30 [INF] User account found: testflowtap@yopmail.com, IsEmailVerified: false, TokenExpiry: "2025-11-18T16:40:20.5035620Z"
+2025-11-17 22:11:10.024 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p17='222218d2-71a1-4c79-9e25-8e3c987b1bb2', @p0='e213068e-3236-4cc9-a515-75834a868ada' (Nullable = true), @p1='2025-11-17T16:40:20.5039120Z' (DbType = DateTime), @p2='testflowtap@yopmail.com' (Nullable = false), @p3=NULL, @p4=NULL (DbType = DateTime), @p5=NULL (DbType = Guid), @p6=NULL, @p7=NULL, @p8='True', @p9='True', @p10=NULL (DbType = DateTime), @p11='oXUYJDbgdlRzQ1bC7bntMtpE/BCM7doSZAHfbBCf67I=' (Nullable = false), @p12='t0jkdv+i7QJtGWzWCl7idg==', @p13='False', @p14='2025-11-17T16:41:10.0220317Z' (DbType = DateTime), @p15='0', @p16='flowtap'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-17 22:11:10.027 +05:30 [INF] Sending welcome email to testflowtap@yopmail.com
+2025-11-17 22:11:12.949 +05:30 [INF] Email sent successfully via SMTP to testflowtap@yopmail.com
+2025-11-17 22:11:12.954 +05:30 [INF] Welcome email sent successfully to testflowtap@yopmail.com
+2025-11-17 22:11:12.956 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 22:11:12.961 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 2968.6694ms
+2025-11-17 22:11:12.963 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 22:11:12.963 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=JFZdn0rRFzjFeBO6z1wCbsDRBToyCo3qM3GSkPOww80 - application/json null
+2025-11-17 22:11:12.964 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=JFZdn0rRFzjFeBO6z1wCbsDRBToyCo3qM3GSkPOww80 - 200 null application/json; charset=utf-8 2997.9033ms
+2025-11-17 22:11:12.968 +05:30 [INF] CORS policy execution successful.
+2025-11-17 22:11:12.973 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 22:11:12.974 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 22:11:12.978 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: JFZdn0rRFz
+2025-11-17 22:11:12.979 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: JFZdn0rRFz)
+2025-11-17 22:11:12.982 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__token_0='JFZdn0rRFzjFeBO6z1wCbsDRBToyCo3qM3GSkPOww80'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 22:11:12.991 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__Trim_0='JFZdn0rRFzjFeBO6z1wCbsDRBToyCo3qM3GSkPOww80'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" IS NOT NULL AND btrim(u."EmailVerificationToken", E' \t\n\r') = @__Trim_0
+LIMIT 1
+2025-11-17 22:11:12.994 +05:30 [WRN] No user account found with verification token (length: 43, first 10: JFZdn0rRFz)
+2025-11-17 22:11:12.996 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 22:11:12.997 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 19.6825ms
+2025-11-17 22:11:12.999 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 22:11:13.000 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/api/auth/verify-email?token=JFZdn0rRFzjFeBO6z1wCbsDRBToyCo3qM3GSkPOww80 - 200 null application/json; charset=utf-8 36.7617ms
+2025-11-17 22:11:44.086 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5113/api/auth/login - null null
+2025-11-17 22:11:44.093 +05:30 [INF] CORS policy execution successful.
+2025-11-17 22:11:44.094 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5113/api/auth/login - 204 null null 8.599ms
+2025-11-17 22:11:44.100 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/auth/login - application/json 57
+2025-11-17 22:11:44.120 +05:30 [INF] CORS policy execution successful.
+2025-11-17 22:11:44.125 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation)'
+2025-11-17 22:11:44.231 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.LoginResponseDto]]] Login(Flowtap_Domain.DtoModel.LoginRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 22:11:44.340 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__email_0='testflowtap@yopmail.com'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-17 22:11:44.368 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p17='222218d2-71a1-4c79-9e25-8e3c987b1bb2', @p0='e213068e-3236-4cc9-a515-75834a868ada' (Nullable = true), @p1='2025-11-17T16:40:20.5039120Z' (DbType = DateTime), @p2='testflowtap@yopmail.com' (Nullable = false), @p3=NULL, @p4=NULL (DbType = DateTime), @p5=NULL (DbType = Guid), @p6=NULL, @p7=NULL, @p8='True', @p9='True', @p10='2025-11-17T16:41:44.3621421Z' (Nullable = true) (DbType = DateTime), @p11='oXUYJDbgdlRzQ1bC7bntMtpE/BCM7doSZAHfbBCf67I=' (Nullable = false), @p12='t0jkdv+i7QJtGWzWCl7idg==', @p13='False', @p14='2025-11-17T16:41:44.3622475Z' (DbType = DateTime), @p15='0', @p16='flowtap'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-17 22:11:44.735 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__id_0='e213068e-3236-4cc9-a515-75834a868ada'], CommandType='"Text"', CommandTimeout='30']
+SELECT t."Id", t."BusinessName", t."Country", t."CreatedAt", t."Currency", t."Email", t."FirstName", t."LastName", t."PhoneNumber", t."StoreIds", t."SubscriptionId", t."TimeZone", t."TrialEndDate", t."TrialStartDate", t."TrialStatus", t."UpdatedAt", t."City", t."PostalCode", t."State", t."StreetName", t."StreetNumber", a0."Id", a0."AppUserId", a0."CreatedAt", a0."Email", a0."FullName", a0."IsPrimaryOwner", a0."PasswordHash", a0."Permissions", a0."City", a0."PostalCode", a0."State", a0."StreetName", a0."StreetNumber"
+FROM (
+    SELECT a."Id", a."BusinessName", a."Country", a."CreatedAt", a."Currency", a."Email", a."FirstName", a."LastName", a."PhoneNumber", a."StoreIds", a."SubscriptionId", a."TimeZone", a."TrialEndDate", a."TrialStartDate", a."TrialStatus", a."UpdatedAt", a."City", a."PostalCode", a."State", a."StreetName", a."StreetNumber"
+    FROM "AppUsers" AS a
+    WHERE a."Id" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN "AppUserAdmins" AS a0 ON t."Id" = a0."AppUserId"
+ORDER BY t."Id"
+2025-11-17 22:11:47.107 +05:30 [WRN] Private key file not found at D:\Git\demo-Back-End\Flowtap_Presentation\Keys\privatekey.pem, using symmetric key fallback
+2025-11-17 22:11:48.510 +05:30 [INF] Successful login for email: testflowtap@yopmail.com, UserId: "222218d2-71a1-4c79-9e25-8e3c987b1bb2"
+2025-11-17 22:11:48.515 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.LoginResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 22:11:48.537 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation) in 4299.2256ms
+2025-11-17 22:11:48.539 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation)'
+2025-11-17 22:11:48.541 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/auth/login - 200 null application/json; charset=utf-8 4441.5311ms
+2025-11-17 22:25:17.267 +05:30 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5113: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(ListenOptions[] listenOptions, AddressBindContext context, Func`2 useHttps, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2025-11-17 22:26:01.632 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/index.html - null null
+2025-11-17 22:26:02.949 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/index.html - 200 null text/html;charset=utf-8 1335.1445ms
+2025-11-17 22:26:03.159 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - null null
+2025-11-17 22:26:04.250 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Failed to generate Operation for action - Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation). See inner exception
+ ---> Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Error reading parameter(s) for action Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation) as [FromForm] attribute used with IFormFile. Please refer to https://github.com/domaindrivendev/Swashbuckle.AspNetCore#handle-forms-and-file-uploads for more information
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParameters(ApiDescription apiDescription, SchemaRepository schemaRespository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   --- End of inner exception stack trace ---
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-17 22:26:04.344 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - 500 null text/plain; charset=utf-8 1185.2052ms
+2025-11-17 22:33:23.863 +05:30 [INF] Application is shutting down...
+2025-11-17 22:34:38.060 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-17 22:34:38.089 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 22:34:38.091 +05:30 [INF] Hosting environment: Development
+2025-11-17 22:34:38.092 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-17 22:34:40.981 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/index.html - null null
+2025-11-17 22:34:41.321 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/index.html - 200 null text/html;charset=utf-8 344.3751ms
+2025-11-17 22:34:41.863 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - null null
+2025-11-17 22:34:42.463 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Failed to generate Operation for action - Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation). See inner exception
+ ---> Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Error reading parameter(s) for action Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation) as [FromForm] attribute used with IFormFile. Please refer to https://github.com/domaindrivendev/Swashbuckle.AspNetCore#handle-forms-and-file-uploads for more information
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParameters(ApiDescription apiDescription, SchemaRepository schemaRespository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   --- End of inner exception stack trace ---
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-17 22:34:42.532 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - 500 null text/plain; charset=utf-8 666.6219ms
+2025-11-17 22:35:02.363 +05:30 [INF] Application is shutting down...
+2025-11-17 22:37:18.725 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-17 22:37:18.758 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 22:37:18.759 +05:30 [INF] Hosting environment: Development
+2025-11-17 22:37:18.760 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-17 22:37:59.051 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/index.html - null null
+2025-11-17 22:37:59.381 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/index.html - 200 null text/html;charset=utf-8 334.5474ms
+2025-11-17 22:37:59.607 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - null null
+2025-11-17 22:38:00.231 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Failed to generate Operation for action - Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation). See inner exception
+ ---> Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Error reading parameter(s) for action Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation) as [FromForm] attribute used with IFormFile. Please refer to https://github.com/domaindrivendev/Swashbuckle.AspNetCore#handle-forms-and-file-uploads for more information
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParameters(ApiDescription apiDescription, SchemaRepository schemaRespository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   --- End of inner exception stack trace ---
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-17 22:38:00.324 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - 500 null text/plain; charset=utf-8 718.3328ms
+2025-11-17 22:38:18.828 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger - null null
+2025-11-17 22:38:18.851 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger - 301 0 null 22.9704ms
+2025-11-17 22:38:19.028 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/index.html - null null
+2025-11-17 22:38:19.046 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/index.html - 200 null text/html;charset=utf-8 17.3657ms
+2025-11-17 22:38:19.637 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/swagger-ui.css - null null
+2025-11-17 22:38:19.646 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/swagger-ui-bundle.js - null null
+2025-11-17 22:38:19.656 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/swagger-ui-standalone-preset.js - null null
+2025-11-17 22:38:19.940 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-11-17 22:38:19.941 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-11-17 22:38:19.945 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-11-17 22:38:19.965 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/swagger-ui.css - 200 152034 text/css 327.7557ms
+2025-11-17 22:38:19.966 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/swagger-ui-standalone-preset.js - 200 230280 text/javascript 309.5419ms
+2025-11-17 22:38:19.970 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/swagger-ui-bundle.js - 200 1456926 text/javascript 323.4552ms
+2025-11-17 22:38:20.200 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - null null
+2025-11-17 22:38:20.283 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/favicon-32x32.png - null null
+2025-11-17 22:38:20.289 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-11-17 22:38:20.293 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/favicon-32x32.png - 200 628 image/png 10.5276ms
+2025-11-17 22:38:20.496 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Failed to generate Operation for action - Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation). See inner exception
+ ---> Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Error reading parameter(s) for action Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation) as [FromForm] attribute used with IFormFile. Please refer to https://github.com/domaindrivendev/Swashbuckle.AspNetCore#handle-forms-and-file-uploads for more information
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParameters(ApiDescription apiDescription, SchemaRepository schemaRespository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   --- End of inner exception stack trace ---
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-17 22:38:20.534 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - 500 null text/plain; charset=utf-8 334.2678ms
+2025-11-17 22:39:44.557 +05:30 [INF] Application is shutting down...
+2025-11-17 22:39:59.132 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-17 22:39:59.164 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 22:39:59.166 +05:30 [INF] Hosting environment: Development
+2025-11-17 22:39:59.167 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-17 22:40:11.189 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/index.html - null null
+2025-11-17 22:40:11.444 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/index.html - 200 null text/html;charset=utf-8 257.1975ms
+2025-11-17 22:40:11.605 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - null null
+2025-11-17 22:40:12.106 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Failed to generate Operation for action - Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation). See inner exception
+ ---> Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Error reading parameter(s) for action Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation) as [FromForm] attribute used with IFormFile. Please refer to https://github.com/domaindrivendev/Swashbuckle.AspNetCore#handle-forms-and-file-uploads for more information
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParameters(ApiDescription apiDescription, SchemaRepository schemaRespository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   --- End of inner exception stack trace ---
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-17 22:40:12.141 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - 500 null text/plain; charset=utf-8 537.4835ms
+2025-11-17 22:42:41.939 +05:30 [INF] Application is shutting down...
+2025-11-17 22:42:54.492 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-17 22:42:54.527 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 22:42:54.529 +05:30 [INF] Hosting environment: Development
+2025-11-17 22:42:54.530 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-17 22:43:11.342 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/index.html - null null
+2025-11-17 22:43:11.565 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/index.html - 200 null text/html;charset=utf-8 225.3137ms
+2025-11-17 22:43:11.848 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - null null
+2025-11-17 22:43:12.356 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Failed to generate Operation for action - Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation). See inner exception
+ ---> Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Error reading parameter(s) for action Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation) as [FromForm] attribute used with IFormFile. Please refer to https://github.com/domaindrivendev/Swashbuckle.AspNetCore#handle-forms-and-file-uploads for more information
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParameters(ApiDescription apiDescription, SchemaRepository schemaRespository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   --- End of inner exception stack trace ---
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-17 22:43:12.390 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - 500 null text/plain; charset=utf-8 542.7881ms
+2025-11-17 22:43:27.381 +05:30 [INF] Application is shutting down...
+2025-11-17 22:43:37.727 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-17 22:43:37.851 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 22:43:37.854 +05:30 [INF] Hosting environment: Development
+2025-11-17 22:43:37.857 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-17 22:43:37.918 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/index.html - null null
+2025-11-17 22:43:38.270 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/index.html - 200 null text/html;charset=utf-8 355.373ms
+2025-11-17 22:43:38.388 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - null null
+2025-11-17 22:43:38.899 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Failed to generate Operation for action - Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation). See inner exception
+ ---> Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Error reading parameter(s) for action Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation) as [FromForm] attribute used with IFormFile. Please refer to https://github.com/domaindrivendev/Swashbuckle.AspNetCore#handle-forms-and-file-uploads for more information
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParameters(ApiDescription apiDescription, SchemaRepository schemaRespository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   --- End of inner exception stack trace ---
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-17 22:43:38.955 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - 500 null text/plain; charset=utf-8 568.1823ms
+2025-11-17 22:44:10.132 +05:30 [INF] Application is shutting down...
+2025-11-17 22:47:03.987 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-17 22:47:04.019 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 22:47:04.020 +05:30 [INF] Hosting environment: Development
+2025-11-17 22:47:04.021 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-17 22:47:06.427 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/index.html - null null
+2025-11-17 22:47:06.763 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/index.html - 200 null text/html;charset=utf-8 340.4269ms
+2025-11-17 22:47:07.123 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - null null
+2025-11-17 22:47:07.661 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Failed to generate Operation for action - Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation). See inner exception
+ ---> Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Error reading parameter(s) for action Flowtap_Presentation.Controllers.UserController.UploadAvatar (Flowtap_Presentation) as [FromForm] attribute used with IFormFile. Please refer to https://github.com/domaindrivendev/Swashbuckle.AspNetCore#handle-forms-and-file-uploads for more information
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateParameters(ApiDescription apiDescription, SchemaRepository schemaRespository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   --- End of inner exception stack trace ---
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperation(ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-11-17 22:47:07.718 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - 500 null text/plain; charset=utf-8 596.1868ms
+2025-11-17 22:54:39.453 +05:30 [INF] Application is shutting down...
+2025-11-17 22:55:12.734 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-17 22:55:12.766 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 22:55:12.769 +05:30 [INF] Hosting environment: Development
+2025-11-17 22:55:12.769 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-17 22:55:26.152 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/index.html - null null
+2025-11-17 22:55:26.528 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/index.html - 200 null text/html;charset=utf-8 381.8748ms
+2025-11-17 22:55:27.291 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - null null
+2025-11-17 22:55:27.918 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 631.4197ms
+2025-11-17 23:08:10.718 +05:30 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5113: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(ListenOptions[] listenOptions, AddressBindContext context, Func`2 useHttps, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2025-11-17 23:08:49.370 +05:30 [INF] Application is shutting down...
+2025-11-17 23:09:16.359 +05:30 [INF] Now listening on: https://localhost:7050
+2025-11-17 23:09:16.437 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-17 23:09:16.632 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-17 23:09:16.634 +05:30 [INF] Hosting environment: Development
+2025-11-17 23:09:16.635 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-17 23:09:18.537 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7050/swagger/index.html - null null
+2025-11-17 23:09:19.222 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7050/swagger/index.html - 200 null text/html;charset=utf-8 692.9626ms
+2025-11-17 23:09:19.239 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7050/_framework/aspnetcore-browser-refresh.js - null null
+2025-11-17 23:09:19.239 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7050/_vs/browserLink - null null
+2025-11-17 23:09:19.291 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7050/_framework/aspnetcore-browser-refresh.js - 200 16525 application/javascript; charset=utf-8 52.4927ms
+2025-11-17 23:09:19.465 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7050/_vs/browserLink - 200 null text/javascript; charset=UTF-8 226.2181ms
+2025-11-17 23:09:19.534 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7050/swagger/v1/swagger.json - null null
+2025-11-17 23:09:19.841 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7050/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 308.4624ms
+2025-11-17 23:10:52.630 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7050/swagger/index.html - null null
+2025-11-17 23:10:52.867 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7050/swagger/index.html - 200 null text/html;charset=utf-8 252.488ms
+2025-11-17 23:10:52.966 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7050/swagger/swagger-ui.css - null null
+2025-11-17 23:10:52.970 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7050/_vs/browserLink - null null
+2025-11-17 23:10:52.967 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7050/swagger/swagger-ui-standalone-preset.js - null null
+2025-11-17 23:10:52.969 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7050/_framework/aspnetcore-browser-refresh.js - null null
+2025-11-17 23:10:52.967 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7050/swagger/swagger-ui-bundle.js - null null
+2025-11-17 23:10:53.055 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7050/_framework/aspnetcore-browser-refresh.js - 200 16525 application/javascript; charset=utf-8 87.0353ms
+2025-11-17 23:10:53.076 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7050/_vs/browserLink - 200 null text/javascript; charset=UTF-8 105.5425ms
+2025-11-17 23:10:53.176 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-11-17 23:10:53.176 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-11-17 23:10:53.180 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7050/swagger/swagger-ui.css - 200 152034 text/css 213.2036ms
+2025-11-17 23:10:53.182 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7050/swagger/swagger-ui-standalone-preset.js - 200 230280 text/javascript 214.7055ms
+2025-11-17 23:10:53.198 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-11-17 23:10:53.203 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7050/swagger/swagger-ui-bundle.js - 200 1456926 text/javascript 236.2552ms
+2025-11-17 23:10:53.515 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7050/swagger/v1/swagger.json - null null
+2025-11-17 23:10:53.541 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7050/swagger/favicon-32x32.png - null null
+2025-11-17 23:10:53.566 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-11-17 23:10:53.569 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7050/swagger/favicon-32x32.png - 200 628 image/png 29.215ms
+2025-11-17 23:10:53.903 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7050/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 388.2272ms
+2025-11-17 23:11:32.748 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7050/api/Auth/register - application/json 124
+2025-11-17 23:11:32.797 +05:30 [INF] CORS policy execution successful.
+2025-11-17 23:11:32.830 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-17 23:11:32.958 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.RegisterResponseDto]]] Register(Flowtap_Domain.DtoModel.RegisterRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 23:11:38.140 +05:30 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-11-17 23:11:38.191 +05:30 [WRN] The property 'AppUser.StoreIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 23:11:38.196 +05:30 [WRN] The property 'AppUserAdmin.Permissions' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 23:11:38.199 +05:30 [WRN] The property 'Store.EmployeeIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-17 23:11:39.774 +05:30 [INF] Executed DbCommand (142ms) [Parameters=[@__email_0='testflowtap@yopmail.com'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-17 23:11:39.923 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__username_0='flowtap'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "UserAccounts" AS u
+    WHERE u."Username" = @__username_0)
+2025-11-17 23:11:40.403 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[@p0='92ae682c-ac82-429f-8643-56b817455285', @p1=NULL (DbType = Guid), @p2='2025-11-17T17:41:39.9590255Z' (DbType = DateTime), @p3='testflowtap@yopmail.com' (Nullable = false), @p4='CRlVCPySsxEAY_6ThkfhCObZaSLp-YFekI2xWIJvkgE', @p5='2025-11-18T17:41:39.9572865Z' (Nullable = true) (DbType = DateTime), @p6=NULL (DbType = Guid), @p7=NULL, @p8=NULL, @p9='True', @p10='False', @p11=NULL (DbType = DateTime), @p12='0WGt1fkhs6mKb7EskM8xiHYKEIxk5Z4gAGZKXECVWFk=' (Nullable = false), @p13='0nfWdgkTLtcmOYNGMzZPrQ==', @p14='False', @p15='2025-11-17T17:41:39.9591340Z' (DbType = DateTime), @p16='0', @p17='flowtap'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UserAccounts" ("Id", "AppUserId", "CreatedAt", "Email", "EmailVerificationToken", "EmailVerificationTokenExpiry", "EmployeeId", "ExternalProvider", "ExternalProviderId", "IsActive", "IsEmailVerified", "LastLoginAt", "PasswordHash", "PasswordSalt", "TwoFactorEnabled", "UpdatedAt", "UserType", "Username")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17);
+2025-11-17 23:11:40.625 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p0='d92e375f-9942-478c-8bc9-5698b60b360a', @p1=NULL, @p2=NULL, @p3='2025-11-17T17:41:40.4472646Z' (DbType = DateTime), @p4='USD' (Nullable = false), @p5='testflowtap@yopmail.com' (Nullable = false), @p6=NULL, @p7=NULL, @p8=NULL, @p9='' (Nullable = false), @p10=NULL (DbType = Guid), @p11='UTC' (Nullable = false), @p12=NULL (DbType = DateTime), @p13=NULL (DbType = DateTime), @p14='2025-11-17T17:41:40.4474676Z' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AppUsers" ("Id", "BusinessName", "Country", "CreatedAt", "Currency", "Email", "FirstName", "LastName", "PhoneNumber", "StoreIds", "SubscriptionId", "TimeZone", "TrialEndDate", "TrialStartDate", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14)
+RETURNING "TrialStatus";
+2025-11-17 23:11:40.706 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p17='92ae682c-ac82-429f-8643-56b817455285', @p0='d92e375f-9942-478c-8bc9-5698b60b360a' (Nullable = true), @p1='2025-11-17T17:41:39.9590255Z' (DbType = DateTime), @p2='testflowtap@yopmail.com' (Nullable = false), @p3='CRlVCPySsxEAY_6ThkfhCObZaSLp-YFekI2xWIJvkgE', @p4='2025-11-18T17:41:39.9572865Z' (Nullable = true) (DbType = DateTime), @p5=NULL (DbType = Guid), @p6=NULL, @p7=NULL, @p8='True', @p9='False', @p10=NULL (DbType = DateTime), @p11='0WGt1fkhs6mKb7EskM8xiHYKEIxk5Z4gAGZKXECVWFk=' (Nullable = false), @p12='0nfWdgkTLtcmOYNGMzZPrQ==', @p13='False', @p14='2025-11-17T17:41:39.9591340Z' (DbType = DateTime), @p15='0', @p16='flowtap'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-17 23:11:40.726 +05:30 [INF] Sending verification email to testflowtap@yopmail.com with link: http://localhost:5173/steps?token=CRlVCPySsxEAY_6ThkfhCObZaSLp-YFekI2xWIJvkgE
+2025-11-17 23:11:44.409 +05:30 [INF] Email sent successfully via SMTP to testflowtap@yopmail.com
+2025-11-17 23:11:44.414 +05:30 [INF] Verification email sent successfully to testflowtap@yopmail.com
+2025-11-17 23:11:44.444 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.RegisterResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 23:11:44.532 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation) in 11560.0664ms
+2025-11-17 23:11:44.534 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Register (Flowtap_Presentation)'
+2025-11-17 23:11:44.553 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7050/api/Auth/register - 200 null application/json; charset=utf-8 11814.2306ms
+2025-11-17 23:12:17.682 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7050/api/Auth/verify-email?token=CRlVCPySsxEAY_6ThkfhCObZaSLp-YFekI2xWIJvkgE - null null
+2025-11-17 23:12:17.704 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 23:12:17.719 +05:30 [INF] Route matched with {action = "VerifyEmail", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.VerifyEmailResponseDto]]] VerifyEmail(System.String) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-17 23:12:17.740 +05:30 [INF] Verification request received. Token length: 43, First 10 chars: CRlVCPySsx
+2025-11-17 23:12:17.746 +05:30 [INF] Attempting to verify email with token (length: 43, first 10: CRlVCPySsx)
+2025-11-17 23:12:17.805 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__token_0='CRlVCPySsxEAY_6ThkfhCObZaSLp-YFekI2xWIJvkgE'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."EmailVerificationToken" = @__token_0
+LIMIT 1
+2025-11-17 23:12:17.824 +05:30 [INF] User account found: testflowtap@yopmail.com, IsEmailVerified: false, TokenExpiry: "2025-11-18T17:41:39.9572860Z"
+2025-11-17 23:12:17.837 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p17='92ae682c-ac82-429f-8643-56b817455285', @p0='d92e375f-9942-478c-8bc9-5698b60b360a' (Nullable = true), @p1='2025-11-17T17:41:39.9590250Z' (DbType = DateTime), @p2='testflowtap@yopmail.com' (Nullable = false), @p3=NULL, @p4=NULL (DbType = DateTime), @p5=NULL (DbType = Guid), @p6=NULL, @p7=NULL, @p8='True', @p9='True', @p10=NULL (DbType = DateTime), @p11='0WGt1fkhs6mKb7EskM8xiHYKEIxk5Z4gAGZKXECVWFk=' (Nullable = false), @p12='0nfWdgkTLtcmOYNGMzZPrQ==', @p13='False', @p14='2025-11-17T17:42:17.8305809Z' (DbType = DateTime), @p15='0', @p16='flowtap'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-17 23:12:17.848 +05:30 [INF] Sending welcome email to testflowtap@yopmail.com
+2025-11-17 23:12:20.896 +05:30 [INF] Email sent successfully via SMTP to testflowtap@yopmail.com
+2025-11-17 23:12:20.901 +05:30 [INF] Welcome email sent successfully to testflowtap@yopmail.com
+2025-11-17 23:12:20.912 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.VerifyEmailResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 23:12:20.942 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation) in 3220.8024ms
+2025-11-17 23:12:20.946 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.VerifyEmail (Flowtap_Presentation)'
+2025-11-17 23:12:20.949 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7050/api/Auth/verify-email?token=CRlVCPySsxEAY_6ThkfhCObZaSLp-YFekI2xWIJvkgE - 200 null application/json; charset=utf-8 3266.326ms
+2025-11-17 23:13:15.540 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7050/api/Onboarding/step-1/d92e375f-9942-478c-8bc9-5698b60b360a - application/json 297
+2025-11-17 23:13:15.579 +05:30 [INF] CORS policy execution successful.
+2025-11-17 23:13:15.585 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.OnboardingController.CompleteStep1 (Flowtap_Presentation)'
+2025-11-17 23:13:15.595 +05:30 [INF] Route matched with {action = "CompleteStep1", controller = "Onboarding"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Domain.DtoModel.ApiResponseDto`1[Flowtap_Domain.DtoModel.OnboardingResponseDto]]] CompleteStep1(System.Guid, Flowtap_Domain.DtoModel.OnboardingStep1RequestDto) on controller Flowtap_Presentation.Controllers.OnboardingController (Flowtap_Presentation).
+2025-11-17 23:13:16.241 +05:30 [INF] Executed DbCommand (30ms) [Parameters=[@__id_0='d92e375f-9942-478c-8bc9-5698b60b360a'], CommandType='"Text"', CommandTimeout='30']
+SELECT t."Id", t."BusinessName", t."Country", t."CreatedAt", t."Currency", t."Email", t."FirstName", t."LastName", t."PhoneNumber", t."StoreIds", t."SubscriptionId", t."TimeZone", t."TrialEndDate", t."TrialStartDate", t."TrialStatus", t."UpdatedAt", t."City", t."PostalCode", t."State", t."StreetName", t."StreetNumber", a0."Id", a0."AppUserId", a0."CreatedAt", a0."Email", a0."FullName", a0."IsPrimaryOwner", a0."PasswordHash", a0."Permissions", a0."City", a0."PostalCode", a0."State", a0."StreetName", a0."StreetNumber"
+FROM (
+    SELECT a."Id", a."BusinessName", a."Country", a."CreatedAt", a."Currency", a."Email", a."FirstName", a."LastName", a."PhoneNumber", a."StoreIds", a."SubscriptionId", a."TimeZone", a."TrialEndDate", a."TrialStartDate", a."TrialStatus", a."UpdatedAt", a."City", a."PostalCode", a."State", a."StreetName", a."StreetNumber"
+    FROM "AppUsers" AS a
+    WHERE a."Id" = @__id_0
+    LIMIT 1
+) AS t
+LEFT JOIN "AppUserAdmins" AS a0 ON t."Id" = a0."AppUserId"
+ORDER BY t."Id"
+2025-11-17 23:13:16.386 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p20='d92e375f-9942-478c-8bc9-5698b60b360a', @p0='jambavan', @p1='string', @p2='2025-11-17T17:41:40.4472640Z' (DbType = DateTime), @p3='string' (Nullable = false), @p4='testflowtap@yopmail.com' (Nullable = false), @p5='hello', @p6='Raj', @p7='9500000', @p8='' (Nullable = false), @p9=NULL (DbType = Guid), @p10='string' (Nullable = false), @p11=NULL (DbType = DateTime), @p12=NULL (DbType = DateTime), @p13='0', @p14='2025-11-17T17:43:16.2760915Z' (DbType = DateTime), @p15='string', @p16='string', @p17='string', @p18='string', @p19='string'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "AppUsers" SET "BusinessName" = @p0, "Country" = @p1, "CreatedAt" = @p2, "Currency" = @p3, "Email" = @p4, "FirstName" = @p5, "LastName" = @p6, "PhoneNumber" = @p7, "StoreIds" = @p8, "SubscriptionId" = @p9, "TimeZone" = @p10, "TrialEndDate" = @p11, "TrialStartDate" = @p12, "TrialStatus" = @p13, "UpdatedAt" = @p14, "City" = @p15, "PostalCode" = @p16, "State" = @p17, "StreetName" = @p18, "StreetNumber" = @p19
+WHERE "Id" = @p20;
+2025-11-17 23:13:16.395 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Domain.DtoModel.ApiResponseDto`1[[Flowtap_Domain.DtoModel.OnboardingResponseDto, Flowtap_Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-17 23:13:16.422 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.OnboardingController.CompleteStep1 (Flowtap_Presentation) in 823.6012ms
+2025-11-17 23:13:16.428 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.OnboardingController.CompleteStep1 (Flowtap_Presentation)'
+2025-11-17 23:13:16.434 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7050/api/Onboarding/step-1/d92e375f-9942-478c-8bc9-5698b60b360a - 200 null application/json; charset=utf-8 894.5902ms

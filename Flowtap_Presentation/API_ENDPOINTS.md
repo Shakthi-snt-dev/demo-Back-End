@@ -465,6 +465,62 @@ This document lists all available API endpoints in the Flowtap Presentation laye
 
 ---
 
+## Employees (Plural Route) (`/api/employees`)
+
+### Get All Employees
+- **Method:** `GET`
+- **Endpoint:** `/api/employees?page={page}&limit={limit}`
+- **Description:** Get all employees with optional pagination
+- **Query Parameters:** `page` (int?, optional), `limit` (int?, optional)
+- **Response:** `ApiResponseDto<IEnumerable<EmployeeResponseDto>>`
+
+### Get Employee by ID
+- **Method:** `GET`
+- **Endpoint:** `/api/employees/{id}`
+- **Description:** Get employee by ID
+- **Path Parameters:** `id` (Guid)
+- **Response:** `ApiResponseDto<EmployeeResponseDto>`
+
+### Create Employee
+- **Method:** `POST`
+- **Endpoint:** `/api/employees`
+- **Description:** Create a new employee
+- **Request Body:** `CreateEmployeeRequestDto`
+- **Response:** `ApiResponseDto<EmployeeResponseDto>`
+
+### Update Employee
+- **Method:** `PUT`
+- **Endpoint:** `/api/employees/{id}`
+- **Description:** Update employee
+- **Path Parameters:** `id` (Guid)
+- **Request Body:** `UpdateEmployeeRequestDto`
+- **Response:** `ApiResponseDto<EmployeeResponseDto>`
+
+### Delete Employee
+- **Method:** `DELETE`
+- **Endpoint:** `/api/employees/{id}`
+- **Description:** Delete employee
+- **Path Parameters:** `id` (Guid)
+- **Response:** `ApiResponseDto<object>`
+
+### Update Employee Role
+- **Method:** `PATCH`
+- **Endpoint:** `/api/employees/{id}/role`
+- **Description:** Update employee role
+- **Path Parameters:** `id` (Guid)
+- **Request Body:** `UpdateEmployeeRoleRequestDto`
+- **Response:** `ApiResponseDto<EmployeeResponseDto>`
+
+### Add Partner/Admin
+- **Method:** `POST`
+- **Endpoint:** `/api/employees/partners?ownerAppUserId={ownerAppUserId}`
+- **Description:** Add a partner/admin to a store (only owner can add partners)
+- **Query Parameters:** `ownerAppUserId` (Guid)
+- **Request Body:** `AddPartnerRequestDto`
+- **Response:** `ApiResponseDto<EmployeeResponseDto>`
+
+---
+
 ## Integrations (`/api/integration`)
 
 ### Create QuickBooks Integration
@@ -594,6 +650,41 @@ This document lists all available API endpoints in the Flowtap Presentation laye
 
 ---
 
+## User (`/api/user`)
+
+### Get User Profile
+- **Method:** `GET`
+- **Endpoint:** `/api/user/profile?appUserId={appUserId}`
+- **Description:** Get user profile
+- **Query Parameters:** `appUserId` (Guid)
+- **Response:** `ApiResponseDto<UserProfileDto>`
+
+### Update User Profile
+- **Method:** `PUT`
+- **Endpoint:** `/api/user/profile?appUserId={appUserId}`
+- **Description:** Update user profile
+- **Query Parameters:** `appUserId` (Guid)
+- **Request Body:** `UpdateUserProfileRequestDto`
+- **Response:** `ApiResponseDto<UserProfileDto>`
+
+### Upload User Avatar
+- **Method:** `POST`
+- **Endpoint:** `/api/user/avatar?appUserId={appUserId}`
+- **Description:** Upload user avatar
+- **Query Parameters:** `appUserId` (Guid)
+- **Request Body:** `IFormFile` (multipart/form-data)
+- **Response:** `ApiResponseDto<object>`
+
+### Change Password
+- **Method:** `POST`
+- **Endpoint:** `/api/user/change-password?appUserId={appUserId}`
+- **Description:** Change user password
+- **Query Parameters:** `appUserId` (Guid)
+- **Request Body:** `UpdateSecuritySettingsRequestDto`
+- **Response:** `ApiResponseDto<object>`
+
+---
+
 ## Settings (`/api/settings`)
 
 ### Get Settings
@@ -650,11 +741,223 @@ This document lists all available API endpoints in the Flowtap Presentation laye
 - **Path Parameters:** `appUserId` (Guid)
 - **Response:** `ApiResponseDto<object>`
 
+### Get Store Settings
+- **Method:** `GET`
+- **Endpoint:** `/api/settings/store/{storeId}`
+- **Description:** Get store settings
+- **Path Parameters:** `storeId` (Guid)
+- **Response:** `ApiResponseDto<StoreSettingsDto>`
+
+### Update Store Settings
+- **Method:** `PUT`
+- **Endpoint:** `/api/settings/store/{storeId}`
+- **Description:** Update store settings
+- **Path Parameters:** `storeId` (Guid)
+- **Request Body:** `UpdateStoreSettingsRequestDto`
+- **Response:** `ApiResponseDto<StoreSettingsDto>`
+
+### Reset API Key
+- **Method:** `POST`
+- **Endpoint:** `/api/settings/store/{storeId}/api-key/reset`
+- **Description:** Reset API key for store
+- **Path Parameters:** `storeId` (Guid)
+- **Response:** `ApiResponseDto<object>` (contains new API key)
+
+---
+
+## Form Configuration (`/api/formconfiguration`)
+
+### Get Form Configuration
+- **Method:** `GET`
+- **Endpoint:** `/api/formconfiguration/{formId}?appUserId={appUserId}&storeId={storeId}`
+- **Description:** Get form configuration by form ID
+- **Path Parameters:** `formId` (string)
+- **Query Parameters:** `appUserId` (Guid?, optional), `storeId` (Guid?, optional)
+- **Response:** `ApiResponseDto<FormConfigurationDto>`
+
+### Get User Profile Form Configuration
+- **Method:** `GET`
+- **Endpoint:** `/api/formconfiguration/user-profile/{appUserId}`
+- **Description:** Get user profile form configuration
+- **Path Parameters:** `appUserId` (Guid)
+- **Response:** `ApiResponseDto<FormConfigurationDto>`
+
+### Get Store Settings Form Configuration
+- **Method:** `GET`
+- **Endpoint:** `/api/formconfiguration/store-settings/{storeId}`
+- **Description:** Get store settings form configuration
+- **Path Parameters:** `storeId` (Guid)
+- **Response:** `ApiResponseDto<FormConfigurationDto>`
+
+### Get Employee Form Configuration
+- **Method:** `GET`
+- **Endpoint:** `/api/formconfiguration/employee?storeId={storeId}`
+- **Description:** Get employee form configuration
+- **Query Parameters:** `storeId` (Guid?, optional)
+- **Response:** `ApiResponseDto<FormConfigurationDto>`
+
+---
+
+## AppUserAdmin (`/api/appuseradmin`)
+
+### Get Business Owners by AppUser ID
+- **Method:** `GET`
+- **Endpoint:** `/api/appuseradmin/appuser/{appUserId}`
+- **Description:** Get all business owners (AppUserAdmin) for an AppUser
+- **Path Parameters:** `appUserId` (Guid)
+- **Response:** `ApiResponseDto<IEnumerable<AppUserAdminResponseDto>>`
+
+### Get Business Owner by ID
+- **Method:** `GET`
+- **Endpoint:** `/api/appuseradmin/{id}`
+- **Description:** Get business owner by ID
+- **Path Parameters:** `id` (Guid)
+- **Response:** `ApiResponseDto<AppUserAdminResponseDto>`
+
+### Create Business Owner
+- **Method:** `POST`
+- **Endpoint:** `/api/appuseradmin?appUserId={appUserId}`
+- **Description:** Create a new business owner (AppUserAdmin). Also creates an Employee record with Owner role if CreateAsEmployee is true.
+- **Query Parameters:** `appUserId` (Guid)
+- **Request Body:** `CreateAppUserAdminRequestDto`
+- **Response:** `ApiResponseDto<AppUserAdminResponseDto>`
+
+### Update Business Owner
+- **Method:** `PUT`
+- **Endpoint:** `/api/appuseradmin/{id}`
+- **Description:** Update business owner
+- **Path Parameters:** `id` (Guid)
+- **Request Body:** `CreateAppUserAdminRequestDto`
+- **Response:** `ApiResponseDto<AppUserAdminResponseDto>`
+
+### Delete Business Owner
+- **Method:** `DELETE`
+- **Endpoint:** `/api/appuseradmin/{id}`
+- **Description:** Delete business owner
+- **Path Parameters:** `id` (Guid)
+- **Response:** `ApiResponseDto<object>`
+
+---
+
+## Stores (`/api/stores`)
+
+### Get All Stores
+- **Method:** `GET`
+- **Endpoint:** `/api/stores`
+- **Description:** Get all stores for the authenticated user (extracts appUserId from JWT token)
+- **Response:** `ApiResponseDto<IEnumerable<StoreResponseDto>>`
+
+### Get Store by ID
+- **Method:** `GET`
+- **Endpoint:** `/api/stores/{id}`
+- **Description:** Get store by ID
+- **Path Parameters:** `id` (Guid)
+- **Response:** `ApiResponseDto<StoreResponseDto>`
+
+### Get Stores by Type
+- **Method:** `GET`
+- **Endpoint:** `/api/stores/type/{storeType}`
+- **Description:** Get stores by type
+- **Path Parameters:** `storeType` (string)
+- **Response:** `ApiResponseDto<IEnumerable<StoreResponseDto>>`
+
+### Create Store
+- **Method:** `POST`
+- **Endpoint:** `/api/stores`
+- **Description:** Create a new store (extracts appUserId from JWT token)
+- **Request Body:** `CreateStoreRequestDto`
+- **Response:** `ApiResponseDto<StoreResponseDto>`
+
+### Update Store
+- **Method:** `PUT`
+- **Endpoint:** `/api/stores/{id}`
+- **Description:** Update store
+- **Path Parameters:** `id` (Guid)
+- **Request Body:** `UpdateStoreRequestDto`
+- **Response:** `ApiResponseDto<StoreResponseDto>`
+
+### Delete Store
+- **Method:** `DELETE`
+- **Endpoint:** `/api/stores/{id}`
+- **Description:** Delete store
+- **Path Parameters:** `id` (Guid)
+- **Response:** `ApiResponseDto<object>`
+
+---
+
+## Store Types (`/api/storetypes`)
+
+### Get All Store Types
+- **Method:** `GET`
+- **Endpoint:** `/api/storetypes`
+- **Description:** Get all store types
+- **Response:** `ApiResponseDto<IEnumerable<StoreTypeResponseDto>>`
+
+### Create Store Type
+- **Method:** `POST`
+- **Endpoint:** `/api/storetypes`
+- **Description:** Create a new store type
+- **Request Body:** `CreateStoreTypeRequestDto`
+- **Response:** `ApiResponseDto<StoreTypeResponseDto>`
+
+### Delete Store Type
+- **Method:** `DELETE`
+- **Endpoint:** `/api/storetypes/{name}`
+- **Description:** Delete store type
+- **Path Parameters:** `name` (string)
+- **Response:** `ApiResponseDto<object>`
+
+---
+
+## Roles (`/api/roles`)
+
+### Get All Roles
+- **Method:** `GET`
+- **Endpoint:** `/api/roles`
+- **Description:** Get all roles
+- **Response:** `ApiResponseDto<IEnumerable<RoleResponseDto>>`
+
+### Get Role by ID
+- **Method:** `GET`
+- **Endpoint:** `/api/roles/{id}`
+- **Description:** Get role by ID
+- **Path Parameters:** `id` (Guid)
+- **Response:** `ApiResponseDto<RoleResponseDto>`
+
+### Get Role by Name
+- **Method:** `GET`
+- **Endpoint:** `/api/roles/name/{name}`
+- **Description:** Get role by name
+- **Path Parameters:** `name` (string)
+- **Response:** `ApiResponseDto<RoleResponseDto>`
+
+### Create Role
+- **Method:** `POST`
+- **Endpoint:** `/api/roles`
+- **Description:** Create a new role
+- **Request Body:** `CreateRoleRequestDto`
+- **Response:** `ApiResponseDto<RoleResponseDto>`
+
+### Update Role
+- **Method:** `PUT`
+- **Endpoint:** `/api/roles/{id}`
+- **Description:** Update role
+- **Path Parameters:** `id` (Guid)
+- **Request Body:** `UpdateRoleRequestDto`
+- **Response:** `ApiResponseDto<RoleResponseDto>`
+
+### Delete Role
+- **Method:** `DELETE`
+- **Endpoint:** `/api/roles/{id}`
+- **Description:** Delete role
+- **Path Parameters:** `id` (Guid)
+- **Response:** `ApiResponseDto<object>`
+
 ---
 
 ## Summary
 
-**Total API Endpoints:** 80
+**Total API Endpoints:** 120
 
 ### By Controller:
 - **Auth:** 3 endpoints
@@ -664,17 +967,27 @@ This document lists all available API endpoints in the Flowtap Presentation laye
 - **Order:** 11 endpoints
 - **RepairTicket:** 13 endpoints
 - **Employee:** 10 endpoints
+- **Employees (Plural):** 7 endpoints
 - **Integration:** 12 endpoints
 - **Dashboard:** 5 endpoints
-- **Settings:** 7 endpoints
+- **User:** 4 endpoints
+- **Settings:** 10 endpoints
+- **FormConfiguration:** 4 endpoints
+- **AppUserAdmin:** 5 endpoints
+- **Stores:** 6 endpoints
+- **StoreTypes:** 3 endpoints
+- **Roles:** 6 endpoints
 
 ### By HTTP Method:
-- **GET:** 42 endpoints
-- **POST:** 23 endpoints
-- **PUT:** 13 endpoints
-- **DELETE:** 6 endpoints
+- **GET:** 58 endpoints
+- **POST:** 33 endpoints
+- **PUT:** 22 endpoints
+- **PATCH:** 1 endpoint
+- **DELETE:** 11 endpoints
 
 ---
 
 **Note:** All endpoints return responses wrapped in `ApiResponseDto<T>` format. Check Swagger UI at `/swagger` for detailed request/response schemas and to test the APIs interactively.
+
+**Authentication:** Most endpoints require JWT authentication. Include the token in the `Authorization` header as `Bearer {token}`. Some endpoints extract `appUserId` from the JWT token automatically.
 

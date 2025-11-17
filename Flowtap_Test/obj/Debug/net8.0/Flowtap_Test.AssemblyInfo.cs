@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Flowtap_Test")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3880675170582aaa84e8e89cc4d9e7cc68800731")]
 [assembly: System.Reflection.AssemblyProductAttribute("Flowtap_Test")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Flowtap_Test")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

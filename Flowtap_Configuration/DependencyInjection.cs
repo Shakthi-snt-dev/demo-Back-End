@@ -2,10 +2,14 @@
 using Flowtap_Application.Mapping;
 using Flowtap_Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Microsoft.OpenApi.Any;
 using System.Security.Cryptography;
 
 
@@ -18,15 +22,19 @@ namespace Flowtap_Configuration
             #region Application
             services.AddApplication();
             #endregion
+
             #region Infrastructure
             services.AddInfrastructure(configuration);
             #endregion
+
             #region Controllers
             services.AddControllers();
             #endregion
+
             #region HttpContextAccessor
             services.AddHttpContextAccessor();
             #endregion
+
             services.AddEndpointsApiExplorer();
             #region ConfigCors
             services.AddCors(option => option.AddPolicy("CustomCorsPolicy", x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
@@ -37,6 +45,13 @@ namespace Flowtap_Configuration
             #region ADDSWAGGERAUTHORITY
             services.AddSwaggerGen(swagger =>
             {
+                swagger.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Flowtap API",
+                    Version = "v1",
+                    Description = "Flowtap API Documentation"
+                });
+
                 swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
@@ -44,26 +59,61 @@ namespace Flowtap_Configuration
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer"
-                }
-            );
+                });
+
                 swagger.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
                 {
-                    new OpenApiSecurityScheme
                     {
-                        Name = "Bearer",
-                        In = ParameterLocation.Header,
-                        Reference = new OpenApiReference
+                        new OpenApiSecurityScheme
                         {
-                            Id = "Bearer",
-                            Type = ReferenceType.SecurityScheme
-                        }
-                    },
-                    new List<string>()
-                }
-            });
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                            Reference = new OpenApiReference
+                            {
+                                Id = "Bearer",
+                                Type = ReferenceType.SecurityScheme
+                            }
+                        },
+                        new List<string>()
+                    }
+                });
 
-
+                // Custom schema options to handle complex types and avoid conflicts
+                swagger.CustomSchemaIds(type => 
+                {
+                    if (type == null) return "UnknownType";
+                    var name = type.FullName ?? type.Name;
+                    if (string.IsNullOrEmpty(name)) return "UnknownType";
+                    
+                    // Clean up the name for Swagger
+                    name = name.Replace("+", ".")
+                               .Replace("`", "_")
+                               .Replace("[", "_")
+                               .Replace("]", "_");
+                    
+                    return name;
+                });
+                
+                // Map IFormFile to file type for Swagger
+                swagger.MapType<IFormFile>(() => new OpenApiSchema
+                {
+                    Type = "string",
+                    Format = "binary"
+                });
+                
+                // Handle form file uploads properly - custom filters
+                // Note: Operation filter runs after parameter generation, so we need to handle this differently
+                swagger.OperationFilter<FormFileOperationFilter>();
+                swagger.ParameterFilter<FormFileParameterFilter>();
+                
+                // Configure to handle form files properly
+                swagger.CustomOperationIds(apiDesc => 
+                {
+                    return apiDesc.ActionDescriptor.RouteValues["action"];
+                });
+                
+                // Ignore obsolete properties to reduce schema complexity
+                swagger.IgnoreObsoleteProperties();
             });
             #endregion
             #region ConfigAuthorization
@@ -123,6 +173,106 @@ namespace Flowtap_Configuration
             #endregion
 
             return services;
+        }
+    }
+
+    /// <summary>
+    /// Operation filter to handle IFormFile parameters with [FromForm] attribute
+    /// </summary>
+    public class FormFileOperationFilter : IOperationFilter
+    {
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
+        {
+            // Find all IFormFile parameters
+            var formFileParams = context.ApiDescription.ParameterDescriptions
+                .Where(p => p.Type == typeof(IFormFile) || p.Type == typeof(IFormFileCollection))
+                .ToList();
+
+            if (!formFileParams.Any())
+                return;
+
+            // Remove IFormFile parameters from the parameters list
+            if (operation.Parameters != null)
+            {
+                var toRemove = operation.Parameters
+                    .Where(p => formFileParams.Any(fp => fp.Name == p.Name))
+                    .ToList();
+                
+                foreach (var param in toRemove)
+                {
+                    operation.Parameters.Remove(param);
+                }
+            }
+
+            // Create or update request body
+            if (operation.RequestBody == null)
+            {
+                operation.RequestBody = new OpenApiRequestBody();
+            }
+
+            if (operation.RequestBody.Content == null)
+            {
+                operation.RequestBody.Content = new Dictionary<string, OpenApiMediaType>();
+            }
+
+            // Create multipart/form-data schema
+            if (!operation.RequestBody.Content.ContainsKey("multipart/form-data"))
+            {
+                operation.RequestBody.Content["multipart/form-data"] = new OpenApiMediaType
+                {
+                    Schema = new OpenApiSchema
+                    {
+                        Type = "object",
+                        Properties = new Dictionary<string, OpenApiSchema>()
+                    }
+                };
+            }
+
+            var mediaType = operation.RequestBody.Content["multipart/form-data"];
+            if (mediaType.Schema.Properties == null)
+            {
+                mediaType.Schema.Properties = new Dictionary<string, OpenApiSchema>();
+            }
+
+            // Add file parameters to the schema
+            foreach (var paramDesc in formFileParams)
+            {
+                var fileSchema = paramDesc.Type == typeof(IFormFileCollection)
+                    ? new OpenApiSchema
+                    {
+                        Type = "array",
+                        Items = new OpenApiSchema
+                        {
+                            Type = "string",
+                            Format = "binary"
+                        }
+                    }
+                    : new OpenApiSchema
+                    {
+                        Type = "string",
+                        Format = "binary"
+                    };
+
+                mediaType.Schema.Properties[paramDesc.Name] = fileSchema;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Parameter filter to handle IFormFile parameters - prevents Swashbuckle from trying to generate them as query parameters
+    /// </summary>
+    public class FormFileParameterFilter : IParameterFilter
+    {
+        public void Apply(OpenApiParameter parameter, ParameterFilterContext context)
+        {
+            // If this is an IFormFile parameter, we need to skip it here
+            // The operation filter will handle it in the request body
+            if (context.ApiParameterDescription?.Type == typeof(IFormFile) || 
+                context.ApiParameterDescription?.Type == typeof(IFormFileCollection))
+            {
+                // This will be handled by the operation filter, so we can leave it
+                // The operation filter will remove it from parameters
+            }
         }
     }
 }
