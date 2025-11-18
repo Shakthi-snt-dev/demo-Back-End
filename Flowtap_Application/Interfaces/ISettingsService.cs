@@ -16,5 +16,11 @@ public interface ISettingsService
     Task<StoreSettingsDto> GetStoreSettingsAsync(Guid storeId);
     Task<StoreSettingsDto> UpdateStoreSettingsAsync(Guid storeId, UpdateStoreSettingsRequestDto request);
     Task<string> ResetApiKeyAsync(Guid storeId);
+    Task<CheckUserTypeResponseDto> CheckUserTypeByEmailAsync(string email);
+    Task<UpdateAppUserProfileResponseDto> UpdateAppUserProfileAsync(string email, UpdateAppUserProfileRequestDto request);
+    Task<AppUserProfileResponseDto> GetAppUserProfileAsync(Guid appUserId);
+    Task<AppUserProfileResponseDto> CreateOrUpdateAppUserProfileAsync(Guid appUserId, AppUserProfileRequestDto request);
+    Task<AppUserProfileResponseDto> GetAppUserProfileByUserAccountIdAsync(Guid userAccountId);
+    Task<AppUserProfileResponseDto> CreateOrUpdateAppUserProfileByUserAccountIdAsync(Guid userAccountId, AppUserProfileRequestDto request);
 }
 

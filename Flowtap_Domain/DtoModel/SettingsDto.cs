@@ -336,3 +336,108 @@ public class SecuritySettingsDto
     public bool TwoFactorEnabled { get; set; } = false;
 }
 
+// Check User Type DTOs
+public class CheckUserTypeRequestDto
+{
+    [Required]
+    [EmailAddress]
+    [MaxLength(320)]
+    public string Email { get; set; } = string.Empty;
+}
+
+public class CheckUserTypeResponseDto
+{
+    public string UserType { get; set; } = string.Empty; // AppUser, Employee, Admin
+    public Guid? AppUserId { get; set; }
+    public Guid? EmployeeId { get; set; }
+    public Guid? AdminUserId { get; set; }
+    public bool Exists { get; set; }
+}
+
+// Update AppUser Profile DTO
+public class UpdateAppUserProfileRequestDto
+{
+    [MaxLength(200)]
+    public string? FirstName { get; set; }
+
+    [MaxLength(200)]
+    public string? LastName { get; set; }
+
+    [MaxLength(200)]
+    public string? Password { get; set; }
+
+    [MaxLength(10)]
+    public string? AccessPin { get; set; }
+
+    public Address? Address { get; set; }
+}
+
+public class UpdateAppUserProfileResponseDto
+{
+    public Guid AppUserId { get; set; }
+    public string Email { get; set; } = string.Empty;
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    public Guid? EmployeeId { get; set; }
+    public string Message { get; set; } = string.Empty;
+}
+
+// AppUser Profile Settings DTOs (flat structure)
+public class AppUserProfileRequestDto
+{
+    [MaxLength(50)]
+    public string? Username { get; set; }
+
+    [MaxLength(320)]
+    [EmailAddress]
+    public string? Email { get; set; }
+
+    [MaxLength(50)]
+    public string? Language { get; set; }
+
+    [MaxLength(20)]
+    public string? Phone { get; set; }
+
+    [MaxLength(20)]
+    public string? Mobile { get; set; }
+
+    [MaxLength(50)]
+    public string? StreetNumber { get; set; }
+
+    [MaxLength(200)]
+    public string? StreetName { get; set; }
+
+    [MaxLength(100)]
+    public string? City { get; set; }
+
+    [MaxLength(100)]
+    public string? State { get; set; }
+
+    [MaxLength(100)]
+    public string? Country { get; set; }
+
+    [MaxLength(20)]
+    public string? PostalCode { get; set; }
+
+    public Guid? DefaultStoreId { get; set; }
+
+    public bool? EnableTwoFactor { get; set; }
+}
+
+public class AppUserProfileResponseDto
+{
+    public string? Username { get; set; }
+    public string? Email { get; set; }
+    public string? Language { get; set; }
+    public string? Phone { get; set; }
+    public string? Mobile { get; set; }
+    public string? StreetNumber { get; set; }
+    public string? StreetName { get; set; }
+    public string? City { get; set; }
+    public string? State { get; set; }
+    public string? Country { get; set; }
+    public string? PostalCode { get; set; }
+    public Guid? DefaultStoreId { get; set; }
+    public bool EnableTwoFactor { get; set; }
+}
+

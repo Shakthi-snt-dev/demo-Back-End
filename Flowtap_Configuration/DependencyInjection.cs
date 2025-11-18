@@ -11,6 +11,8 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.OpenApi.Any;
 using System.Security.Cryptography;
+using System.Security.Claims;
+using System.Text;
 
 
 namespace Flowtap_Configuration
@@ -123,29 +125,9 @@ namespace Flowtap_Configuration
 
             #region ConfigJwtAsymmetric
             var publicKeyPath = configuration.GetValue<string>("Tokens:PublicKey");
-            if (string.IsNullOrWhiteSpace(publicKeyPath))
-            {
-                // If no public key path is configured, add authentication without JWT
-                // This allows the app to run without JWT keys for development
-                services.AddAuthentication();
-                return services;
-            }
-
-            RSA publicRsa = RSA.Create();
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(),
-                "Keys",
-                publicKeyPath);
+            var secretKey = configuration.GetValue<string>("Tokens:SecretKey") ?? "YourSuperSecretKeyThatShouldBeAtLeast32CharactersLong!";
             
-            if (!File.Exists(filePath))
-            {
-                // If key file doesn't exist, skip JWT configuration
-                return services;
-            }
-
-            var data = File.ReadAllText(filePath);
-            publicRsa.ImportFromPem(data);
-            RsaSecurityKey signingKey = new RsaSecurityKey(publicRsa);
-
+            // Always configure authentication with JWT Bearer as default
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -154,21 +136,59 @@ namespace Flowtap_Configuration
             {
                 option.RequireHttpsMetadata = false;
                 option.SaveToken = true;
-                /*                option.Authority = "https://securetoken.google.com/skillset-4c0a7";
-                */
-                option.TokenValidationParameters = new TokenValidationParameters()
+                
+                var tokenValidationParameters = new TokenValidationParameters()
                 {
-
-                    IssuerSigningKey = signingKey,
                     ValidateAudience = true,
-                    ValidAudience = configuration.GetValue<string>("Tokens:Audience"),
+                    ValidAudience = configuration.GetValue<string>("Tokens:Audience") ?? "http://localhost:4000",
                     ValidateIssuer = true,
-                    ValidIssuer = configuration.GetValue<string>("Tokens:Issuer"),
+                    ValidIssuer = configuration.GetValue<string>("Tokens:Issuer") ?? "http://localhost:5000",
                     ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true
+                    ValidateIssuerSigningKey = true,
+                    // Map JWT claim names to ASP.NET Core claim types
+                    NameClaimType = "nameid", // Map nameid to Name claim
+                    RoleClaimType = ClaimTypes.Role
                 };
-            });
 
+                // Try to use RSA (asymmetric) if public key exists
+                if (!string.IsNullOrWhiteSpace(publicKeyPath))
+                {
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Keys", publicKeyPath);
+                    
+                    if (File.Exists(filePath))
+                    {
+                        try
+                        {
+                            RSA publicRsa = RSA.Create();
+                            var data = File.ReadAllText(filePath);
+                            publicRsa.ImportFromPem(data);
+                            RsaSecurityKey signingKey = new RsaSecurityKey(publicRsa);
+                            tokenValidationParameters.IssuerSigningKey = signingKey;
+                        }
+                        catch (Exception ex)
+                        {
+                            // If RSA key loading fails, fall back to symmetric key
+                            Console.WriteLine($"Warning: Failed to load RSA public key, falling back to symmetric key: {ex.Message}");
+                            var symmetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+                            tokenValidationParameters.IssuerSigningKey = symmetricKey;
+                        }
+                    }
+                    else
+                    {
+                        // Public key file doesn't exist, use symmetric key
+                        var symmetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+                        tokenValidationParameters.IssuerSigningKey = symmetricKey;
+                    }
+                }
+                else
+                {
+                    // No public key configured, use symmetric key
+                    var symmetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+                    tokenValidationParameters.IssuerSigningKey = symmetricKey;
+                }
+
+                option.TokenValidationParameters = tokenValidationParameters;
+            });
 
             #endregion
 

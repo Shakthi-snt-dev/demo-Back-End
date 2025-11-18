@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Flowtap_Application.Interfaces;
 using Flowtap_Domain.DtoModel;
+using System.Security.Claims;
 
 namespace Flowtap_Presentation.Controllers;
 
@@ -17,6 +18,39 @@ public class SettingsController : ControllerBase
     {
         _settingsService = settingsService;
         _logger = logger;
+    }
+
+    /// <summary>
+    /// Get UserAccount ID from JWT token claims
+    /// </summary>
+    private Guid? GetUserAccountIdFromToken()
+    {
+        // Check if user is authenticated
+        if (User?.Identity == null || !User.Identity.IsAuthenticated)
+        {
+            _logger.LogWarning("User is not authenticated. Identity: {Identity}, IsAuthenticated: {IsAuth}", 
+                User?.Identity?.Name ?? "null", User?.Identity?.IsAuthenticated ?? false);
+            return null;
+        }
+
+        // Since we configured NameClaimType = "nameid" in JWT options, 
+        // the nameid claim should be mapped to User.Identity.Name
+        // But we'll also try direct claim lookup as fallback
+        var userIdClaim = User.Identity.Name  // This should contain nameid value due to NameClaimType mapping
+            ?? User.FindFirst("nameid")?.Value  // Try JWT short name directly
+            ?? User.FindFirst(ClaimTypes.NameIdentifier)?.Value  // Try standard claim type
+            ?? User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value; // Try full URI
+
+        if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out var userId))
+        {
+            _logger.LogWarning("Unable to extract UserAccount ID from token. Identity.Name: {Name}, Available claims: {Claims}", 
+                User.Identity.Name ?? "null",
+                string.Join(", ", User.Claims.Select(c => $"{c.Type}={c.Value}")));
+            return null;
+        }
+        
+        _logger.LogDebug("Extracted UserAccount ID from token: {UserId}", userId);
+        return userId;
     }
 
     /// <summary>
@@ -159,6 +193,88 @@ public class SettingsController : ControllerBase
     {
         var result = await _settingsService.ResetApiKeyAsync(storeId);
         return Ok(ApiResponseDto<object>.Success(new { apiKey = result }, "API key reset successfully"));
+    }
+
+    /// <summary>
+    /// Check user type by email (AppUser, Employee, or AdminUser)
+    /// </summary>
+    [HttpPost("check-user-type")]
+    [ProducesResponseType(typeof(ApiResponseDto<CheckUserTypeResponseDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<ApiResponseDto<CheckUserTypeResponseDto>>> CheckUserType([FromBody] CheckUserTypeRequestDto request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return Ok(ApiResponseDto<CheckUserTypeResponseDto>.Failure("Invalid request data", null));
+        }
+
+        var result = await _settingsService.CheckUserTypeByEmailAsync(request.Email);
+        return Ok(ApiResponseDto<CheckUserTypeResponseDto>.Success(result, "User type checked successfully"));
+    }
+
+    /// <summary>
+    /// Get AppUser profile settings
+    /// </summary>
+    [HttpGet("profile")]
+    [Microsoft.AspNetCore.Authorization.Authorize]
+    [ProducesResponseType(typeof(ApiResponseDto<AppUserProfileResponseDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<ApiResponseDto<AppUserProfileResponseDto>>> GetAppUserProfile()
+    {
+        var userAccountId = GetUserAccountIdFromToken();
+        if (!userAccountId.HasValue)
+        {
+            return Unauthorized(ApiResponseDto<AppUserProfileResponseDto>.Failure("User not authenticated", null));
+        }
+
+        var result = await _settingsService.GetAppUserProfileByUserAccountIdAsync(userAccountId.Value);
+        return Ok(ApiResponseDto<AppUserProfileResponseDto>.Success(result, "Profile retrieved successfully"));
+    }
+
+    /// <summary>
+    /// Create or update AppUser profile settings (POST)
+    /// </summary>
+    [HttpPost("profile")]
+    [Microsoft.AspNetCore.Authorization.Authorize]
+    [ProducesResponseType(typeof(ApiResponseDto<AppUserProfileResponseDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<ApiResponseDto<AppUserProfileResponseDto>>> CreateOrUpdateAppUserProfile(
+        [FromBody] AppUserProfileRequestDto request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return Ok(ApiResponseDto<AppUserProfileResponseDto>.Failure("Invalid request data", null));
+        }
+
+        var userAccountId = GetUserAccountIdFromToken();
+        if (!userAccountId.HasValue)
+        {
+            return Unauthorized(ApiResponseDto<AppUserProfileResponseDto>.Failure("User not authenticated", null));
+        }
+
+        var result = await _settingsService.CreateOrUpdateAppUserProfileByUserAccountIdAsync(userAccountId.Value, request);
+        return Ok(ApiResponseDto<AppUserProfileResponseDto>.Success(result, "Profile saved successfully"));
+    }
+
+    /// <summary>
+    /// Update AppUser profile settings (PUT)
+    /// </summary>
+    [HttpPut("profile")]
+    [Microsoft.AspNetCore.Authorization.Authorize]
+    [ProducesResponseType(typeof(ApiResponseDto<AppUserProfileResponseDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<ApiResponseDto<AppUserProfileResponseDto>>> UpdateAppUserProfile(
+        [FromBody] AppUserProfileRequestDto request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return Ok(ApiResponseDto<AppUserProfileResponseDto>.Failure("Invalid request data", null));
+        }
+
+        var userAccountId = GetUserAccountIdFromToken();
+        if (!userAccountId.HasValue)
+        {
+            return Unauthorized(ApiResponseDto<AppUserProfileResponseDto>.Failure("User not authenticated", null));
+        }
+
+        var result = await _settingsService.CreateOrUpdateAppUserProfileByUserAccountIdAsync(userAccountId.Value, request);
+        return Ok(ApiResponseDto<AppUserProfileResponseDto>.Success(result, "Profile updated successfully"));
     }
 }
 
