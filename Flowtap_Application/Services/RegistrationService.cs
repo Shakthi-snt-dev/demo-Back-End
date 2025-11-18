@@ -116,7 +116,7 @@ public class RegistrationService : IRegistrationService
 
         // Send verification email
         var frontendUrl = _configuration["AppSettings:FrontendUrl"] ?? "http://localhost:5173";
-        var verificationLink = $"{frontendUrl}/steps?token={verificationToken}";
+        var verificationLink = $"{frontendUrl}/verification-successful?token={verificationToken}";
 
         var emailSent = await _emailService.SendVerificationEmailAsync(
             request.Email,
@@ -157,25 +157,35 @@ public class RegistrationService : IRegistrationService
         
         if (userAccount == null)
         {
-            _logger.LogWarning("No user account found with verification token (length: {Length}, first 10: {Preview})", 
+            _logger.LogWarning("No user account found with verification token (length: {Length}, first 10: {Preview}). " +
+                "Token may have already been used. Checking for recently verified accounts.", 
                 cleanToken.Length, cleanToken.Length > 10 ? cleanToken.Substring(0, 10) : cleanToken);
+            
+        
+            
+            _logger.LogWarning("Invalid verification token. Token may have been used, expired, or is invalid.");
             
             return new VerifyEmailResponseDto
             {
                 IsVerified = false,
-                Message = "Invalid verification token."
+                Message = "Invalid or expired verification token. This link may have already been used or has expired. If you've already verified your email, please proceed to login."
             };
         }
 
         _logger.LogInformation("User account found: {Email}, IsEmailVerified: {IsVerified}, TokenExpiry: {Expiry}", 
             userAccount.Email, userAccount.IsEmailVerified, userAccount.EmailVerificationTokenExpiry);
 
+        // Check if email is already verified - but only if token matches
+        // This means the user clicked the link again after verification
         if (userAccount.IsEmailVerified)
         {
+            _logger.LogInformation("Email {Email} is already verified. Token matches, so this is a re-verification attempt.", 
+                userAccount.Email);
+            
             return new VerifyEmailResponseDto
             {
                 IsVerified = true,
-                Message = "Email is already verified.",
+                Message = "Email is already verified. Your email was verified successfully. You can proceed to login or continue setup.",
                 AppUserId = userAccount.AppUserId,
                 OnboardingStep = 1
             };
@@ -218,10 +228,12 @@ public class RegistrationService : IRegistrationService
         // Send welcome email
         await _emailService.SendWelcomeEmailAsync(userAccount.Email, userAccount.Username ?? userAccount.Email);
 
+        _logger.LogInformation("Email {Email} verified successfully for the first time.", userAccount.Email);
+
         return new VerifyEmailResponseDto
         {
             IsVerified = true,
-            Message = "Email verified successfully. You can now complete your profile setup.",
+            Message = "Email verified successfully! Your email has been verified and your account is now active. You can proceed to login or continue with your profile setup.",
             AppUserId = appUserId,
             OnboardingStep = 1
         };

@@ -320,4 +320,3 @@ D:\Git\demo-Back-End\Flowtap_Presentation\obj\Debug\net8.0\refint\Flowtap_Presen
 D:\Git\demo-Back-End\Flowtap_Presentation\obj\Debug\net8.0\Flowtap_Presentation.pdb
 D:\Git\demo-Back-End\Flowtap_Presentation\obj\Debug\net8.0\Flowtap_Presentation.genruntimeconfig.cache
 D:\Git\demo-Back-End\Flowtap_Presentation\obj\Debug\net8.0\ref\Flowtap_Presentation.dll
-D:\Git\demo-Back-End\Flowtap_Presentation\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
