@@ -1,6 +1,7 @@
 using Serilog;
 using System.Reflection;
 using Flowtap_Configuration;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,21 @@ app.UseSwaggerUI(c =>
 });
 
 app.UseHttpsRedirection();
+
+// Enable static files serving for images
+app.UseStaticFiles();
+
+// Serve images from the Images folder
+var imagesPath = Path.Combine(builder.Environment.ContentRootPath, "Images");
+if (!Directory.Exists(imagesPath))
+{
+    Directory.CreateDirectory(imagesPath);
+}
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(imagesPath),
+    RequestPath = "/images"
+});
 
 app.UseCors("CustomCorsPolicy");
 

@@ -185,7 +185,7 @@ public class RegistrationService : IRegistrationService
             return new VerifyEmailResponseDto
             {
                 IsVerified = true,
-                Message = "Email is already verified. Your email was verified successfully. You can proceed to login or continue setup.",
+                Message = "Verification success! Your email is already verified. Please go to login to access your account.",
                 AppUserId = userAccount.AppUserId,
                 OnboardingStep = 1
             };
@@ -233,7 +233,7 @@ public class RegistrationService : IRegistrationService
         return new VerifyEmailResponseDto
         {
             IsVerified = true,
-            Message = "Email verified successfully! Your email has been verified and your account is now active. You can proceed to login or continue with your profile setup.",
+            Message = "Verification success! Your email has been verified and your account is now active. Please go to login to access your account.",
             AppUserId = appUserId,
             OnboardingStep = 1
         };
