@@ -164,6 +164,7 @@ namespace Flowtap_Configuration
                             publicRsa.ImportFromPem(data);
                             RsaSecurityKey signingKey = new RsaSecurityKey(publicRsa);
                             tokenValidationParameters.IssuerSigningKey = signingKey;
+                            Console.WriteLine("RSA public key loaded successfully");
                         }
                         catch (Exception ex)
                         {

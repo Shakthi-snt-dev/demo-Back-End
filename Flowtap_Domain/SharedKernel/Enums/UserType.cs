@@ -2,8 +2,7 @@ namespace Flowtap_Domain.SharedKernel.Enums;
 
 public enum UserType
 {
-    AppUser,
-    Admin,
-    Employee
+    AppUser=1,
+    Employee=2,
 }
 

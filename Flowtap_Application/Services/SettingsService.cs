@@ -336,17 +336,7 @@ public class SettingsService : ISettingsService
                 }
                 break;
 
-            case UserType.Admin:
-                response.UserType = "Admin";
-                // Check if it's an AppUserAdmin
-                var appUserAdmin = await _appUserAdminRepository.GetByEmailAsync(email);
-                if (appUserAdmin != null)
-                {
-                    response.AdminUserId = appUserAdmin.Id;
-                    response.AppUserId = appUserAdmin.AppUserId;
-                }
-                break;
-
+            // Admin user type removed - AppUserAdmin is no longer in DbContext
             default:
                 response.UserType = userAccount.UserType.ToString();
                 break;
@@ -556,7 +546,7 @@ public class SettingsService : ISettingsService
         {
             Username = userAccount.Username,
             Email = appUser.Email,
-            Language = null, // Language not stored in AppUser, could be stored in UserAccount or settings
+            Language = appUser.Language,
             Phone = appUser.PhoneNumber,
             Mobile = appUser.PhoneNumber, // Using PhoneNumber as mobile
             StreetNumber = address?.StreetNumber,
@@ -586,21 +576,8 @@ public class SettingsService : ISettingsService
             userAccount.Username = request.Username;
         }
 
-        // Update Email (if changed, need to update both AppUser and UserAccount)
-        if (!string.IsNullOrWhiteSpace(request.Email) && request.Email != appUser.Email)
-        {
-            // Check if new email already exists
-            var existingUserAccount = await _userAccountRepository.GetByEmailAsync(request.Email);
-            if (existingUserAccount != null && existingUserAccount.Id != userAccount.Id)
-            {
-                throw new Flowtap_Domain.Exceptions.InvalidOperationException(
-                    $"Email {request.Email} is already in use",
-                    "UserAccount");
-            }
-
-            appUser.Email = request.Email;
-            userAccount.Email = request.Email;
-        }
+        // Note: Email should NOT be updated via PUT profile endpoint for security reasons
+        // Email changes should be handled through a separate email verification flow
 
         // Update Phone
         if (request.Phone != null)
@@ -612,6 +589,12 @@ public class SettingsService : ISettingsService
         if (request.Mobile != null)
         {
             appUser.PhoneNumber = request.Mobile;
+        }
+
+        // Update Language
+        if (request.Language != null)
+        {
+            appUser.Language = request.Language;
         }
 
         // Update Country
@@ -662,7 +645,7 @@ public class SettingsService : ISettingsService
         {
             Username = userAccount.Username,
             Email = appUser.Email,
-            Language = null, // Language not stored yet
+            Language = appUser.Language,
             Phone = appUser.PhoneNumber,
             Mobile = appUser.PhoneNumber,
             StreetNumber = address?.StreetNumber,

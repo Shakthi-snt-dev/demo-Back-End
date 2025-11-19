@@ -32,6 +32,9 @@ public class AppUser
 
     public string TimeZone { get; set; } = "UTC";
 
+    [MaxLength(50)]
+    public string? Language { get; set; }
+
     // Subscription
     public Guid? SubscriptionId { get; set; }
 
@@ -45,7 +48,7 @@ public class AppUser
     public bool IsTrialActive => TrialEndDate.HasValue && DateTime.UtcNow <= TrialEndDate.Value;
 
     // Co-owners
-    public ICollection<AppUserAdmin> Admins { get; set; } = new List<AppUserAdmin>();
+    // public ICollection<AppUserAdmin> Admins { get; set; } = new List<AppUserAdmin>();
 
     // Stores (IDs only to avoid cross-context coupling)
     public ICollection<Guid> StoreIds { get; set; } = new List<Guid>();
@@ -103,39 +106,8 @@ public class AppUser
         UpdatedAt = DateTime.UtcNow;
     }
 
-    /// <summary>
-    /// Adds a co-owner/admin to the account
-    /// </summary>
-    /// <param name="admin">The admin to add</param>
-    public void AddAdmin(AppUserAdmin admin)
-    {
-        if (admin == null)
-            throw new ArgumentNullException(nameof(admin));
-
-        if (Admins.Any(a => a.Email == admin.Email))
-            throw new InvalidOperationException($"Admin with email {admin.Email} already exists");
-
-        admin.AppUserId = Id;
-        Admins.Add(admin);
-        UpdatedAt = DateTime.UtcNow;
-    }
-
-    /// <summary>
-    /// Removes a co-owner/admin from the account
-    /// </summary>
-    /// <param name="adminId">The admin ID to remove</param>
-    public void RemoveAdmin(Guid adminId)
-    {
-        var admin = Admins.FirstOrDefault(a => a.Id == adminId);
-        if (admin == null)
-            throw new InvalidOperationException($"Admin with ID {adminId} not found");
-
-        if (admin.IsPrimaryOwner)
-            throw new InvalidOperationException("Cannot remove primary owner");
-
-        Admins.Remove(admin);
-        UpdatedAt = DateTime.UtcNow;
-    }
+    // Note: Admin management methods removed since AppUserAdmin is no longer part of the DbContext
+    // If admin functionality is needed in the future, it should be implemented through a different mechanism
 
     /// <summary>
     /// Links a store to this user

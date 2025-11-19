@@ -1,71 +1,56 @@
-using Microsoft.EntityFrameworkCore;
 using Flowtap_Domain.BoundedContexts.Owner.Entities;
 using Flowtap_Domain.BoundedContexts.Owner.Interfaces;
-using Flowtap_Infrastructure.Data;
 
 namespace Flowtap_Infrastructure.Repositories;
 
+/// <summary>
+/// Stub implementation - AppUserAdmin is no longer part of DbContext
+/// All methods return empty/null results
+/// </summary>
 public class AppUserAdminRepository : IAppUserAdminRepository
 {
-    private readonly AppDbContext _context;
-
-    public AppUserAdminRepository(AppDbContext context)
+    public AppUserAdminRepository()
     {
-        _context = context;
     }
 
-    public async Task<AppUserAdmin?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    public Task<AppUserAdmin?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _context.AppUserAdmins
-            .FirstOrDefaultAsync(a => a.Id == id, cancellationToken);
+        return Task.FromResult<AppUserAdmin?>(null);
     }
 
-    public async Task<AppUserAdmin?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
+    public Task<AppUserAdmin?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
     {
-        return await _context.AppUserAdmins
-            .FirstOrDefaultAsync(a => a.Email == email, cancellationToken);
+        return Task.FromResult<AppUserAdmin?>(null);
     }
 
-    public async Task<IEnumerable<AppUserAdmin>> GetByAppUserIdAsync(Guid appUserId, CancellationToken cancellationToken = default)
+    public Task<IEnumerable<AppUserAdmin>> GetByAppUserIdAsync(Guid appUserId, CancellationToken cancellationToken = default)
     {
-        return await _context.AppUserAdmins
-            .Where(a => a.AppUserId == appUserId)
-            .ToListAsync(cancellationToken);
+        return Task.FromResult<IEnumerable<AppUserAdmin>>(new List<AppUserAdmin>());
     }
 
-    public async Task<AppUserAdmin?> GetPrimaryOwnerAsync(Guid appUserId, CancellationToken cancellationToken = default)
+    public Task<AppUserAdmin?> GetPrimaryOwnerAsync(Guid appUserId, CancellationToken cancellationToken = default)
     {
-        return await _context.AppUserAdmins
-            .FirstOrDefaultAsync(a => a.AppUserId == appUserId && a.IsPrimaryOwner, cancellationToken);
+        return Task.FromResult<AppUserAdmin?>(null);
     }
 
-    public async Task<AppUserAdmin> AddAsync(AppUserAdmin admin, CancellationToken cancellationToken = default)
+    public Task<AppUserAdmin> AddAsync(AppUserAdmin admin, CancellationToken cancellationToken = default)
     {
-        await _context.AppUserAdmins.AddAsync(admin, cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken);
-        return admin;
+        return Task.FromResult(admin);
     }
 
-    public async Task UpdateAsync(AppUserAdmin admin, CancellationToken cancellationToken = default)
+    public Task UpdateAsync(AppUserAdmin admin, CancellationToken cancellationToken = default)
     {
-        _context.AppUserAdmins.Update(admin);
-        await _context.SaveChangesAsync(cancellationToken);
+        return Task.CompletedTask;
     }
 
-    public async Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+    public Task DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var admin = await GetByIdAsync(id, cancellationToken);
-        if (admin != null)
-        {
-            _context.AppUserAdmins.Remove(admin);
-            await _context.SaveChangesAsync(cancellationToken);
-        }
+        return Task.CompletedTask;
     }
 
-    public async Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken = default)
+    public Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await _context.AppUserAdmins
-            .AnyAsync(a => a.Id == id, cancellationToken);
+        return Task.FromResult(false);
     }
 }
 

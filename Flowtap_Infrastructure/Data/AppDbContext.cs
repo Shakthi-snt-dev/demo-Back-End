@@ -26,7 +26,6 @@ public class AppDbContext : DbContext
 
     // Owner Context
     public DbSet<AppUser> AppUsers { get; set; }
-    public DbSet<AppUserAdmin> AppUserAdmins { get; set; }
 
     // Billing Context
     public DbSet<Subscription> Subscriptions { get; set; }
@@ -58,6 +57,9 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        // Ignore AppUserAdmin - it's kept in domain but not mapped to database
+        modelBuilder.Ignore<AppUserAdmin>();
 
         // ===========================
         // IDENTITY CONTEXT
@@ -104,34 +106,6 @@ public class AppDbContext : DbContext
                         .ToList())
                 .HasColumnType("text");
 
-            entity.HasMany(e => e.Admins)
-                .WithOne()
-                .HasForeignKey(a => a.AppUserId)
-                .OnDelete(DeleteBehavior.Cascade);
-        });
-
-        modelBuilder.Entity<AppUserAdmin>(entity =>
-        {
-            entity.HasKey(e => e.Id);
-            entity.Property(e => e.Email).IsRequired().HasMaxLength(320);
-            entity.Property(e => e.AppUserId).IsRequired();
-            
-            // Configure Address as owned entity
-            entity.OwnsOne(e => e.Address, a =>
-            {
-                a.Property(p => p.StreetNumber).HasColumnName("StreetNumber").HasMaxLength(50);
-                a.Property(p => p.StreetName).HasColumnName("StreetName").HasMaxLength(200);
-                a.Property(p => p.City).HasColumnName("City").HasMaxLength(100);
-                a.Property(p => p.State).HasColumnName("State").HasMaxLength(100);
-                a.Property(p => p.PostalCode).HasColumnName("PostalCode").HasMaxLength(20);
-            });
-
-            // Configure Permissions as JSON array
-            entity.Property(e => e.Permissions)
-                .HasConversion(
-                    v => string.Join(',', v),
-                    v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList())
-                .HasColumnType("text");
         });
 
         // ===========================

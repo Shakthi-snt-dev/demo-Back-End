@@ -52,9 +52,19 @@ public class JwtService : IJwtService
             }
 
             var privateKeyData = File.ReadAllText(privateKeyPath);
-            using var rsa = RSA.Create();
-            rsa.ImportFromPem(privateKeyData);
-            var signingKey = new RsaSecurityKey(rsa);
+            
+            // Create RSA and extract parameters to avoid disposal issues
+            RSAParameters rsaParams;
+            using (var rsa = RSA.Create())
+            {
+                rsa.ImportFromPem(privateKeyData);
+                rsaParams = rsa.ExportParameters(true); // Export private key parameters
+            }
+            
+            // Create a new RSA instance from the exported parameters
+            var rsaForSigning = RSA.Create();
+            rsaForSigning.ImportParameters(rsaParams);
+            var signingKey = new RsaSecurityKey(rsaForSigning);
 
             var claims = new List<Claim>
             {

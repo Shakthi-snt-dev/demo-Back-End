@@ -18,21 +18,18 @@ public class AppUserRepository : IAppUserRepository
     public async Task<AppUser?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await _context.AppUsers
-            .Include(u => u.Admins)
             .FirstOrDefaultAsync(u => u.Id == id, cancellationToken);
     }
 
     public async Task<AppUser?> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
     {
         return await _context.AppUsers
-            .Include(u => u.Admins)
             .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
     }
 
     public async Task<AppUser?> GetBySubscriptionIdAsync(Guid subscriptionId, CancellationToken cancellationToken = default)
     {
         return await _context.AppUsers
-            .Include(u => u.Admins)
             .FirstOrDefaultAsync(u => u.SubscriptionId == subscriptionId, cancellationToken);
     }
 

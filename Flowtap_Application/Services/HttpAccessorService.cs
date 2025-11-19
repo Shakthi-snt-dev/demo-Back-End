@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.IdentityModel.Tokens.Jwt;
@@ -99,15 +100,36 @@ public class HttpAccessorService : IHttpAccessorService
 
     /// <summary>
     /// Gets the UserAccount ID (NameIdentifier claim)
+    /// Tries multiple claim types to find the user ID
     /// </summary>
     public Guid? GetUserAccountId()
     {
-        var userIdString = GetClaim(ClaimTypes.NameIdentifier);
-        if (Guid.TryParse(userIdString, out var userId))
+        var user = GetUser();
+        if (user?.Identity == null || !user.Identity.IsAuthenticated)
         {
-            return userId;
+            _logger.LogWarning("User is not authenticated. Identity: {Identity}, IsAuthenticated: {IsAuth}", 
+                user?.Identity?.Name ?? "null", user?.Identity?.IsAuthenticated ?? false);
+            return null;
         }
-        return null;
+
+        // Since we configured NameClaimType = "nameid" in JWT options, 
+        // the nameid claim should be mapped to User.Identity.Name
+        // But we'll also try direct claim lookup as fallback
+        var userIdClaim = user.Identity.Name  // This should contain nameid value due to NameClaimType mapping
+            ?? user.FindFirst("nameid")?.Value  // Try JWT short name directly
+            ?? user.FindFirst(ClaimTypes.NameIdentifier)?.Value  // Try standard claim type
+            ?? user.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value; // Try full URI
+
+        if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out var userId))
+        {
+            _logger.LogWarning("Unable to extract UserAccount ID from token. Identity.Name: {Name}, Available claims: {Claims}", 
+                user.Identity.Name ?? "null",
+                string.Join(", ", user.Claims.Select(c => $"{c.Type}={c.Value}")));
+            return null;
+        }
+        
+        _logger.LogDebug("Extracted UserAccount ID from token: {UserId}", userId);
+        return userId;
     }
 
     /// <summary>

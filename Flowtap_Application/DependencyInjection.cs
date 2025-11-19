@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Flowtap_Application.Interfaces;
-using Flowtap_Application.Services;
+ using Flowtap_Application.Interfaces;
+ using Flowtap_Application.Services;
 
 namespace Flowtap_Application
 {
@@ -14,35 +14,35 @@ namespace Flowtap_Application
             services.AddScoped<IJwtService, JwtService>();
 
             // Sales Context
-            services.AddScoped<ICustomerService, CustomerService>();
-            services.AddScoped<IOrderService, OrderService>();
+            // services.AddScoped<ICustomerService, CustomerService>();
+            // services.AddScoped<IOrderService, OrderService>();
 
             // Inventory Context
-            services.AddScoped<IProductService, ProductService>();
+            // services.AddScoped<IProductService, ProductService>();
 
             // Service Context
-            services.AddScoped<IRepairTicketService, RepairTicketService>();
+            // services.AddScoped<IRepairTicketService, RepairTicketService>();
 
             // HR Context
-            services.AddScoped<IEmployeeService, EmployeeService>();
+            // services.AddScoped<IEmployeeService, EmployeeService>();
 
             // Dashboard
-            services.AddScoped<IDashboardService, DashboardService>();
+            // services.AddScoped<IDashboardService, DashboardService>();
 
             // Integration
-            services.AddScoped<IIntegrationService, IntegrationService>();
+            // services.AddScoped<IIntegrationService, IntegrationService>();
 
             // Settings
             services.AddScoped<ISettingsService, SettingsService>();
 
             // AppUserAdmin
-            services.AddScoped<IAppUserAdminService, AppUserAdminService>();
+            // services.AddScoped<IAppUserAdminService, AppUserAdminService>();
 
             // Form Configuration
-            services.AddScoped<IFormConfigurationService, FormConfigurationService>();
+            // services.AddScoped<IFormConfigurationService, FormConfigurationService>();
 
             // Store
-            services.AddScoped<IStoreService, StoreService>();
+            // services.AddScoped<IStoreService, StoreService>();
 
             // Role
             services.AddScoped<IRoleService, RoleService>();
