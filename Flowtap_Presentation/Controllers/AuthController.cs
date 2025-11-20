@@ -56,9 +56,14 @@ public class AuthController : ControllerBase
         // Remove any whitespace that might have been introduced
         var cleanToken = token?.Trim();
         
+        if (string.IsNullOrWhiteSpace(cleanToken))
+        {
+            return Ok(ApiResponseDto<VerifyEmailResponseDto>.Failure("Verification token is required", null));
+        }
+        
         // Log token info for debugging (don't log full token for security)
         _logger.LogInformation("Verification request received. Token length: {Length}, First 10 chars: {Preview}", 
-            cleanToken?.Length ?? 0, cleanToken?.Length > 10 ? cleanToken.Substring(0, 10) : cleanToken ?? "null");
+            cleanToken.Length, cleanToken.Length > 10 ? cleanToken.Substring(0, 10) : cleanToken);
 
         var result = await _registrationService.VerifyEmailAsync(cleanToken);
         

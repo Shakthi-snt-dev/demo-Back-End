@@ -163,6 +163,26 @@ public class AppDbContext : DbContext
             entity.Property(e => e.EnablePOS).HasDefaultValue(true);
             entity.Property(e => e.EnableInventory).HasDefaultValue(true);
             entity.Property(e => e.TimeZone).HasDefaultValue("UTC");
+            entity.Property(e => e.TimeFormat).HasDefaultValue("12h");
+            entity.Property(e => e.Language).HasDefaultValue("en");
+            entity.Property(e => e.DefaultCurrency).HasDefaultValue("USD");
+            entity.Property(e => e.PriceFormat).HasDefaultValue("$0.00");
+            entity.Property(e => e.DecimalFormat).HasDefaultValue("2");
+            entity.Property(e => e.AccountingMethod).HasDefaultValue("Cash Basis");
+            entity.Property(e => e.EmailNotifications).HasDefaultValue(true);
+            entity.Property(e => e.LockScreenTimeoutMinutes).HasDefaultValue(15);
+            entity.Property(e => e.TaxPercentage).HasPrecision(18, 2);
+            entity.Property(e => e.DiagnosticBenchFee).HasPrecision(18, 2);
+            
+            // Configure DefaultAddress as owned entity
+            entity.OwnsOne(e => e.DefaultAddress, a =>
+            {
+                a.Property(p => p.StreetNumber).HasColumnName("DefaultAddress_StreetNumber").HasMaxLength(50);
+                a.Property(p => p.StreetName).HasColumnName("DefaultAddress_StreetName").HasMaxLength(200);
+                a.Property(p => p.City).HasColumnName("DefaultAddress_City").HasMaxLength(100);
+                a.Property(p => p.State).HasColumnName("DefaultAddress_State").HasMaxLength(100);
+                a.Property(p => p.PostalCode).HasColumnName("DefaultAddress_PostalCode").HasMaxLength(20);
+            });
         });
 
         // ===========================

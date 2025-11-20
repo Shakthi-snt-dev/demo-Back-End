@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Flowtap_Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class UpdateDatabaseSchema : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,11 +46,13 @@ namespace Flowtap_Infrastructure.Migrations
                     Country = table.Column<string>(type: "text", nullable: true),
                     Currency = table.Column<string>(type: "text", nullable: false, defaultValue: "USD"),
                     TimeZone = table.Column<string>(type: "text", nullable: false, defaultValue: "UTC"),
+                    Language = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     SubscriptionId = table.Column<Guid>(type: "uuid", nullable: true),
                     TrialStartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     TrialEndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     TrialStatus = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
                     StoreIds = table.Column<string>(type: "text", nullable: false),
+                    DefaultStoreId = table.Column<Guid>(type: "uuid", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -284,35 +286,6 @@ namespace Flowtap_Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppUserAdmins",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    AppUserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    FullName = table.Column<string>(type: "text", nullable: true),
-                    Email = table.Column<string>(type: "character varying(320)", maxLength: 320, nullable: false),
-                    PasswordHash = table.Column<string>(type: "text", nullable: true),
-                    IsPrimaryOwner = table.Column<bool>(type: "boolean", nullable: false),
-                    StreetNumber = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    StreetName = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
-                    City = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    State = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
-                    PostalCode = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
-                    Permissions = table.Column<string>(type: "text", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppUserAdmins", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AppUserAdmins_AppUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AppUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "OrderItems",
                 columns: table => new
                 {
@@ -343,11 +316,44 @@ namespace Flowtap_Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     StoreId = table.Column<Guid>(type: "uuid", nullable: false),
+                    StoreEmail = table.Column<string>(type: "character varying(320)", maxLength: 320, nullable: true),
+                    AlternateName = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
+                    StoreLogoUrl = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
+                    Mobile = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
+                    Website = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
                     EnablePOS = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
                     EnableInventory = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
-                    TimeZone = table.Column<string>(type: "text", nullable: false, defaultValue: "UTC"),
+                    TimeZone = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false, defaultValue: "UTC"),
+                    TimeFormat = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false, defaultValue: "12h"),
+                    Language = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false, defaultValue: "en"),
+                    DefaultCurrency = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false, defaultValue: "USD"),
+                    PriceFormat = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false, defaultValue: "$0.00"),
+                    DecimalFormat = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false, defaultValue: "2"),
+                    ChargeSalesTax = table.Column<bool>(type: "boolean", nullable: false),
+                    DefaultTaxClass = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    TaxPercentage = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    RegistrationNumber = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    StartTime = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
+                    EndTime = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
+                    DefaultAddress_StreetNumber = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    DefaultAddress_StreetName = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
+                    DefaultAddress_City = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    DefaultAddress_State = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: true),
+                    DefaultAddress_PostalCode = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: true),
+                    ApiKey = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
+                    ApiKeyCreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    AccountingMethod = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false, defaultValue: "Cash Basis"),
+                    CompanyEmail = table.Column<string>(type: "character varying(320)", maxLength: 320, nullable: true),
+                    CompanyEmailVerified = table.Column<bool>(type: "boolean", nullable: false),
+                    EmailNotifications = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
+                    RequireTwoFactorForAllUsers = table.Column<bool>(type: "boolean", nullable: false),
+                    ChargeRestockingFee = table.Column<bool>(type: "boolean", nullable: false),
+                    DiagnosticBenchFee = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    ChargeDepositOnRepairs = table.Column<bool>(type: "boolean", nullable: false),
+                    LockScreenTimeoutMinutes = table.Column<int>(type: "integer", nullable: false, defaultValue: 15),
                     BusinessHoursJson = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -379,11 +385,6 @@ namespace Flowtap_Infrastructure.Migrations
                 name: "IX_ActivityLogs_StoreId",
                 table: "ActivityLogs",
                 column: "StoreId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AppUserAdmins_AppUserId",
-                table: "AppUserAdmins",
-                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_Email",
@@ -617,7 +618,7 @@ namespace Flowtap_Infrastructure.Migrations
                 name: "ActivityLogs");
 
             migrationBuilder.DropTable(
-                name: "AppUserAdmins");
+                name: "AppUsers");
 
             migrationBuilder.DropTable(
                 name: "Customers");
@@ -645,9 +646,6 @@ namespace Flowtap_Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserAccounts");
-
-            migrationBuilder.DropTable(
-                name: "AppUsers");
 
             migrationBuilder.DropTable(
                 name: "Orders");

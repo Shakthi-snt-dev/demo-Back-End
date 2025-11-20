@@ -165,8 +165,13 @@ public class RegistrationService : IRegistrationService
             UpdatedAt = DateTime.UtcNow
         };
 
-        await _employeeRepository.AddAsync(employee);
+        var createdEmployee = await _employeeRepository.AddAsync(employee);
         _logger.LogInformation("Created Employee record for AppUser {AppUserId} as Owner in Store {StoreId} during registration", appUser.Id, defaultStore.Id);
+
+        // Link Employee to UserAccount
+        userAccount.EmployeeId = createdEmployee.Id;
+        await _userAccountRepository.UpdateAsync(userAccount);
+        _logger.LogInformation("Linked Employee {EmployeeId} to UserAccount {UserAccountId} during registration", createdEmployee.Id, userAccount.Id);
 
         // Send verification email
         var frontendUrl = _configuration["AppSettings:FrontendUrl"] ?? "http://localhost:5173";
@@ -399,8 +404,13 @@ public class RegistrationService : IRegistrationService
                 employee.Address = appUser.Address;
             }
 
-            await _employeeRepository.AddAsync(employee);
-            _logger.LogInformation("Created Employee record for AppUser {AppUserId} as Owner in Store {StoreId}", appUser.Id, store.Id);
+            var createdEmployee = await _employeeRepository.AddAsync(employee);
+            
+            // Link Employee to UserAccount
+            userAccount.EmployeeId = createdEmployee.Id;
+            await _userAccountRepository.UpdateAsync(userAccount);
+            
+            _logger.LogInformation("Created Employee record for AppUser {AppUserId} as Owner in Store {StoreId} and linked to UserAccount {UserAccountId}", appUser.Id, store.Id, userAccount.Id);
         }
 
         return new OnboardingResponseDto

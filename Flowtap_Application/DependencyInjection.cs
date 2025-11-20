@@ -32,8 +32,11 @@ namespace Flowtap_Application
             // Integration
             // services.AddScoped<IIntegrationService, IntegrationService>();
 
-            // Settings
-            services.AddScoped<ISettingsService, SettingsService>();
+            // Profile Service
+            services.AddScoped<IProfileService, ProfileService>();
+            
+            // Store Settings Service
+            services.AddScoped<IStoreSettingsService, StoreSettingsService>();
 
             // AppUserAdmin
             // services.AddScoped<IAppUserAdminService, AppUserAdminService>();
