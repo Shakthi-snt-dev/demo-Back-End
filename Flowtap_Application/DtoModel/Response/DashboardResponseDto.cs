@@ -1,4 +1,4 @@
-namespace Flowtap_Domain.DtoModel;
+namespace Flowtap_Application.DtoModel.Response;
 
 public class DashboardStatsResponseDto
 {

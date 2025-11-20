@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Flowtap_Application.Interfaces;
-using Flowtap_Domain.DtoModel;
+using Flowtap_Application.DtoModel;
+using Flowtap_Application.DtoModel.Request;
+using Flowtap_Application.DtoModel.Response;
 
 namespace Flowtap_Presentation.Controllers;
 

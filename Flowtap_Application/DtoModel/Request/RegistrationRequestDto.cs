@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Flowtap_Domain.DtoModel;
+namespace Flowtap_Application.DtoModel.Request;
 
 public class RegisterRequestDto
 {
@@ -19,14 +19,5 @@ public class RegisterRequestDto
     [Required(ErrorMessage = "Confirm password is required")]
     [Compare("Password", ErrorMessage = "Password and confirm password do not match")]
     public string ConfirmPassword { get; set; } = string.Empty;
-}
-
-public class RegisterResponseDto
-{
-    public Guid UserId { get; set; }
-    public string Email { get; set; } = string.Empty;
-    public string? Username { get; set; }
-    public bool EmailSent { get; set; }
-    public string Message { get; set; } = string.Empty;
 }
 

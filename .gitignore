@@ -1,0 +1,15 @@
+Flowtap_Presentation/bin
+Flowtap_Presentation/obj
+Flowtap_Application/bin
+Flowtap_Application/obj
+Flowtap_Domain/bin
+Flowtap_Domain/obj
+Flowtap_Infrastructure/bin
+Flowtap_Infrastructure/obj
+Flowtap_Middleware/bin
+Flowtap_Middleware/obj
+Flowtap_Test/bin
+Flowtap_Test/obj
+Flowtap_Infrastructure/migrations
+Flowtap_Presentation/appsettings.json
+Flowtap_Application/appsettings.development.json

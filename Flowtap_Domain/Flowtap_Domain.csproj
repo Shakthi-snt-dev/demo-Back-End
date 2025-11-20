@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Interface\" />
     <Folder Include="Entities\" />
-    <Folder Include="DtoModel\" />
     <Folder Include="Valueobjects\" />
   </ItemGroup>
 

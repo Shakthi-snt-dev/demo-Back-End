@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using Flowtap_Application.DtoModel;
 
-namespace Flowtap_Domain.DtoModel;
+namespace Flowtap_Application.DtoModel.Request;
 
 /// <summary>
 /// DTO for creating a business owner (AppUserAdmin)
@@ -32,18 +33,5 @@ public class CreateAppUserAdminRequestDto
     /// Store ID where the employee should be created (required if CreateAsEmployee is true)
     /// </summary>
     public Guid? StoreId { get; set; }
-}
-
-public class AppUserAdminResponseDto
-{
-    public Guid Id { get; set; }
-    public Guid AppUserId { get; set; }
-    public string? FullName { get; set; }
-    public string Email { get; set; } = string.Empty;
-    public bool IsPrimaryOwner { get; set; }
-    public AddressDto? Address { get; set; }
-    public List<string> Permissions { get; set; } = new();
-    public DateTime CreatedAt { get; set; }
-    public Guid? EmployeeId { get; set; } // If created as employee
 }
 

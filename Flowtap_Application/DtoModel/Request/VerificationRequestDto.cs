@@ -1,19 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Flowtap_Domain.DtoModel;
+namespace Flowtap_Application.DtoModel.Request;
 
 public class VerifyEmailRequestDto
 {
     [Required(ErrorMessage = "Token is required")]
     public string Token { get; set; } = string.Empty;
-}
-
-public class VerifyEmailResponseDto
-{
-    public bool IsVerified { get; set; }
-    public string Message { get; set; } = string.Empty;
-    public Guid? AppUserId { get; set; }
-    public int OnboardingStep { get; set; } = 1;
 }
 
 public class OnboardingStep1RequestDto
@@ -99,15 +91,5 @@ public class OnboardingStep3RequestDto
 {
     [Required(ErrorMessage = "Action is required")]
     public string Action { get; set; } = string.Empty; // "dive_in" or "demo"
-}
-
-public class OnboardingResponseDto
-{
-    public bool Success { get; set; }
-    public string Message { get; set; } = string.Empty;
-    public int CurrentStep { get; set; }
-    public Guid? StoreId { get; set; }
-    public bool TrialStarted { get; set; }
-    public DateTime? TrialEndDate { get; set; }
 }
 

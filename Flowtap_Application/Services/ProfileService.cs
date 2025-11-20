@@ -4,7 +4,9 @@ using Flowtap_Domain.BoundedContexts.Store.Interfaces;
 using Flowtap_Domain.BoundedContexts.Identity.Interfaces;
 using Flowtap_Domain.BoundedContexts.HR.Interfaces;
 using Flowtap_Domain.BoundedContexts.HR.Entities;
-using Flowtap_Domain.DtoModel;
+using Flowtap_Application.DtoModel;
+using Flowtap_Application.DtoModel.Request;
+using Flowtap_Application.DtoModel.Response;
 using Flowtap_Domain.Exceptions;
 using Flowtap_Domain.SharedKernel.Enums;
 using Flowtap_Domain.SharedKernel.ValueObjects;
@@ -53,6 +55,9 @@ public class ProfileService : IProfileService
         var stores = await _storeRepository.GetByAppUserIdAsync(appUserId);
         // Use DefaultStoreId from AppUser if set, otherwise fall back to first store
         var defaultStoreId = appUser.DefaultStoreId ?? stores.FirstOrDefault()?.Id;
+        var defaultStore = defaultStoreId.HasValue 
+            ? stores.FirstOrDefault(s => s.Id == defaultStoreId.Value) 
+            : null;
 
         // Extract address components
         var address = appUser.Address;
@@ -70,7 +75,9 @@ public class ProfileService : IProfileService
             State = address?.State,
             Country = appUser.Country,
             PostalCode = address?.PostalCode,
-            DefaultStoreId = defaultStoreId,
+            DefaultStore = defaultStore != null 
+                ? new DefaultStoreDto { Id = defaultStore.Id, StoreName = defaultStore.StoreName }
+                : null,
             EnableTwoFactor = userAccount.TwoFactorEnabled
         };
     }
@@ -160,6 +167,9 @@ public class ProfileService : IProfileService
         var stores = await _storeRepository.GetByAppUserIdAsync(appUserId);
         // Use DefaultStoreId from AppUser if set, otherwise fall back to first store
         var defaultStoreId = appUser.DefaultStoreId ?? stores.FirstOrDefault()?.Id;
+        var defaultStore = defaultStoreId.HasValue 
+            ? stores.FirstOrDefault(s => s.Id == defaultStoreId.Value) 
+            : null;
 
         // Return updated profile
         var address = appUser.Address;
@@ -176,7 +186,9 @@ public class ProfileService : IProfileService
             State = address?.State,
             Country = appUser.Country,
             PostalCode = address?.PostalCode,
-            DefaultStoreId = defaultStoreId,
+            DefaultStore = defaultStore != null 
+                ? new DefaultStoreDto { Id = defaultStore.Id, StoreName = defaultStore.StoreName }
+                : null,
             EnableTwoFactor = userAccount.TwoFactorEnabled
         };
     }

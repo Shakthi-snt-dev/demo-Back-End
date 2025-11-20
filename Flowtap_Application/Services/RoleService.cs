@@ -1,7 +1,9 @@
 using Flowtap_Application.Interfaces;
 using Flowtap_Domain.BoundedContexts.HR.Entities;
 using Flowtap_Domain.BoundedContexts.HR.Interfaces;
-using Flowtap_Domain.DtoModel;
+using Flowtap_Application.DtoModel;
+using Flowtap_Application.DtoModel.Request;
+using Flowtap_Application.DtoModel.Response;
 using Flowtap_Domain.Exceptions;
 using Microsoft.Extensions.Logging;
 

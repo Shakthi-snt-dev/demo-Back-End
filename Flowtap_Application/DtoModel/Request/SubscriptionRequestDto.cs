@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Flowtap_Domain.DtoModel;
+namespace Flowtap_Application.DtoModel.Request;
 
 public class UpgradeToSubscriptionRequestDto
 {
@@ -19,15 +19,5 @@ public class UpgradeToSubscriptionRequestDto
     public string? PaymentProvider { get; set; }
 
     public string? ExternalSubscriptionId { get; set; }
-}
-
-public class UpgradeToSubscriptionResponseDto
-{
-    public bool Success { get; set; }
-    public string Message { get; set; } = string.Empty;
-    public Guid SubscriptionId { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
-    public string PlanName { get; set; } = string.Empty;
 }
 

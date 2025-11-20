@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Flowtap_Domain.DtoModel;
+namespace Flowtap_Application.DtoModel;
 
 public class ApiResponseDto<T>
 {
