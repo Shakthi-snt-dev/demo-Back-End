@@ -53,6 +53,9 @@ public class AppUser
     // Stores (IDs only to avoid cross-context coupling)
     public ICollection<Guid> StoreIds { get; set; } = new List<Guid>();
 
+    // Default Store
+    public Guid? DefaultStoreId { get; set; }
+
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
@@ -156,6 +159,19 @@ public class AppUser
     public bool CanCreateStore(int maxStores)
     {
         return StoreIds.Count < maxStores;
+    }
+
+    /// <summary>
+    /// Sets the default store for this user
+    /// </summary>
+    /// <param name="storeId">The store ID to set as default</param>
+    public void SetDefaultStore(Guid storeId)
+    {
+        if (!StoreIds.Contains(storeId))
+            throw new InvalidOperationException($"Store {storeId} is not linked to this user");
+
+        DefaultStoreId = storeId;
+        UpdatedAt = DateTime.UtcNow;
     }
 }
 

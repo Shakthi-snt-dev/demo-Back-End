@@ -114,6 +114,60 @@ public class RegistrationService : IRegistrationService
         userAccount.AppUserId = appUser.Id;
         await _userAccountRepository.UpdateAsync(userAccount);
 
+        // Create a default store during registration
+        var defaultStoreName = !string.IsNullOrWhiteSpace(request.Username) 
+            ? $"{request.Username}'s Store" 
+            : $"{request.Email.Split('@')[0]}'s Store";
+        
+        var defaultStore = new Store
+        {
+            Id = Guid.NewGuid(),
+            AppUserId = appUser.Id,
+            StoreName = defaultStoreName,
+            StoreType = null,
+            StoreCategory = null,
+            Phone = null,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
+
+        // Set default store settings
+        defaultStore.UpdateSettings(
+            enablePOS: true,
+            enableInventory: true,
+            timeZone: "UTC");
+
+        defaultStore.Settings.Id = Guid.NewGuid();
+        defaultStore.Settings.StoreId = defaultStore.Id;
+        defaultStore.Settings.CreatedAt = DateTime.UtcNow;
+
+        await _storeRepository.AddAsync(defaultStore);
+        Console.WriteLine($"[REGISTRATION] Default store created: {defaultStore.StoreName}, ID: {defaultStore.Id}");
+
+        // Link store to app user and set as default
+        appUser.AddStore(defaultStore.Id);
+        appUser.SetDefaultStore(defaultStore.Id);
+        await _appUserRepository.UpdateAsync(appUser);
+        Console.WriteLine($"[REGISTRATION] Store linked to AppUser and set as default store");
+
+        // Create Employee record for the AppUser as Owner (similar to onboarding step 2)
+        var employee = new Employee
+        {
+            Id = Guid.NewGuid(),
+            StoreId = defaultStore.Id,
+            FullName = string.Empty, // Will be updated during onboarding step 1
+            Email = appUser.Email,
+            Role = EmployeeRole.Owner.ToString(),
+            LinkedAppUserId = appUser.Id,
+            IsActive = true,
+            CanSwitchRole = true, // Owner can switch roles
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
+
+        await _employeeRepository.AddAsync(employee);
+        _logger.LogInformation("Created Employee record for AppUser {AppUserId} as Owner in Store {StoreId} during registration", appUser.Id, defaultStore.Id);
+
         // Send verification email
         var frontendUrl = _configuration["AppSettings:FrontendUrl"] ?? "http://localhost:5173";
         var verificationLink = $"{frontendUrl}/verification-successful?token={verificationToken}";

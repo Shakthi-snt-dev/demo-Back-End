@@ -1,0 +1,11 @@
+2025-11-20 11:43:46.446 +05:30 [INF] User profile is available. Using 'C:\Users\Rajan\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-20 11:43:46.604 +05:30 [WRN] The WebRootPath was not found: D:\Git\demo-Back-End\Flowtap_Presentation\wwwroot. Static files may be unavailable.
+2025-11-20 11:43:46.663 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-20 11:43:46.668 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-20 11:43:46.673 +05:30 [INF] Hosting environment: Development
+2025-11-20 11:43:46.676 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-20 11:44:03.547 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/index.html - null null
+2025-11-20 11:44:03.881 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/index.html - 200 null text/html;charset=utf-8 338.0462ms
+2025-11-20 11:44:04.108 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - null null
+2025-11-20 11:44:04.372 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 265.2023ms
+2025-11-20 12:36:17.478 +05:30 [INF] Application is shutting down...

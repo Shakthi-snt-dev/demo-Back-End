@@ -189,7 +189,8 @@ public class SettingsService : ISettingsService
 
         var userAccount = await _userAccountRepository.GetByEmailAsync(appUser.Email);
         var stores = await _storeRepository.GetByAppUserIdAsync(appUserId);
-        var defaultStoreId = stores.FirstOrDefault()?.Id;
+        // Use DefaultStoreId from AppUser if set, otherwise fall back to first store
+        var defaultStoreId = appUser.DefaultStoreId ?? stores.FirstOrDefault()?.Id;
 
         return new UserProfileDto
         {
@@ -537,7 +538,8 @@ public class SettingsService : ISettingsService
 
         // Get stores for this AppUser
         var stores = await _storeRepository.GetByAppUserIdAsync(appUserId);
-        var defaultStoreId = stores.FirstOrDefault()?.Id;
+        // Use DefaultStoreId from AppUser if set, otherwise fall back to first store
+        var defaultStoreId = appUser.DefaultStoreId ?? stores.FirstOrDefault()?.Id;
 
         // Extract address components
         var address = appUser.Address;
@@ -631,13 +633,20 @@ public class SettingsService : ISettingsService
             }
         }
 
+        // Update default store if provided
+        if (request.DefaultStoreId.HasValue)
+        {
+            appUser.SetDefaultStore(request.DefaultStoreId.Value);
+        }
+
         // Save changes
         await _appUserRepository.UpdateAsync(appUser);
         await _userAccountRepository.UpdateAsync(userAccount);
 
         // Get updated stores
         var stores = await _storeRepository.GetByAppUserIdAsync(appUserId);
-        var defaultStoreId = request.DefaultStoreId ?? stores.FirstOrDefault()?.Id;
+        // Use DefaultStoreId from AppUser if set, otherwise fall back to first store
+        var defaultStoreId = appUser.DefaultStoreId ?? stores.FirstOrDefault()?.Id;
 
         // Return updated profile
         var address = appUser.Address;
