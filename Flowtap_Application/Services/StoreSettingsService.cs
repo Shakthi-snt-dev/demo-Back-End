@@ -1,3 +1,4 @@
+using AutoMapper;
 using Flowtap_Application.Interfaces;
 using Flowtap_Domain.BoundedContexts.Owner.Interfaces;
 using Flowtap_Domain.BoundedContexts.Store.Interfaces;
@@ -6,8 +7,11 @@ using Flowtap_Application.DtoModel;
 using Flowtap_Application.DtoModel.Request;
 using Flowtap_Application.DtoModel.Response;
 using Flowtap_Domain.Exceptions;
+using Flowtap_Domain.SharedKernel.ValueObjects;
 using Microsoft.Extensions.Logging;
+using System.Reflection;
 using System.Security.Cryptography;
+using System;
 
 namespace Flowtap_Application.Services;
 
@@ -20,6 +24,7 @@ public class StoreSettingsService : IStoreSettingsService
     private readonly IStoreRepository _storeRepository;
     private readonly IUserAccountRepository _userAccountRepository;
     private readonly IEmailService _emailService;
+    private readonly IMapper _mapper;
     private readonly ILogger<StoreSettingsService> _logger;
 
     public StoreSettingsService(
@@ -27,12 +32,14 @@ public class StoreSettingsService : IStoreSettingsService
         IStoreRepository storeRepository,
         IUserAccountRepository userAccountRepository,
         IEmailService emailService,
+        IMapper mapper,
         ILogger<StoreSettingsService> logger)
     {
         _appUserRepository = appUserRepository;
         _storeRepository = storeRepository;
         _userAccountRepository = userAccountRepository;
         _emailService = emailService;
+        _mapper = mapper;
         _logger = logger;
     }
 
@@ -54,69 +61,25 @@ public class StoreSettingsService : IStoreSettingsService
             await _storeRepository.UpdateAsync(store);
         }
 
-        var settings = store.Settings;
-
-        return new StoreSettingsDto
+        // Map Store to StoreSettingsDto using AutoMapper
+        var settingsDto = _mapper.Map<StoreSettingsDto>(store);
+        
+        // Handle special cases that need manual mapping
+        settingsDto.Address = store.Address ?? CreateEmptyAddress();
+        
+        // Mask API Key for security (show only last 8 characters)
+        if (!string.IsNullOrEmpty(store.Settings.ApiKey))
         {
-            // Basic Information
-            BusinessName = store.StoreName,
-            StoreEmail = settings.StoreEmail,
-            AlternateName = settings.AlternateName,
-            StoreLogoUrl = settings.StoreLogoUrl,
-            
-            // Contact Information
-            Phone = store.Phone,
-            Mobile = settings.Mobile,
-            Website = settings.Website,
-            Address = store.Address,
-            
-            // Other Information
-            TimeZone = settings.TimeZone ?? "UTC",
-            TimeFormat = settings.TimeFormat ?? "12h",
-            Language = settings.Language ?? "en",
-            DefaultCurrency = settings.DefaultCurrency ?? "USD",
-            PriceFormat = settings.PriceFormat ?? "$0.00",
-            DecimalFormat = settings.DecimalFormat ?? "2",
-            
-            // Sales Tax
-            ChargeSalesTax = settings.ChargeSalesTax,
-            DefaultTaxClass = settings.DefaultTaxClass,
-            TaxPercentage = settings.TaxPercentage,
-            
-            // Business Information
-            RegistrationNumber = settings.RegistrationNumber,
-            StartTime = settings.StartTime,
-            EndTime = settings.EndTime,
-            DefaultAddress = settings.DefaultAddress,
-            
-            // API Key (masked for security - show only last 8 characters)
-            ApiKey = string.IsNullOrEmpty(settings.ApiKey) 
-                ? null 
-                : $"****{settings.ApiKey.Substring(Math.Max(0, settings.ApiKey.Length - 8))}",
-            
-            // Accounting
-            AccountingMethod = settings.AccountingMethod ?? "Cash Basis",
-            
-            // Company Email
-            CompanyEmail = settings.CompanyEmail,
-            CompanyEmailVerified = settings.CompanyEmailVerified,
-            
-            // Email Notifications
-            EmailNotifications = settings.EmailNotifications,
-            
-            // Security
-            RequireTwoFactorForAllUsers = settings.RequireTwoFactorForAllUsers,
-            
-            // Restocking Fee
-            ChargeRestockingFee = settings.ChargeRestockingFee,
-            
-            // Deposit
-            DiagnosticBenchFee = settings.DiagnosticBenchFee,
-            ChargeDepositOnRepairs = settings.ChargeDepositOnRepairs,
-            
-            // Lock Screen
-            LockScreenTimeoutMinutes = settings.LockScreenTimeoutMinutes > 0 ? settings.LockScreenTimeoutMinutes : 15
-        };
+            settingsDto.ApiKey = $"****{store.Settings.ApiKey.Substring(Math.Max(0, store.Settings.ApiKey.Length - 8))}";
+        }
+        
+        // Ensure LockScreenTimeoutMinutes has a default value
+        if (settingsDto.LockScreenTimeoutMinutes <= 0)
+        {
+            settingsDto.LockScreenTimeoutMinutes = 15;
+        }
+
+        return settingsDto;
     }
 
     public async Task<StoreSettingsDto> UpdateStoreSettingsAsync(Guid storeId, UpdateStoreSettingsRequestDto request)
@@ -458,6 +421,23 @@ public class StoreSettingsService : IStoreSettingsService
         }
 
         return emailSent;
+    }
+
+    /// <summary>
+    /// Creates an empty Address instance using reflection to access the private parameterless constructor
+    /// </summary>
+    private Address CreateEmptyAddress()
+    {
+        var constructor = typeof(Address).GetConstructor(
+            BindingFlags.Instance | BindingFlags.NonPublic,
+            null,
+            Type.EmptyTypes,
+            null);
+
+        if (constructor == null)
+            throw new System.InvalidOperationException("Unable to create empty Address instance");
+
+        return (Address)constructor.Invoke(null);
     }
 }
 

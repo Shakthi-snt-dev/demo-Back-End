@@ -3,6 +3,7 @@ using Flowtap_Application.Interfaces;
 using Flowtap_Application.DtoModel;
 using Flowtap_Application.DtoModel.Request;
 using Flowtap_Application.DtoModel.Response;
+using Flowtap_Presentation.Attributes;
 
 namespace Flowtap_Presentation.Controllers;
 
@@ -11,6 +12,7 @@ namespace Flowtap_Presentation.Controllers;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
+[AppUserOrOwner]
 public class ProfileController : ControllerBase
 {
     private readonly IProfileService _profileService;
@@ -32,9 +34,9 @@ public class ProfileController : ControllerBase
     /// </summary>
     /// <returns>User profile</returns>
     [HttpGet]
-    [Microsoft.AspNetCore.Authorization.Authorize]
     [ProducesResponseType(typeof(ApiResponseDto<AppUserProfileResponseDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult<ApiResponseDto<AppUserProfileResponseDto>>> GetProfile()
     {
         var userAccountId = _httpAccessorService.GetUserAccountId();
@@ -60,10 +62,10 @@ public class ProfileController : ControllerBase
     /// <param name="request">Profile update request</param>
     /// <returns>Updated profile</returns>
     [HttpPut]
-    [Microsoft.AspNetCore.Authorization.Authorize]
     [ProducesResponseType(typeof(ApiResponseDto<AppUserProfileResponseDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<ActionResult<ApiResponseDto<AppUserProfileResponseDto>>> UpdateProfile(
         [FromBody] AppUserProfileRequestDto request)
     {

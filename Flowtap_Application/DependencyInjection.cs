@@ -24,7 +24,7 @@ namespace Flowtap_Application
             // services.AddScoped<IRepairTicketService, RepairTicketService>();
 
             // HR Context
-            // services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
 
             // Dashboard
             // services.AddScoped<IDashboardService, DashboardService>();
@@ -45,13 +45,16 @@ namespace Flowtap_Application
             // services.AddScoped<IFormConfigurationService, FormConfigurationService>();
 
             // Store
-            // services.AddScoped<IStoreService, StoreService>();
+            services.AddScoped<IStoreService, StoreService>();
 
             // Role
             services.AddScoped<IRoleService, RoleService>();
 
             // HTTP Accessor
             services.AddScoped<IHttpAccessorService, HttpAccessorService>();
+
+            // Authorization
+            services.AddScoped<IAuthorizationService, AuthorizationService>();
 
             return services;
         }

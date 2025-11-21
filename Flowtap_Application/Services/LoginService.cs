@@ -1,3 +1,4 @@
+using AutoMapper;
 using Flowtap_Application.Interfaces;
 using Flowtap_Domain.BoundedContexts.Identity.Interfaces;
 using Flowtap_Domain.BoundedContexts.Owner.Interfaces;
@@ -17,17 +18,20 @@ public class LoginService : ILoginService
     private readonly IUserAccountRepository _userAccountRepository;
     private readonly IAppUserRepository _appUserRepository;
     private readonly IJwtService _jwtService;
+    private readonly IMapper _mapper;
     private readonly ILogger<LoginService> _logger;
 
     public LoginService(
         IUserAccountRepository userAccountRepository,
         IAppUserRepository appUserRepository,
         IJwtService jwtService,
+        IMapper mapper,
         ILogger<LoginService> logger)
     {
         _userAccountRepository = userAccountRepository;
         _appUserRepository = appUserRepository;
         _jwtService = jwtService;
+        _mapper = mapper;
         _logger = logger;
     }
 
@@ -97,21 +101,15 @@ public class LoginService : ILoginService
 
         _logger.LogInformation("Successful login for email: {Email}, UserId: {UserId}", request.Email, userAccount.Id);
 
+        // Map UserAccount to UserInfoDto using AutoMapper
+        var userInfo = _mapper.Map<UserInfoDto>(userAccount);
+
         return new LoginResponseDto
         {
             Success = true,
             Message = "Login successful.",
             Token = token,
-            User = new UserInfoDto
-            {
-                UserId = userAccount.Id,
-                AppUserId = userAccount.AppUserId,
-                Email = userAccount.Email,
-                Username = userAccount.Username,
-                UserType = userAccount.UserType.ToString(),
-                IsEmailVerified = userAccount.IsEmailVerified,
-                LastLoginAt = userAccount.LastLoginAt
-            }
+            User = userInfo
         };
     }
 

@@ -1,3 +1,4 @@
+using AutoMapper;
 using Flowtap_Application.Interfaces;
 using Flowtap_Domain.BoundedContexts.Identity.Entities;
 using Flowtap_Domain.BoundedContexts.Identity.Interfaces;
@@ -31,6 +32,7 @@ public class RegistrationService : IRegistrationService
     private readonly IEmployeeRepository _employeeRepository;
     private readonly IEmailService _emailService;
     private readonly IConfiguration _configuration;
+    private readonly IMapper _mapper;
     private readonly ILogger<RegistrationService> _logger;
 
     public RegistrationService(
@@ -41,6 +43,7 @@ public class RegistrationService : IRegistrationService
         IEmployeeRepository employeeRepository,
         IEmailService emailService,
         IConfiguration configuration,
+        IMapper mapper,
         ILogger<RegistrationService> logger)
     {
         _userAccountRepository = userAccountRepository;
@@ -50,6 +53,7 @@ public class RegistrationService : IRegistrationService
         _employeeRepository = employeeRepository;
         _emailService = emailService;
         _configuration = configuration;
+        _mapper = mapper;
         _logger = logger;
     }
 
@@ -184,16 +188,14 @@ public class RegistrationService : IRegistrationService
             verificationLink,
             request.Username ?? request.Email);
 
-        return new RegisterResponseDto
-        {
-            UserId = userAccount.Id,
-            Email = userAccount.Email,
-            Username = userAccount.Username,
-            EmailSent = emailSent,
-            Message = emailSent
+        // Map UserAccount to RegisterResponseDto using AutoMapper
+        var response = _mapper.Map<RegisterResponseDto>(userAccount);
+        response.EmailSent = emailSent;
+        response.Message = emailSent
                 ? "Registration successful. Please check your email to verify your account."
-                : "Registration successful, but email could not be sent. Please contact support."
-        };
+            : "Registration successful, but email could not be sent. Please contact support.";
+
+        return response;
     }
 
     public async Task<VerifyEmailResponseDto> VerifyEmailAsync(string token)

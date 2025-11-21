@@ -16,5 +16,10 @@ public interface IStoreService
     Task<IEnumerable<StoreTypeResponseDto>> GetStoreTypesAsync();
     Task<StoreTypeResponseDto> CreateStoreTypeAsync(CreateStoreTypeRequestDto request);
     Task<bool> DeleteStoreTypeAsync(string name);
+    
+    /// <summary>
+    /// Gets stores for the current user (UserAccount) - returns only ID and Name for dropdowns
+    /// </summary>
+    Task<IEnumerable<StoreListItemDto>> GetStoresForCurrentUserAsync(Guid userAccountId);
 }
 

@@ -10,6 +10,6 @@ public enum EmployeeRole
     Admin = 3,
     Manager = 4,
     Technician = 5,
-     Cashier = 6
+    Cashier = 6
 }
 

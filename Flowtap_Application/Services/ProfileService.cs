@@ -1,3 +1,4 @@
+using AutoMapper;
 using Flowtap_Application.Interfaces;
 using Flowtap_Domain.BoundedContexts.Owner.Interfaces;
 using Flowtap_Domain.BoundedContexts.Store.Interfaces;
@@ -25,6 +26,7 @@ public class ProfileService : IProfileService
     private readonly IStoreRepository _storeRepository;
     private readonly IUserAccountRepository _userAccountRepository;
     private readonly IEmployeeRepository _employeeRepository;
+    private readonly IMapper _mapper;
     private readonly ILogger<ProfileService> _logger;
 
     public ProfileService(
@@ -32,12 +34,14 @@ public class ProfileService : IProfileService
         IStoreRepository storeRepository,
         IUserAccountRepository userAccountRepository,
         IEmployeeRepository employeeRepository,
+        IMapper mapper,
         ILogger<ProfileService> logger)
     {
         _appUserRepository = appUserRepository;
         _storeRepository = storeRepository;
         _userAccountRepository = userAccountRepository;
         _employeeRepository = employeeRepository;
+        _mapper = mapper;
         _logger = logger;
     }
 
@@ -59,27 +63,17 @@ public class ProfileService : IProfileService
             ? stores.FirstOrDefault(s => s.Id == defaultStoreId.Value) 
             : null;
 
-        // Extract address components
-        var address = appUser.Address;
+        // Map AppUser to DTO using AutoMapper
+        var profileDto = _mapper.Map<AppUserProfileResponseDto>(appUser);
+        
+        // Set additional properties that require manual mapping
+        profileDto.Username = userAccount.Username;
+        profileDto.EnableTwoFactor = userAccount.TwoFactorEnabled;
+        profileDto.DefaultStore = defaultStore != null 
+            ? _mapper.Map<DefaultStoreDto>(defaultStore)
+            : null;
 
-        return new AppUserProfileResponseDto
-        {
-            Username = userAccount.Username,
-            Email = appUser.Email,
-            Language = appUser.Language,
-            Phone = appUser.PhoneNumber,
-            Mobile = appUser.PhoneNumber, // Using PhoneNumber as mobile
-            StreetNumber = address?.StreetNumber,
-            StreetName = address?.StreetName,
-            City = address?.City,
-            State = address?.State,
-            Country = appUser.Country,
-            PostalCode = address?.PostalCode,
-            DefaultStore = defaultStore != null 
-                ? new DefaultStoreDto { Id = defaultStore.Id, StoreName = defaultStore.StoreName }
-                : null,
-            EnableTwoFactor = userAccount.TwoFactorEnabled
-        };
+        return profileDto;
     }
 
     public async Task<AppUserProfileResponseDto> CreateOrUpdateAppUserProfileAsync(Guid appUserId, AppUserProfileRequestDto request)
@@ -171,26 +165,17 @@ public class ProfileService : IProfileService
             ? stores.FirstOrDefault(s => s.Id == defaultStoreId.Value) 
             : null;
 
-        // Return updated profile
-        var address = appUser.Address;
-        return new AppUserProfileResponseDto
-        {
-            Username = userAccount.Username,
-            Email = appUser.Email,
-            Language = appUser.Language,
-            Phone = appUser.PhoneNumber,
-            Mobile = appUser.PhoneNumber,
-            StreetNumber = address?.StreetNumber,
-            StreetName = address?.StreetName,
-            City = address?.City,
-            State = address?.State,
-            Country = appUser.Country,
-            PostalCode = address?.PostalCode,
-            DefaultStore = defaultStore != null 
-                ? new DefaultStoreDto { Id = defaultStore.Id, StoreName = defaultStore.StoreName }
-                : null,
-            EnableTwoFactor = userAccount.TwoFactorEnabled
-        };
+        // Map AppUser to DTO using AutoMapper
+        var profileDto = _mapper.Map<AppUserProfileResponseDto>(appUser);
+        
+        // Set additional properties that require manual mapping
+        profileDto.Username = userAccount.Username;
+        profileDto.EnableTwoFactor = userAccount.TwoFactorEnabled;
+        profileDto.DefaultStore = defaultStore != null 
+            ? _mapper.Map<DefaultStoreDto>(defaultStore)
+            : null;
+
+        return profileDto;
     }
 
     public async Task<AppUserProfileResponseDto> GetAppUserProfileByUserAccountIdAsync(Guid userAccountId)

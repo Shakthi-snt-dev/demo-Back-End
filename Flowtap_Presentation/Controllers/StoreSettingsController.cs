@@ -3,6 +3,7 @@ using Flowtap_Application.Interfaces;
 using Flowtap_Application.DtoModel;
 using Flowtap_Application.DtoModel.Request;
 using Flowtap_Application.DtoModel.Response;
+using Flowtap_Presentation.Attributes;
 
 namespace Flowtap_Presentation.Controllers;
 
@@ -11,6 +12,7 @@ namespace Flowtap_Presentation.Controllers;
 /// </summary>
 [ApiController]
 [Route("api/[controller]")]
+[AppUserOrOwner]
 public class StoreSettingsController : ControllerBase
 {
     private readonly IStoreSettingsService _storeSettingsService;
@@ -33,9 +35,9 @@ public class StoreSettingsController : ControllerBase
     /// <param name="storeId">Store ID</param>
     /// <returns>Store settings</returns>
     [HttpGet("stores/{storeId}")]
-    [Microsoft.AspNetCore.Authorization.Authorize]
     [ProducesResponseType(typeof(ApiResponseDto<StoreSettingsDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ApiResponseDto<StoreSettingsDto>>> GetStoreSettings(Guid storeId)
     {
@@ -67,10 +69,10 @@ public class StoreSettingsController : ControllerBase
     /// <param name="request">Store settings update request</param>
     /// <returns>Updated store settings</returns>
     [HttpPut("stores/{storeId}")]
-    [Microsoft.AspNetCore.Authorization.Authorize]
     [ProducesResponseType(typeof(ApiResponseDto<StoreSettingsDto>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ApiResponseDto<StoreSettingsDto>>> UpdateStoreSettings(
         Guid storeId,
@@ -112,9 +114,9 @@ public class StoreSettingsController : ControllerBase
     /// <param name="storeId">Store ID</param>
     /// <returns>New API key</returns>
     [HttpPost("stores/{storeId}/reset-api-key")]
-    [Microsoft.AspNetCore.Authorization.Authorize]
     [ProducesResponseType(typeof(ApiResponseDto<string>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ApiResponseDto<string>>> ResetApiKey(Guid storeId)
     {
@@ -146,10 +148,10 @@ public class StoreSettingsController : ControllerBase
     /// <param name="storeId">Store ID</param>
     /// <returns>Success status</returns>
     [HttpPost("stores/{storeId}/send-verification-email")]
-    [Microsoft.AspNetCore.Authorization.Authorize]
     [ProducesResponseType(typeof(ApiResponseDto<bool>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ApiResponseDto<bool>>> SendCompanyEmailVerification(Guid storeId)
     {
@@ -185,10 +187,10 @@ public class StoreSettingsController : ControllerBase
     /// <param name="verificationToken">Verification token</param>
     /// <returns>Success status</returns>
     [HttpPost("stores/{storeId}/verify-email")]
-    [Microsoft.AspNetCore.Authorization.Authorize]
     [ProducesResponseType(typeof(ApiResponseDto<bool>), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<ApiResponseDto<bool>>> VerifyCompanyEmail(Guid storeId, [FromQuery] string verificationToken)
     {
