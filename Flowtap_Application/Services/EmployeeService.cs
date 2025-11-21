@@ -3,12 +3,17 @@ using Flowtap_Application.Interfaces;
 using Flowtap_Domain.BoundedContexts.HR.Interfaces;
 using Flowtap_Domain.BoundedContexts.HR.Entities;
 using Flowtap_Domain.BoundedContexts.Store.Interfaces;
+using Flowtap_Domain.BoundedContexts.Identity.Interfaces;
+using Flowtap_Domain.BoundedContexts.Identity.Entities;
+using Flowtap_Domain.SharedKernel.Enums;
 using Flowtap_Application.DtoModel;
 using Flowtap_Application.DtoModel.Request;
 using Flowtap_Application.DtoModel.Response;
 using Flowtap_Domain.Exceptions;
 using Flowtap_Domain.SharedKernel.ValueObjects;
 using Microsoft.Extensions.Logging;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Flowtap_Application.Services;
 
@@ -16,17 +21,20 @@ public class EmployeeService : IEmployeeService
 {
     private readonly IEmployeeRepository _employeeRepository;
     private readonly IStoreRepository _storeRepository;
+    private readonly IUserAccountRepository _userAccountRepository;
     private readonly IMapper _mapper;
     private readonly ILogger<EmployeeService> _logger;
 
     public EmployeeService(
         IEmployeeRepository employeeRepository,
         IStoreRepository storeRepository,
+        IUserAccountRepository userAccountRepository,
         IMapper mapper,
         ILogger<EmployeeService> logger)
     {
         _employeeRepository = employeeRepository;
         _storeRepository = storeRepository;
+        _userAccountRepository = userAccountRepository;
         _mapper = mapper;
         _logger = logger;
     }
@@ -40,7 +48,14 @@ public class EmployeeService : IEmployeeService
             throw new EntityNotFoundException("Store", request.StoreId);
         }
 
-        // Check if email already exists for this store
+        // Check if email already exists in UserAccount
+        var existingUserAccount = await _userAccountRepository.GetByEmailAsync(request.Email);
+        if (existingUserAccount != null)
+        {
+            throw new System.InvalidOperationException($"User account with email {request.Email} already exists");
+        }
+
+        // Check if email already exists for this store in Employee
         var existingEmployee = await _employeeRepository.GetByEmailAsync(request.Email);
         if (existingEmployee != null && existingEmployee.StoreId == request.StoreId)
         {
@@ -56,6 +71,26 @@ public class EmployeeService : IEmployeeService
                 throw new System.InvalidOperationException($"Employee with code {request.EmployeeCode} already exists");
             }
         }
+
+        // Hash password
+        var (passwordHash, passwordSalt) = HashPassword(request.Password);
+
+        // Create UserAccount first
+        var userAccount = new UserAccount
+        {
+            Id = Guid.NewGuid(),
+            Email = request.Email,
+            PasswordHash = passwordHash,
+            PasswordSalt = passwordSalt,
+            UserType = UserType.Employee,
+            IsActive = true,
+            IsEmailVerified = false, // Employee email verification can be done later if needed
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
+
+        var createdUserAccount = await _userAccountRepository.AddAsync(userAccount);
+        _logger.LogInformation("Created UserAccount {UserAccountId} for employee email {Email}", createdUserAccount.Id, request.Email);
 
         // Map DTO to entity
         var employee = _mapper.Map<Employee>(request);
@@ -82,6 +117,11 @@ public class EmployeeService : IEmployeeService
 
         var createdEmployee = await _employeeRepository.AddAsync(employee);
         _logger.LogInformation("Created employee {EmployeeId} for store {StoreId}", createdEmployee.Id, request.StoreId);
+
+        // Link UserAccount to Employee
+        createdUserAccount.EmployeeId = createdEmployee.Id;
+        await _userAccountRepository.UpdateAsync(createdUserAccount);
+        _logger.LogInformation("Linked UserAccount {UserAccountId} to Employee {EmployeeId}", createdUserAccount.Id, createdEmployee.Id);
 
         return _mapper.Map<EmployeeResponseDto>(createdEmployee);
     }
@@ -290,6 +330,24 @@ public class EmployeeService : IEmployeeService
         _logger.LogInformation("Added partner {EmployeeId} to store {StoreId}", createdEmployee.Id, request.StoreId);
 
         return _mapper.Map<EmployeeResponseDto>(createdEmployee);
+    }
+
+    /// <summary>
+    /// Hash password using SHA256 with salt
+    /// </summary>
+    private (string hash, string salt) HashPassword(string password)
+    {
+        using var rng = RandomNumberGenerator.Create();
+        var saltBytes = new byte[16];
+        rng.GetBytes(saltBytes);
+        var salt = Convert.ToBase64String(saltBytes);
+
+        using var sha256 = SHA256.Create();
+        var passwordBytes = Encoding.UTF8.GetBytes(password + salt);
+        var hashBytes = sha256.ComputeHash(passwordBytes);
+        var hash = Convert.ToBase64String(hashBytes);
+
+        return (hash, salt);
     }
 }
 

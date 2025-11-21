@@ -84,6 +84,8 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Phone, opt => opt.Ignore()); // Phone is not in Employee entity
 
         // CreateEmployeeRequestDto to Employee
+        // Note: Password field is ignored automatically (Employee doesn't have Password property)
+        // Password is stored in UserAccount, not Employee
         CreateMap<CreateEmployeeRequestDto, Employee>()
             .ForMember(dest => dest.Id, opt => opt.Ignore())
             .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
