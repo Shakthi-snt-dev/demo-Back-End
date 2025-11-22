@@ -320,6 +320,54 @@ namespace Flowtap_Infrastructure.Migrations
                     b.ToTable("Integrations");
                 });
 
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.InventoryItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("CostPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<int>("QuantityOnHand")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("SKU")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<decimal>("SellPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("StoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SKU");
+
+                    b.HasIndex("StoreId");
+
+                    b.HasIndex("StoreId", "SKU")
+                        .IsUnique()
+                        .HasFilter("[SKU] IS NOT NULL");
+
+                    b.ToTable("InventoryItems");
+                });
+
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.Product", b =>
                 {
                     b.Property<Guid>("Id")
@@ -464,6 +512,13 @@ namespace Flowtap_Infrastructure.Migrations
                         .HasMaxLength(320)
                         .HasColumnType("character varying(320)");
 
+                    b.Property<string>("ExternalId")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<bool>("IsSyncedWithExternal")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -478,7 +533,7 @@ namespace Flowtap_Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
-                        .HasDefaultValue("active");
+                        .HasDefaultValue("Active");
 
                     b.Property<Guid>("StoreId")
                         .HasColumnType("uuid");
@@ -497,6 +552,8 @@ namespace Flowtap_Infrastructure.Migrations
 
                     b.HasIndex("Email");
 
+                    b.HasIndex("ExternalId");
+
                     b.HasIndex("Phone");
 
                     b.HasIndex("Status");
@@ -506,6 +563,105 @@ namespace Flowtap_Infrastructure.Migrations
                     b.HasIndex("StoreId", "Email");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.Entities.Invoice", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("DueDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("InvoiceNumber")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<DateTime?>("PaidAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasDefaultValue("Draft");
+
+                    b.Property<Guid>("StoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Subtotal")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Tax")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Total")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedAt");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("DueDate");
+
+                    b.HasIndex("InvoiceNumber")
+                        .IsUnique()
+                        .HasFilter("[InvoiceNumber] IS NOT NULL AND [InvoiceNumber] != ''");
+
+                    b.HasIndex("Status");
+
+                    b.HasIndex("StoreId");
+
+                    b.HasIndex("CustomerId", "Status");
+
+                    b.HasIndex("StoreId", "Status");
+
+                    b.ToTable("Invoices");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.Entities.InvoiceItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<Guid>("InvoiceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvoiceId");
+
+                    b.ToTable("InvoiceItems");
                 });
 
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.Entities.Order", b =>
@@ -581,6 +737,46 @@ namespace Flowtap_Infrastructure.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.Entities.Payment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("InvoiceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Method")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasDefaultValue("Cash");
+
+                    b.Property<DateTime>("PaidAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("TransactionReference")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InvoiceId");
+
+                    b.HasIndex("Method");
+
+                    b.HasIndex("PaidAt");
+
+                    b.HasIndex("TransactionReference");
+
+                    b.ToTable("Payments");
+                });
+
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.ValueObjects.OrderItem", b =>
                 {
                     b.Property<Guid>("Id")
@@ -626,30 +822,111 @@ namespace Flowtap_Infrastructure.Migrations
                     b.ToTable("OrderItems");
                 });
 
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.Device", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("IMEI")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<string>("Model")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<string>("SerialNumber")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<Guid>("StoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IMEI");
+
+                    b.HasIndex("SerialNumber");
+
+                    b.HasIndex("StoreId");
+
+                    b.HasIndex("StoreId", "IMEI")
+                        .IsUnique()
+                        .HasFilter("[IMEI] IS NOT NULL");
+
+                    b.HasIndex("StoreId", "SerialNumber")
+                        .IsUnique()
+                        .HasFilter("[SerialNumber] IS NOT NULL");
+
+                    b.ToTable("Devices");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.PartUsed", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("InventoryItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("RepairTicketId")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InventoryItemId");
+
+                    b.HasIndex("RepairTicketId");
+
+                    b.HasIndex("RepairTicketId", "InventoryItemId");
+
+                    b.ToTable("PartsUsed");
+                });
+
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.RepairTicket", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("AssignedToEmployeeId")
-                        .HasColumnType("uuid");
+                    b.Property<decimal?>("ActualCost")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CompletedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CustomerEmail")
                         .HasMaxLength(320)
                         .HasColumnType("character varying(320)");
 
-                    b.Property<Guid?>("CustomerId")
+                    b.Property<Guid>("CustomerId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("CustomerName")
-                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
@@ -661,59 +938,70 @@ namespace Flowtap_Infrastructure.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Device")
-                        .IsRequired()
+                    b.Property<string>("DeviceDescription")
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
+
+                    b.Property<Guid?>("DeviceId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime?>("DueDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<decimal>("EstimatedCost")
+                    b.Property<DateTime?>("EstimatedCompletionAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal?>("EstimatedCost")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Issue")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("Notes")
                         .HasColumnType("text");
 
                     b.Property<string>("Priority")
-                        .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
                         .HasDefaultValue("medium");
+
+                    b.Property<string>("ProblemDescription")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("ResolutionNotes")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
-                        .HasDefaultValue("pending");
+                        .HasDefaultValue("Open");
 
                     b.Property<Guid>("StoreId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("TechnicianId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("TicketNumber")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AssignedToEmployeeId");
-
-                    b.HasIndex("CreatedDate");
+                    b.HasIndex("CreatedAt");
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("DueDate");
+                    b.HasIndex("DeviceId");
+
+                    b.HasIndex("EstimatedCompletionAt");
 
                     b.HasIndex("Priority");
 
@@ -721,12 +1009,15 @@ namespace Flowtap_Infrastructure.Migrations
 
                     b.HasIndex("StoreId");
 
-                    b.HasIndex("TicketNumber")
-                        .IsUnique();
+                    b.HasIndex("TechnicianId");
 
-                    b.HasIndex("StoreId", "AssignedToEmployeeId");
+                    b.HasIndex("TicketNumber");
+
+                    b.HasIndex("CustomerId", "Status");
 
                     b.HasIndex("StoreId", "Status");
+
+                    b.HasIndex("StoreId", "TechnicianId");
 
                     b.ToTable("RepairTickets");
                 });
@@ -1078,6 +1369,39 @@ namespace Flowtap_Infrastructure.Migrations
                     b.Navigation("Address");
                 });
 
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.Entities.Invoice", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Sales.Entities.Customer", "Customer")
+                        .WithMany("Invoices")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.Entities.InvoiceItem", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Sales.Entities.Invoice", "Invoice")
+                        .WithMany("Items")
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Invoice");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.Entities.Payment", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Sales.Entities.Invoice", "Invoice")
+                        .WithMany("Payments")
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Invoice");
+                });
+
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.ValueObjects.OrderItem", b =>
                 {
                     b.HasOne("Flowtap_Domain.BoundedContexts.Sales.Entities.Order", null)
@@ -1085,6 +1409,27 @@ namespace Flowtap_Infrastructure.Migrations
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.PartUsed", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.RepairTicket", "RepairTicket")
+                        .WithMany("PartsUsed")
+                        .HasForeignKey("RepairTicketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RepairTicket");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.RepairTicket", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.Device", "Device")
+                        .WithMany("RepairTickets")
+                        .HasForeignKey("DeviceId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Device");
                 });
 
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Store.Entities.Store", b =>
@@ -1189,9 +1534,31 @@ namespace Flowtap_Infrastructure.Migrations
                     b.Navigation("DefaultAddress");
                 });
 
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.Entities.Customer", b =>
+                {
+                    b.Navigation("Invoices");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.Entities.Invoice", b =>
+                {
+                    b.Navigation("Items");
+
+                    b.Navigation("Payments");
+                });
+
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.Entities.Order", b =>
                 {
                     b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.Device", b =>
+                {
+                    b.Navigation("RepairTickets");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.RepairTicket", b =>
+                {
+                    b.Navigation("PartsUsed");
                 });
 
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Store.Entities.Store", b =>

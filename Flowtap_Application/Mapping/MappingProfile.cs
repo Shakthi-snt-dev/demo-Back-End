@@ -69,7 +69,43 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.MinStock, opt => opt.MapFrom(src => src.MinStock));
 
         // Customer to CustomerResponseDto
-        CreateMap<Customer, CustomerResponseDto>();
+        CreateMap<Customer, CustomerResponseDto>()
+            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+            .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address != null ? new AddressDto
+            {
+                StreetNumber = src.Address.StreetNumber,
+                StreetName = src.Address.StreetName,
+                City = src.Address.City,
+                State = src.Address.State,
+                PostalCode = src.Address.PostalCode
+            } : null));
+
+        // CreateCustomerRequestDto to Customer
+        CreateMap<CreateCustomerRequestDto, Customer>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.Status, opt => opt.Ignore()) // Will be set to default Active
+            .ForMember(dest => dest.TotalOrders, opt => opt.Ignore())
+            .ForMember(dest => dest.TotalSpent, opt => opt.Ignore())
+            .ForMember(dest => dest.IsSyncedWithExternal, opt => opt.Ignore())
+            .ForMember(dest => dest.ExternalId, opt => opt.Ignore())
+            .ForMember(dest => dest.Invoices, opt => opt.Ignore())
+            .ForMember(dest => dest.Address, opt => opt.Ignore()); // Will be set manually
+
+        // UpdateCustomerRequestDto to Customer (for updates)
+        CreateMap<UpdateCustomerRequestDto, Customer>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.StoreId, opt => opt.Ignore())
+            .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.TotalOrders, opt => opt.Ignore())
+            .ForMember(dest => dest.TotalSpent, opt => opt.Ignore())
+            .ForMember(dest => dest.IsSyncedWithExternal, opt => opt.Ignore())
+            .ForMember(dest => dest.ExternalId, opt => opt.Ignore())
+            .ForMember(dest => dest.Invoices, opt => opt.Ignore())
+            .ForMember(dest => dest.Address, opt => opt.Ignore()) // Will be set manually
+            .ForMember(dest => dest.Status, opt => opt.Ignore()); // Will be set manually if provided
 
         // Order to OrderResponseDto
         CreateMap<Order, OrderResponseDto>()

@@ -1610,3 +1610,11 @@ LIMIT 1
 2025-11-21 18:14:00.132 +05:30 [INF] Application started. Press Ctrl+C to shut down.
 2025-11-21 18:14:00.134 +05:30 [INF] Hosting environment: Development
 2025-11-21 18:14:00.135 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-21 18:14:35.292 +05:30 [INF] Application is shutting down...
+2025-11-21 23:24:26.222 +05:30 [INF] User profile is available. Using 'C:\Users\Rajan\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-21 23:24:26.488 +05:30 [WRN] The WebRootPath was not found: D:\Git\demo-Back-End\Flowtap_Presentation\wwwroot. Static files may be unavailable.
+2025-11-21 23:24:26.570 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-21 23:24:26.575 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-21 23:24:26.578 +05:30 [INF] Hosting environment: Development
+2025-11-21 23:24:26.581 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-21 23:24:29.649 +05:30 [INF] Application is shutting down...

@@ -6,10 +6,11 @@ namespace Flowtap_Domain.BoundedContexts.Store.Entities;
 public class Store
 {
     [Key]
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     public Guid AppUserId { get; set; }
 
+    [Required, MaxLength(200)]
     public string StoreName { get; set; } = string.Empty;
 
     public string? StoreType { get; set; }
@@ -20,10 +21,17 @@ public class Store
 
     public string? Phone { get; set; }
 
+  
     public StoreSettings Settings { get; set; } = new StoreSettings();
 
     // Employee IDs only to avoid cross-context coupling
     public ICollection<Guid> EmployeeIds { get; set; } = new List<Guid>();
+
+    // Note: Navigation properties to other bounded contexts removed for DDD compliance
+    // Reference other contexts by ID only:
+    // - Customers: Query Sales context using StoreId
+    // - RepairTickets: Query Service context using StoreId
+    // - InventoryItems: Query Inventory context using StoreId
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 

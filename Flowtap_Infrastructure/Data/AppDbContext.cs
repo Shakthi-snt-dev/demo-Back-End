@@ -47,12 +47,20 @@ public class AppDbContext : DbContext
 
     // Inventory Context
     public DbSet<Product> Products { get; set; }
+    public DbSet<InventoryItem> InventoryItems { get; set; }
 
-        // Service Context
-        public DbSet<RepairTicket> RepairTickets { get; set; }
+    // Service Context
+    public DbSet<RepairTicket> RepairTickets { get; set; }
+    public DbSet<Device> Devices { get; set; }
+    public DbSet<PartUsed> PartsUsed { get; set; }
 
-        // Integration Context
-        public DbSet<Flowtap_Domain.BoundedContexts.Integration.Entities.Integration> Integrations { get; set; }
+    // Sales Context - Additional entities
+    public DbSet<Invoice> Invoices { get; set; }
+    public DbSet<InvoiceItem> InvoiceItems { get; set; }
+    public DbSet<Payment> Payments { get; set; }
+
+    // Integration Context
+    public DbSet<Flowtap_Domain.BoundedContexts.Integration.Entities.Integration> Integrations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -235,12 +243,17 @@ public class AppDbContext : DbContext
             entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
             entity.Property(e => e.Email).HasMaxLength(320);
             entity.Property(e => e.Phone).HasMaxLength(20);
-            entity.Property(e => e.Status).IsRequired().HasMaxLength(50).HasDefaultValue("active");
+            entity.Property(e => e.Status)
+                .IsRequired()
+                .HasConversion<string>()
+                .HasMaxLength(50).HasDefaultValue(CustomerStatus.Active);
             entity.Property(e => e.TotalSpent).HasPrecision(18, 2);
+            entity.Property(e => e.ExternalId).HasMaxLength(100);
             entity.HasIndex(e => e.StoreId);
             entity.HasIndex(e => e.Email);
             entity.HasIndex(e => e.Phone);
             entity.HasIndex(e => e.Status);
+            entity.HasIndex(e => e.ExternalId);
             entity.HasIndex(e => new { e.StoreId, e.Email }); // Composite index for store-specific email lookup
             
             // Configure Address as owned entity
@@ -252,6 +265,12 @@ public class AppDbContext : DbContext
                 a.Property(p => p.State).HasColumnName("State").HasMaxLength(100);
                 a.Property(p => p.PostalCode).HasColumnName("PostalCode").HasMaxLength(20);
             });
+
+            // Configure relationship with Invoices (within Sales context)
+            entity.HasMany(e => e.Invoices)
+                .WithOne(i => i.Customer)
+                .HasForeignKey(i => i.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -292,6 +311,68 @@ public class AppDbContext : DbContext
             entity.HasIndex(e => e.ProductId);
         });
 
+        // Sales Context - Invoice entities
+        modelBuilder.Entity<Invoice>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.StoreId).IsRequired();
+            entity.Property(e => e.CustomerId).IsRequired();
+            entity.Property(e => e.InvoiceNumber).HasMaxLength(100);
+            entity.Property(e => e.Status)
+                .IsRequired()
+                .HasConversion<string>()
+                .HasMaxLength(50)
+                .HasDefaultValue(InvoiceStatus.Draft);
+            entity.Property(e => e.Subtotal).HasPrecision(18, 2);
+            entity.Property(e => e.Tax).HasPrecision(18, 2);
+            entity.Property(e => e.Total).HasPrecision(18, 2);
+            entity.HasIndex(e => e.StoreId);
+            entity.HasIndex(e => e.CustomerId);
+            entity.HasIndex(e => e.InvoiceNumber).IsUnique().HasFilter("[InvoiceNumber] IS NOT NULL AND [InvoiceNumber] != ''");
+            entity.HasIndex(e => e.Status);
+            entity.HasIndex(e => e.CreatedAt);
+            entity.HasIndex(e => e.DueDate);
+            entity.HasIndex(e => new { e.StoreId, e.Status }); // Composite index for store-specific status queries
+            entity.HasIndex(e => new { e.CustomerId, e.Status }); // Composite index for customer invoices
+
+            // Configure relationships within Sales context
+            entity.HasMany(e => e.Items)
+                .WithOne(i => i.Invoice)
+                .HasForeignKey(i => i.InvoiceId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasMany(e => e.Payments)
+                .WithOne(p => p.Invoice)
+                .HasForeignKey(p => p.InvoiceId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<InvoiceItem>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.InvoiceId).IsRequired();
+            entity.Property(e => e.Description).HasMaxLength(200);
+            entity.Property(e => e.UnitPrice).HasPrecision(18, 2);
+            entity.HasIndex(e => e.InvoiceId);
+        });
+
+        modelBuilder.Entity<Payment>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.InvoiceId).IsRequired();
+            entity.Property(e => e.Method)
+                .IsRequired()
+                .HasConversion<string>()
+                .HasMaxLength(50)
+                .HasDefaultValue(PaymentMethod.Cash);
+            entity.Property(e => e.Amount).HasPrecision(18, 2);
+            entity.Property(e => e.TransactionReference).HasMaxLength(500);
+            entity.HasIndex(e => e.InvoiceId);
+            entity.HasIndex(e => e.Method);
+            entity.HasIndex(e => e.PaidAt);
+            entity.HasIndex(e => e.TransactionReference);
+        });
+
         // ===========================
         // INVENTORY CONTEXT
         // ===========================
@@ -310,32 +391,93 @@ public class AppDbContext : DbContext
             entity.HasIndex(e => new { e.StoreId, e.Category }); // Composite index for store-specific category lookup
         });
 
+        modelBuilder.Entity<InventoryItem>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.StoreId).IsRequired();
+            entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.SKU).HasMaxLength(200);
+            entity.Property(e => e.CostPrice).HasPrecision(18, 2);
+            entity.Property(e => e.SellPrice).HasPrecision(18, 2);
+            entity.HasIndex(e => e.StoreId);
+            entity.HasIndex(e => e.SKU);
+            entity.HasIndex(e => new { e.StoreId, e.SKU }).IsUnique().HasFilter("[SKU] IS NOT NULL"); // SKU unique per store
+        });
+
         // ===========================
         // SERVICE CONTEXT
         // ===========================
+        modelBuilder.Entity<Device>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.StoreId).IsRequired();
+            entity.Property(e => e.Brand).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.Model).HasMaxLength(200);
+            entity.Property(e => e.SerialNumber).HasMaxLength(200);
+            entity.Property(e => e.IMEI).HasMaxLength(200);
+            entity.HasIndex(e => e.StoreId);
+            entity.HasIndex(e => e.SerialNumber);
+            entity.HasIndex(e => e.IMEI);
+            entity.HasIndex(e => new { e.StoreId, e.SerialNumber }).IsUnique().HasFilter("[SerialNumber] IS NOT NULL");
+            entity.HasIndex(e => new { e.StoreId, e.IMEI }).IsUnique().HasFilter("[IMEI] IS NOT NULL");
+
+            // Configure relationship with RepairTickets (within Service context)
+            entity.HasMany(e => e.RepairTickets)
+                .WithOne(t => t.Device)
+                .HasForeignKey(t => t.DeviceId)
+                .OnDelete(DeleteBehavior.Restrict);
+        });
+
         modelBuilder.Entity<RepairTicket>(entity =>
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.StoreId).IsRequired();
-            entity.Property(e => e.TicketNumber).IsRequired().HasMaxLength(50);
-            entity.Property(e => e.CustomerName).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.CustomerId).IsRequired();
+            entity.Property(e => e.TicketNumber).HasMaxLength(100);
+            entity.Property(e => e.Status)
+                .IsRequired()
+                .HasConversion<string>()
+                .HasMaxLength(50)
+                .HasDefaultValue(TicketStatus.Open);
+            entity.Property(e => e.ProblemDescription).HasMaxLength(500);
+            entity.Property(e => e.ResolutionNotes).HasMaxLength(500);
+            entity.Property(e => e.Priority).HasMaxLength(50).HasDefaultValue("medium");
+            entity.Property(e => e.CustomerName).HasMaxLength(200);
             entity.Property(e => e.CustomerPhone).HasMaxLength(20);
             entity.Property(e => e.CustomerEmail).HasMaxLength(320);
-            entity.Property(e => e.Device).IsRequired().HasMaxLength(200);
-            entity.Property(e => e.Status).IsRequired().HasMaxLength(50).HasDefaultValue("pending");
-            entity.Property(e => e.Priority).IsRequired().HasMaxLength(50).HasDefaultValue("medium");
+            entity.Property(e => e.DeviceDescription).HasMaxLength(200);
             entity.Property(e => e.EstimatedCost).HasPrecision(18, 2);
+            entity.Property(e => e.ActualCost).HasPrecision(18, 2);
             entity.Property(e => e.DepositPaid).HasPrecision(18, 2);
             entity.HasIndex(e => e.StoreId);
             entity.HasIndex(e => e.CustomerId);
-            entity.HasIndex(e => e.TicketNumber).IsUnique();
+            entity.HasIndex(e => e.DeviceId);
+            entity.HasIndex(e => e.TechnicianId);
+            entity.HasIndex(e => e.TicketNumber);
             entity.HasIndex(e => e.Status);
             entity.HasIndex(e => e.Priority);
-            entity.HasIndex(e => e.AssignedToEmployeeId);
-            entity.HasIndex(e => e.CreatedDate);
-            entity.HasIndex(e => e.DueDate);
+            entity.HasIndex(e => e.CreatedAt);
+            entity.HasIndex(e => e.EstimatedCompletionAt);
             entity.HasIndex(e => new { e.StoreId, e.Status }); // Composite index for store-specific status queries
-            entity.HasIndex(e => new { e.StoreId, e.AssignedToEmployeeId }); // Composite index for employee tickets per store
+            entity.HasIndex(e => new { e.StoreId, e.TechnicianId }); // Composite index for technician tickets per store
+            entity.HasIndex(e => new { e.CustomerId, e.Status }); // Composite index for customer tickets
+
+            // Configure relationship with PartsUsed (within Service context)
+            entity.HasMany(e => e.PartsUsed)
+                .WithOne(p => p.RepairTicket)
+                .HasForeignKey(p => p.RepairTicketId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<PartUsed>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.RepairTicketId).IsRequired();
+            entity.Property(e => e.InventoryItemId).IsRequired();
+            entity.Property(e => e.UnitPrice).HasPrecision(18, 2);
+            entity.HasIndex(e => e.RepairTicketId);
+            entity.HasIndex(e => e.InventoryItemId);
+            entity.HasIndex(e => new { e.RepairTicketId, e.InventoryItemId }); // Composite index for part usage tracking
         });
 
         // ===========================

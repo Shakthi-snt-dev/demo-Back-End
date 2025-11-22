@@ -12,4 +12,4 @@ Flowtap_Test/bin
 Flowtap_Test/obj
 Flowtap_Infrastructure/migrations
 Flowtap_Presentation/appsettings.json
-Flowtap_Application/appsettings.development.json
+Flowtap_Presentation/appsettings.Development.json

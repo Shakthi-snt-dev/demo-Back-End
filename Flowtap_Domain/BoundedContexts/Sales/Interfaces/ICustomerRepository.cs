@@ -9,6 +9,8 @@ public interface ICustomerRepository
     Task<Customer?> GetByEmailAsync(string email);
     Task<Customer?> GetByPhoneAsync(string phone);
     Task<IEnumerable<Customer>> GetByStatusAsync(string status);
+    Task<IEnumerable<Customer>> GetByStoreIdAsync(Guid storeId);
+    Task<IEnumerable<Customer>> GetByStoreIdsAsync(IEnumerable<Guid> storeIds);
     Task<IEnumerable<Customer>> SearchAsync(string searchTerm);
     Task<Customer> CreateAsync(Customer customer);
     Task<Customer> UpdateAsync(Customer customer);

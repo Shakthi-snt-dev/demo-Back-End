@@ -1,5 +1,6 @@
 using Flowtap_Domain.BoundedContexts.Sales.Entities;
 using Flowtap_Domain.BoundedContexts.Sales.Interfaces;
+using Flowtap_Domain.SharedKernel.Enums;
 using Flowtap_Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,8 +39,35 @@ public class CustomerRepository : ICustomerRepository
 
     public async Task<IEnumerable<Customer>> GetByStatusAsync(string status)
     {
+        // Convert string to enum for backward compatibility
+        if (Enum.TryParse<CustomerStatus>(status, true, out var customerStatus))
+        {
+            return await _context.Customers
+                .Where(c => c.Status == customerStatus)
+                .ToListAsync();
+        }
+        return new List<Customer>();
+    }
+
+    public async Task<IEnumerable<Customer>> GetByStoreIdAsync(Guid storeId)
+    {
         return await _context.Customers
-            .Where(c => c.Status == status)
+            .Where(c => c.StoreId == storeId)
+            .OrderByDescending(c => c.CreatedAt)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Customer>> GetByStoreIdsAsync(IEnumerable<Guid> storeIds)
+    {
+        var storeIdsList = storeIds.ToList();
+        if (!storeIdsList.Any())
+        {
+            return new List<Customer>();
+        }
+
+        return await _context.Customers
+            .Where(c => storeIdsList.Contains(c.StoreId))
+            .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();
     }
 

@@ -14,7 +14,7 @@ namespace Flowtap_Application
             services.AddScoped<IJwtService, JwtService>();
 
             // Sales Context
-            // services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<ICustomerService, CustomerService>();
             // services.AddScoped<IOrderService, OrderService>();
 
             // Inventory Context

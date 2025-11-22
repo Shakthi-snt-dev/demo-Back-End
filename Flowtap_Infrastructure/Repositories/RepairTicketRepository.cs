@@ -1,5 +1,6 @@
 using Flowtap_Domain.BoundedContexts.Service.Entities;
 using Flowtap_Domain.BoundedContexts.Service.Interfaces;
+using Flowtap_Domain.SharedKernel.Enums;
 using Flowtap_Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,7 +23,7 @@ public class RepairTicketRepository : IRepairTicketRepository
     public async Task<IEnumerable<RepairTicket>> GetAllAsync()
     {
         return await _context.RepairTickets
-            .OrderByDescending(t => t.CreatedDate)
+            .OrderByDescending(t => t.CreatedAt)
             .ToListAsync();
     }
 
@@ -34,25 +35,30 @@ public class RepairTicketRepository : IRepairTicketRepository
 
     public async Task<IEnumerable<RepairTicket>> GetByStatusAsync(string status)
     {
-        return await _context.RepairTickets
-            .Where(t => t.Status == status)
-            .OrderByDescending(t => t.CreatedDate)
-            .ToListAsync();
+        // Convert string to enum for backward compatibility
+        if (Enum.TryParse<TicketStatus>(status, true, out var ticketStatus))
+        {
+            return await _context.RepairTickets
+                .Where(t => t.Status == ticketStatus)
+                .OrderByDescending(t => t.CreatedAt)
+                .ToListAsync();
+        }
+        return new List<RepairTicket>();
     }
 
     public async Task<IEnumerable<RepairTicket>> GetByPriorityAsync(string priority)
     {
         return await _context.RepairTickets
-            .Where(t => t.Priority == priority)
-            .OrderByDescending(t => t.CreatedDate)
+            .Where(t => t.Priority != null && t.Priority == priority)
+            .OrderByDescending(t => t.CreatedAt)
             .ToListAsync();
     }
 
     public async Task<IEnumerable<RepairTicket>> GetByEmployeeIdAsync(Guid employeeId)
     {
         return await _context.RepairTickets
-            .Where(t => t.AssignedToEmployeeId == employeeId)
-            .OrderByDescending(t => t.CreatedDate)
+            .Where(t => t.TechnicianId == employeeId)
+            .OrderByDescending(t => t.CreatedAt)
             .ToListAsync();
     }
 
@@ -60,22 +66,22 @@ public class RepairTicketRepository : IRepairTicketRepository
     {
         var now = DateTime.UtcNow;
         return await _context.RepairTickets
-            .Where(t => t.DueDate.HasValue &&
-                       t.DueDate.Value < now &&
-                       t.Status != "completed" &&
-                       t.Status != "cancelled")
-            .OrderBy(t => t.DueDate)
+            .Where(t => (t.EstimatedCompletionAt.HasValue && t.EstimatedCompletionAt.Value < now) ||
+                       (t.DueDate.HasValue && t.DueDate.Value < now) &&
+                       t.Status != TicketStatus.Completed &&
+                       t.Status != TicketStatus.Cancelled)
+            .OrderBy(t => t.EstimatedCompletionAt ?? t.DueDate)
             .ToListAsync();
     }
 
     public async Task<IEnumerable<RepairTicket>> SearchAsync(string searchTerm)
     {
         return await _context.RepairTickets
-            .Where(t => t.TicketNumber.Contains(searchTerm) ||
-                       t.CustomerName.Contains(searchTerm) ||
-                       t.Device.Contains(searchTerm) ||
-                       t.Issue.Contains(searchTerm))
-            .OrderByDescending(t => t.CreatedDate)
+            .Where(t => (t.TicketNumber != null && t.TicketNumber.Contains(searchTerm)) ||
+                       (t.CustomerName != null && t.CustomerName.Contains(searchTerm)) ||
+                       (t.DeviceDescription != null && t.DeviceDescription.Contains(searchTerm)) ||
+                       (t.ProblemDescription != null && t.ProblemDescription.Contains(searchTerm)))
+            .OrderByDescending(t => t.CreatedAt)
             .ToListAsync();
     }
 
@@ -120,20 +126,21 @@ public class RepairTicketRepository : IRepairTicketRepository
     public async Task<string> GenerateTicketNumberAsync()
     {
         var lastTicket = await _context.RepairTickets
-            .OrderByDescending(t => t.CreatedDate)
+            .OrderByDescending(t => t.CreatedAt)
             .FirstOrDefaultAsync();
 
         int nextNumber = 1;
         if (lastTicket != null && !string.IsNullOrWhiteSpace(lastTicket.TicketNumber))
         {
-            var numberPart = lastTicket.TicketNumber.Replace("TKT-", "");
+            var numberPart = lastTicket.TicketNumber.Replace("TKT-", "").Replace("RD-", "");
             if (int.TryParse(numberPart, out int lastNumber))
             {
                 nextNumber = lastNumber + 1;
             }
         }
 
-        return $"TKT-{nextNumber:D3}";
+        var year = DateTime.UtcNow.Year;
+        return $"RD-{year}-{nextNumber:D4}";
     }
 }
 
