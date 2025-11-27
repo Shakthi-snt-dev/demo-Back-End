@@ -251,6 +251,98 @@ This document lists all available API endpoints in the Flowtap Presentation laye
 - **Response:** `ApiResponseDto<bool>`
 - **Authorization:** Requires `AppUserOrOwner` role
 
+### Product Categories (`/api/productcategories`)
+
+#### Get All Product Categories
+- **Method:** `GET`
+- **Endpoint:** `/api/productcategories`
+- **Description:** Get all product categories
+- **Response:** `ApiResponseDto<IEnumerable<ProductCategoryResponseDto>>`
+- **Authorization:** Requires `AppUserOrOwner` role
+
+#### Get Product Category by ID
+- **Method:** `GET`
+- **Endpoint:** `/api/productcategories/{id}`
+- **Description:** Get product category by ID
+- **Path Parameters:** `id` (Guid)
+- **Response:** `ApiResponseDto<ProductCategoryResponseDto>`
+- **Authorization:** Requires `AppUserOrOwner` role
+
+#### Create Product Category
+- **Method:** `POST`
+- **Endpoint:** `/api/productcategories`
+- **Description:** Create a new product category
+- **Request Body:** `CreateProductCategoryRequestDto`
+- **Response:** `ApiResponseDto<ProductCategoryResponseDto>`
+- **Authorization:** Requires `AppUserOrOwner` role
+
+#### Update Product Category
+- **Method:** `PUT`
+- **Endpoint:** `/api/productcategories/{id}`
+- **Description:** Update product category
+- **Path Parameters:** `id` (Guid)
+- **Request Body:** `UpdateProductCategoryRequestDto`
+- **Response:** `ApiResponseDto<ProductCategoryResponseDto>`
+- **Authorization:** Requires `AppUserOrOwner` role
+
+#### Delete Product Category
+- **Method:** `DELETE`
+- **Endpoint:** `/api/productcategories/{id}`
+- **Description:** Delete product category
+- **Path Parameters:** `id` (Guid)
+- **Response:** `ApiResponseDto<bool>`
+- **Authorization:** Requires `AppUserOrOwner` role
+
+### Product SubCategories (`/api/productsubcategories`)
+
+#### Get All Product SubCategories
+- **Method:** `GET`
+- **Endpoint:** `/api/productsubcategories`
+- **Description:** Get all product subcategories
+- **Response:** `ApiResponseDto<IEnumerable<ProductSubCategoryResponseDto>>`
+- **Authorization:** Requires `AppUserOrOwner` role
+
+#### Get Product SubCategory by ID
+- **Method:** `GET`
+- **Endpoint:** `/api/productsubcategories/{id}`
+- **Description:** Get product subcategory by ID
+- **Path Parameters:** `id` (Guid)
+- **Response:** `ApiResponseDto<ProductSubCategoryResponseDto>`
+- **Authorization:** Requires `AppUserOrOwner` role
+
+#### Get Product SubCategories by Category ID
+- **Method:** `GET`
+- **Endpoint:** `/api/productsubcategories/category/{categoryId}`
+- **Description:** Get product subcategories by category ID (cascading filter)
+- **Path Parameters:** `categoryId` (Guid)
+- **Response:** `ApiResponseDto<IEnumerable<ProductSubCategoryResponseDto>>`
+- **Authorization:** Requires `AppUserOrOwner` role
+
+#### Create Product SubCategory
+- **Method:** `POST`
+- **Endpoint:** `/api/productsubcategories`
+- **Description:** Create a new product subcategory
+- **Request Body:** `CreateProductSubCategoryRequestDto`
+- **Response:** `ApiResponseDto<ProductSubCategoryResponseDto>`
+- **Authorization:** Requires `AppUserOrOwner` role
+
+#### Update Product SubCategory
+- **Method:** `PUT`
+- **Endpoint:** `/api/productsubcategories/{id}`
+- **Description:** Update product subcategory
+- **Path Parameters:** `id` (Guid)
+- **Request Body:** `UpdateProductSubCategoryRequestDto`
+- **Response:** `ApiResponseDto<ProductSubCategoryResponseDto>`
+- **Authorization:** Requires `AppUserOrOwner` role
+
+#### Delete Product SubCategory
+- **Method:** `DELETE`
+- **Endpoint:** `/api/productsubcategories/{id}`
+- **Description:** Delete product subcategory
+- **Path Parameters:** `id` (Guid)
+- **Response:** `ApiResponseDto<bool>`
+- **Authorization:** Requires `AppUserOrOwner` role
+
 ### Inventory Items (`/api/inventoryitems`)
 
 #### Get Inventory Item by ID
@@ -837,7 +929,7 @@ This document lists all available API endpoints in the Flowtap Presentation laye
 
 ## Summary
 
-**Total API Endpoints:** 100
+**Total API Endpoints:** 111
 
 ### By Controller:
 - **Auth:** 3 endpoints
@@ -847,6 +939,8 @@ This document lists all available API endpoints in the Flowtap Presentation laye
 - **Stores:** 1 endpoint
 - **Roles:** 6 endpoints
 - **Products:** 6 endpoints
+- **ProductCategories:** 5 endpoints
+- **ProductSubCategories:** 6 endpoints
 - **InventoryItems:** 10 endpoints
 - **Suppliers:** 6 endpoints
 - **PurchaseOrders:** 7 endpoints
@@ -860,17 +954,17 @@ This document lists all available API endpoints in the Flowtap Presentation laye
 - **Customers:** 5 endpoints
 
 ### By HTTP Method:
-- **GET:** 55 endpoints
-- **POST:** 30 endpoints
-- **PUT:** 13 endpoints
-- **DELETE:** 12 endpoints
+- **GET:** 61 endpoints
+- **POST:** 32 endpoints
+- **PUT:** 15 endpoints
+- **DELETE:** 13 endpoints
 
 ### By Bounded Context:
 - **Identity:** 3 endpoints (Auth)
 - **Store:** 6 endpoints (StoreSettings, Stores)
 - **HR:** 5 endpoints (Employees)
 - **Identity:** 6 endpoints (Roles)
-- **Inventory:** 16 endpoints (Products, InventoryItems)
+- **Inventory:** 27 endpoints (Products, ProductCategories, ProductSubCategories, InventoryItems)
 - **Procurement:** 13 endpoints (Suppliers, PurchaseOrders)
 - **Service:** 40 endpoints (DeviceCategories, DeviceBrands, DeviceModels, DeviceHierarchy, Services, PreCheckItems, SpecialOrderParts)
 - **Sales:** 5 endpoints (Customers)

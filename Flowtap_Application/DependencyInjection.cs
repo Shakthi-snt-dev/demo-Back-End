@@ -20,6 +20,8 @@ namespace Flowtap_Application
             // Inventory Context
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IInventoryItemService, InventoryItemService>();
+            services.AddScoped<IProductCategoryService, ProductCategoryService>();
+            services.AddScoped<IProductSubCategoryService, ProductSubCategoryService>();
             
             // Procurement Context
             services.AddScoped<ISupplierService, SupplierService>();

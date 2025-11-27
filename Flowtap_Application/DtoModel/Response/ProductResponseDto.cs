@@ -55,20 +55,6 @@ public class ProductVariantResponseDto
     public string? AttributeValue { get; set; }
 }
 
-public class ProductCategoryResponseDto
-{
-    public Guid Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public List<ProductSubCategoryResponseDto> SubCategories { get; set; } = new();
-}
-
-public class ProductSubCategoryResponseDto
-{
-    public Guid Id { get; set; }
-    public Guid CategoryId { get; set; }
-    public string Name { get; set; } = string.Empty;
-}
-
 public class SerialNumberResponseDto
 {
     public Guid Id { get; set; }

@@ -77,6 +77,13 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Variants, opt => opt.Ignore())
             .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => true));
 
+        // ProductCategory mappings
+        CreateMap<ProductCategory, ProductCategoryResponseDto>()
+            .ForMember(dest => dest.SubCategories, opt => opt.MapFrom(src => src.SubCategories));
+        
+        CreateMap<ProductSubCategory, ProductSubCategoryResponseDto>()
+            .ForMember(dest => dest.CategoryName, opt => opt.Ignore()); // Will be set manually in service
+
         // InventoryItem mappings
         CreateMap<InventoryItem, InventoryItemResponseDto>()
             .ForMember(dest => dest.Product, opt => opt.Ignore()) // Will be set manually
