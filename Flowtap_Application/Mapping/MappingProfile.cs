@@ -8,6 +8,7 @@ using Flowtap_Domain.BoundedContexts.Store.Entities;
 using Flowtap_Domain.BoundedContexts.Sales.Entities;
 using Flowtap_Domain.BoundedContexts.Sales.ValueObjects;
 using Flowtap_Domain.BoundedContexts.Inventory.Entities;
+using Flowtap_Domain.BoundedContexts.Procurement.Entities;
 using Flowtap_Domain.BoundedContexts.HR.Entities;
 using Flowtap_Domain.BoundedContexts.Service.Entities;
 using Flowtap_Domain.SharedKernel.ValueObjects;
@@ -63,10 +64,138 @@ public class MappingProfile : Profile
         // Address ValueObject to AddressDto
         CreateMap<Address, AddressDto>();
 
-        // Product to ProductResponseDto
+        // Product mappings
         CreateMap<Product, ProductResponseDto>()
-            .ForMember(dest => dest.Stock, opt => opt.MapFrom(src => src.Stock))
-            .ForMember(dest => dest.MinStock, opt => opt.MapFrom(src => src.MinStock));
+            .ForMember(dest => dest.Variants, opt => opt.MapFrom(src => src.Variants))
+            .ForMember(dest => dest.ProductType, opt => opt.MapFrom(src => src.ProductType.ToString()));
+        
+        CreateMap<ProductVariant, ProductVariantResponseDto>();
+        
+        CreateMap<CreateProductRequestDto, Product>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.Variants, opt => opt.Ignore())
+            .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => true));
+
+        // InventoryItem mappings
+        CreateMap<InventoryItem, InventoryItemResponseDto>()
+            .ForMember(dest => dest.Product, opt => opt.Ignore()) // Will be set manually
+            .ForMember(dest => dest.IsInStock, opt => opt.Ignore())
+            .ForMember(dest => dest.IsBelowReorderLevel, opt => opt.Ignore())
+            .ForMember(dest => dest.SerialCount, opt => opt.Ignore())
+            .ForMember(dest => dest.QuantityReserved, opt => opt.MapFrom(src => src.QuantityReserved))
+            .ForMember(dest => dest.QuantityAvailable, opt => opt.MapFrom(src => src.GetQuantityAvailable()));
+        
+        CreateMap<CreateInventoryItemRequestDto, InventoryItem>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.Product, opt => opt.Ignore())
+            .ForMember(dest => dest.Serials, opt => opt.Ignore())
+            .ForMember(dest => dest.Transactions, opt => opt.Ignore())
+            .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
+
+        // SerialNumber mappings
+        CreateMap<SerialNumber, SerialNumberResponseDto>()
+            .ForMember(dest => dest.IsAvailable, opt => opt.MapFrom(src => src.IsAvailable()));
+
+        // InventoryTransaction mappings
+        CreateMap<InventoryTransaction, InventoryTransactionResponseDto>()
+            .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.Type.ToString()))
+            .ForMember(dest => dest.TotalCost, opt => opt.MapFrom(src => src.GetTotalCost()))
+            .ForMember(dest => dest.ReferenceNumber, opt => opt.MapFrom(src => src.ReferenceNumber))
+            .ForMember(dest => dest.ReferenceType, opt => opt.MapFrom(src => src.ReferenceType));
+
+        // StockTransfer mappings
+        CreateMap<StockTransfer, StockTransferResponseDto>()
+            .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.Items))
+            .ForMember(dest => dest.TotalQuantity, opt => opt.MapFrom(src => src.GetTotalQuantity()));
+        
+        CreateMap<StockTransferItem, StockTransferItemResponseDto>()
+            .ForMember(dest => dest.InventoryItem, opt => opt.Ignore());
+
+        // Supplier mappings
+        CreateMap<Supplier, SupplierResponseDto>();
+        
+        CreateMap<CreateSupplierRequestDto, Supplier>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.IsActive, opt => opt.Ignore());
+
+        // PurchaseOrder mappings
+        CreateMap<PurchaseOrder, PurchaseOrderResponseDto>()
+            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+            .ForMember(dest => dest.Lines, opt => opt.MapFrom(src => src.Lines))
+            .ForMember(dest => dest.TotalAmount, opt => opt.MapFrom(src => src.GetTotalAmount()))
+            .ForMember(dest => dest.Supplier, opt => opt.Ignore()); // Will be set manually
+        
+        CreateMap<PurchaseOrderLine, PurchaseOrderLineResponseDto>()
+            .ForMember(dest => dest.TotalCost, opt => opt.MapFrom(src => src.GetTotalCost()))
+            .ForMember(dest => dest.ProductName, opt => opt.Ignore());
+
+        // SupplierReturn mappings
+        CreateMap<SupplierReturn, SupplierReturnResponseDto>()
+            .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.Items))
+            .ForMember(dest => dest.TotalQuantity, opt => opt.MapFrom(src => src.GetTotalQuantity()))
+            .ForMember(dest => dest.Supplier, opt => opt.Ignore());
+        
+        CreateMap<SupplierReturnItem, SupplierReturnItemResponseDto>()
+            .ForMember(dest => dest.InventoryItem, opt => opt.Ignore());
+
+        // Device hierarchy mappings
+        CreateMap<DeviceCategory, DeviceCategoryResponseDto>();
+        CreateMap<DeviceBrand, DeviceBrandResponseDto>();
+        CreateMap<DeviceModel, DeviceModelResponseDto>();
+        CreateMap<DeviceVariant, DeviceVariantResponseDto>();
+        CreateMap<DeviceProblem, DeviceProblemResponseDto>();
+
+        CreateMap<CreateDeviceCategoryRequestDto, DeviceCategory>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.Brands, opt => opt.Ignore());
+
+        CreateMap<CreateDeviceBrandRequestDto, DeviceBrand>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.Category, opt => opt.Ignore())
+            .ForMember(dest => dest.Models, opt => opt.Ignore());
+
+        CreateMap<CreateDeviceModelRequestDto, DeviceModel>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.Brand, opt => opt.Ignore())
+            .ForMember(dest => dest.Variants, opt => opt.Ignore())
+            .ForMember(dest => dest.Problems, opt => opt.Ignore());
+
+        // Service mappings
+        CreateMap<Service, ServiceResponseDto>()
+            .ForMember(dest => dest.Parts, opt => opt.Ignore()) // Will be set manually
+            .ForMember(dest => dest.Labor, opt => opt.MapFrom(src => src.Labor))
+            .ForMember(dest => dest.Warranties, opt => opt.MapFrom(src => src.Warranties))
+            .ForMember(dest => dest.TotalCost, opt => opt.Ignore());
+
+        CreateMap<ServicePart, ServicePartResponseDto>()
+            .ForMember(dest => dest.ProductName, opt => opt.Ignore());
+
+        CreateMap<ServiceLabor, ServiceLaborResponseDto>();
+        CreateMap<ServiceWarranty, ServiceWarrantyResponseDto>();
+
+        // PreCheckItem mappings
+        CreateMap<PreCheckItem, PreCheckItemResponseDto>();
+
+        CreateMap<CreatePreCheckItemRequestDto, PreCheckItem>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => true))
+            .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
+
+        // SpecialOrderPart mappings
+        CreateMap<SpecialOrderPart, SpecialOrderPartResponseDto>()
+            .ForMember(dest => dest.TotalCost, opt => opt.Ignore())
+            .ForMember(dest => dest.ManufacturerName, opt => opt.Ignore())
+            .ForMember(dest => dest.DeviceModelName, opt => opt.Ignore())
+            .ForMember(dest => dest.SupplierName, opt => opt.Ignore());
+
+        CreateMap<CreateSpecialOrderPartRequestDto, SpecialOrderPart>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore())
+            .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
+            .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
 
         // Customer to CustomerResponseDto
         CreateMap<Customer, CustomerResponseDto>()

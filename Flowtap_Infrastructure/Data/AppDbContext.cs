@@ -8,6 +8,7 @@ using Flowtap_Domain.BoundedContexts.Audit.Entities;
 using Flowtap_Domain.BoundedContexts.Sales.Entities;
 using Flowtap_Domain.BoundedContexts.Sales.ValueObjects;
 using Flowtap_Domain.BoundedContexts.Inventory.Entities;
+using Flowtap_Domain.BoundedContexts.Procurement.Entities;
 using Flowtap_Domain.BoundedContexts.Service.Entities;
 using Flowtap_Domain.BoundedContexts.Integration.Entities;
 using Flowtap_Domain.SharedKernel.ValueObjects;
@@ -47,11 +48,43 @@ public class AppDbContext : DbContext
 
     // Inventory Context
     public DbSet<Product> Products { get; set; }
+    public DbSet<ProductCategory> ProductCategories { get; set; }
+    public DbSet<ProductSubCategory> ProductSubCategories { get; set; }
+    public DbSet<ProductVariant> ProductVariants { get; set; }
     public DbSet<InventoryItem> InventoryItems { get; set; }
+    public DbSet<SerialNumber> SerialNumbers { get; set; }
+    public DbSet<InventoryTransaction> InventoryTransactions { get; set; }
+    public DbSet<InventoryAdjustment> InventoryAdjustments { get; set; }
+    public DbSet<StockTransfer> StockTransfers { get; set; }
+    public DbSet<StockTransferItem> StockTransferItems { get; set; }
+    public DbSet<InventorySettings> InventorySettings { get; set; }
+    public DbSet<BarcodeTemplate> BarcodeTemplates { get; set; }
+
+    // Procurement Context
+    public DbSet<Supplier> Suppliers { get; set; }
+    public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+    public DbSet<PurchaseOrderLine> PurchaseOrderLines { get; set; }
+    public DbSet<SupplierReturn> SupplierReturns { get; set; }
+    public DbSet<SupplierReturnItem> SupplierReturnItems { get; set; }
 
     // Service Context
     public DbSet<RepairTicket> RepairTickets { get; set; }
     public DbSet<Device> Devices { get; set; }
+    public DbSet<DeviceCategory> DeviceCategories { get; set; }
+    public DbSet<DeviceBrand> DeviceBrands { get; set; }
+    public DbSet<DeviceModel> DeviceModels { get; set; }
+    public DbSet<DeviceVariant> DeviceVariants { get; set; }
+    public DbSet<DeviceProblem> DeviceProblems { get; set; }
+    public DbSet<Service> Services { get; set; }
+    public DbSet<ServicePart> ServiceParts { get; set; }
+    public DbSet<ServiceLabor> ServiceLabors { get; set; }
+    public DbSet<ServiceWarranty> ServiceWarranties { get; set; }
+    public DbSet<ServicePriceMatrix> ServicePriceMatrices { get; set; }
+    public DbSet<PreCheckItem> PreCheckItems { get; set; }
+    public DbSet<TicketPreCheck> TicketPreChecks { get; set; }
+    public DbSet<ServiceDiagnosis> ServiceDiagnoses { get; set; }
+    public DbSet<TicketConditionImage> TicketConditionImages { get; set; }
+    public DbSet<SpecialOrderPart> SpecialOrderParts { get; set; }
     public DbSet<PartUsed> PartsUsed { get; set; }
 
     // Sales Context - Additional entities
@@ -379,29 +412,27 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Product>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.StoreId).IsRequired();
-            entity.Property(e => e.SKU).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.SKU).HasMaxLength(100);
             entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
-            entity.Property(e => e.Category).HasMaxLength(100);
-            entity.Property(e => e.Price).HasPrecision(18, 2);
-            entity.Property(e => e.Cost).HasPrecision(18, 2);
-            entity.HasIndex(e => e.StoreId);
-            entity.HasIndex(e => new { e.StoreId, e.SKU }).IsUnique(); // SKU unique per store
-            entity.HasIndex(e => e.Category);
-            entity.HasIndex(e => new { e.StoreId, e.Category }); // Composite index for store-specific category lookup
+            entity.Property(e => e.CostPrice).HasPrecision(18, 2);
+            entity.Property(e => e.SalePrice).HasPrecision(18, 2);
+            entity.Property(e => e.MinimumPrice).HasPrecision(18, 2);
+            entity.HasIndex(e => e.SKU);
+            entity.HasIndex(e => e.CategoryId);
+            entity.HasIndex(e => e.SubCategoryId);
+            entity.HasIndex(e => e.SupplierId);
         });
 
         modelBuilder.Entity<InventoryItem>(entity =>
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.StoreId).IsRequired();
-            entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
-            entity.Property(e => e.SKU).HasMaxLength(200);
-            entity.Property(e => e.CostPrice).HasPrecision(18, 2);
-            entity.Property(e => e.SellPrice).HasPrecision(18, 2);
+            entity.Property(e => e.ProductId).IsRequired();
+            entity.Property(e => e.QuantityOnHand).IsRequired();
+            entity.Property(e => e.QuantityReserved).IsRequired();
             entity.HasIndex(e => e.StoreId);
-            entity.HasIndex(e => e.SKU);
-            entity.HasIndex(e => new { e.StoreId, e.SKU }).IsUnique().HasFilter("[SKU] IS NOT NULL"); // SKU unique per store
+            entity.HasIndex(e => e.ProductId);
+            entity.HasIndex(e => new { e.ProductId, e.StoreId }); // Composite index
         });
 
         // ===========================

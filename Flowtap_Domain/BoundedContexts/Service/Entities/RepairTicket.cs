@@ -9,19 +9,91 @@ public class RepairTicket
     [Key]
     public Guid Id { get; set; } = Guid.NewGuid();
 
+    // Customer + Store
     [Required]
-    public Guid StoreId { get; set; } // Reference to Store context (ID only, no navigation)
+    public Guid StoreId { get; set; }
+    // Note: Store is in Store context - reference by ID only, no navigation property
 
     [Required]
-    public Guid CustomerId { get; set; } // Reference to Sales.Customer (ID only, no navigation)
+    public Guid CustomerId { get; set; }
+    // Note: Customer is in Sales context - reference by ID only, no navigation property
+
+    // Device Category, Brand, Model, Variant
+    public Guid? DeviceCategoryId { get; set; }
+    public DeviceCategory? DeviceCategory { get; set; }
+
+    public Guid? DeviceBrandId { get; set; }
+    public DeviceBrand? DeviceBrand { get; set; }
+
+    public Guid? DeviceModelId { get; set; }
+    public DeviceModel? DeviceModel { get; set; }
+
+    public Guid? DeviceVariantId { get; set; }
+    public DeviceVariant? DeviceVariant { get; set; }
+
+    // Problem selected
+    public Guid? DeviceProblemId { get; set; }
+    public DeviceProblem? DeviceProblem { get; set; }
+
+    // Device Identification
+    [MaxLength(200)]
+    public string? IMEI { get; set; }
+
+    [MaxLength(200)]
+    public string? SerialNumber { get; set; }
+
+    // Security
+    [MaxLength(100)]
+    public string? Passcode { get; set; }
 
     [MaxLength(100)]
-    public string TicketNumber { get; set; } = string.Empty; // e.g. RD-2025-0001
+    public string? PatternLock { get; set; }
 
-    public TicketStatus Status { get; set; } = TicketStatus.Open;
+    // Warranty
+    public bool IsWarrantyApplicable { get; set; }
+
+    public int WarrantyDays { get; set; } = 0;
+
+    // Technician assignment
+    public Guid? TechnicianId { get; set; }
+    // Note: Employee is in HR context - reference by ID only, no navigation property
+
+    public DateTime? TaskDueDate { get; set; }
+
+    // Status
+    [MaxLength(100)]
+    public string Status { get; set; } = "Waiting for inspection"; // RepairDesk default
+
+    public bool IsRushJob { get; set; } = false;
+
+    // Pricing
+    [Column(TypeName = "decimal(18,2)")]
+    public decimal RepairCharges { get; set; } = 0;
+
+    // Physical location in store
+    [MaxLength(200)]
+    public string? PhysicalLocation { get; set; } // Drawer 1, Shelf A2, Locker 3
+
+    // Job Type
+    [MaxLength(50)]
+    public string TaskType { get; set; } = "In-Store"; // Mail-in, Pickup, Delivery
+
+    // Device network status
+    [MaxLength(200)]
+    public string? NetworkStatus { get; set; } // Locked, Unlocked, SIM issues
+
+    // Notes
+    public string? DiagnosticNote { get; set; }
+
+    public string? PrivateComment { get; set; }
+
+    public string? AdditionalNote { get; set; }
+
+    // Legacy fields for backward compatibility
+    [MaxLength(100)]
+    public string? TicketNumber { get; set; } // e.g. RD-2025-0001
 
     public Guid? DeviceId { get; set; }
-
     public Device? Device { get; set; }
 
     [MaxLength(500)]
@@ -30,23 +102,12 @@ public class RepairTicket
     [MaxLength(500)]
     public string? ResolutionNotes { get; set; }
 
-    public Guid? TechnicianId { get; set; } // Maps to Employee.Id in HR context
-
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-    public DateTime? EstimatedCompletionAt { get; set; }
-
-    public DateTime? CompletedAt { get; set; }
-
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-
     [Column(TypeName = "decimal(18,2)")]
     public decimal? EstimatedCost { get; set; }
 
     [Column(TypeName = "decimal(18,2)")]
     public decimal? ActualCost { get; set; }
 
-    // Legacy fields for backward compatibility
     [MaxLength(200)]
     public string? CustomerName { get; set; }
 
@@ -57,10 +118,10 @@ public class RepairTicket
     public string? CustomerEmail { get; set; }
 
     [MaxLength(200)]
-    public string? DeviceDescription { get; set; } // Legacy field, use Device entity instead
+    public string? DeviceDescription { get; set; }
 
     [MaxLength(50)]
-    public string? Priority { get; set; } = "medium"; // low, medium, high, urgent
+    public string? Priority { get; set; } = "medium";
 
     [Column(TypeName = "decimal(18,2)")]
     public decimal DepositPaid { get; set; } = 0;
@@ -69,6 +130,21 @@ public class RepairTicket
 
     public string? Notes { get; set; }
 
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    public DateTime? EstimatedCompletionAt { get; set; }
+
+    public DateTime? CompletedAt { get; set; }
+
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+    // Pre-Repair Checklist
+    public ICollection<TicketPreCheck> PreChecks { get; set; } = new List<TicketPreCheck>();
+
+    // Pre-Repair Images
+    public ICollection<TicketConditionImage> ConditionImages { get; set; } = new List<TicketConditionImage>();
+
+    // Parts used
     public ICollection<PartUsed> PartsUsed { get; set; } = new List<PartUsed>();
 
     // ===========================
@@ -78,36 +154,38 @@ public class RepairTicket
     /// <summary>
     /// Updates the ticket status
     /// </summary>
-    public void UpdateStatus(TicketStatus status)
+    public void UpdateStatus(string status)
     {
+        if (string.IsNullOrWhiteSpace(status))
+            throw new ArgumentException("Status cannot be empty", nameof(status));
+
+        var validStatuses = new[] { "New", "Waiting for inspection", "InProgress", "Waiting for parts", 
+            "Ready for pickup", "Completed", "Returned", "Cancelled" };
+
+        if (!validStatuses.Contains(status, StringComparer.OrdinalIgnoreCase))
+            throw new InvalidOperationException($"Invalid status: {status}");
+
         Status = status;
         UpdatedAt = DateTime.UtcNow;
 
-        if (status == TicketStatus.Completed && !CompletedAt.HasValue)
+        if (status.Equals("Completed", StringComparison.OrdinalIgnoreCase) && !CompletedAt.HasValue)
         {
             CompletedAt = DateTime.UtcNow;
         }
     }
 
     /// <summary>
-    /// Updates the ticket status (legacy string method for backward compatibility)
+    /// Updates the ticket status using enum (for backward compatibility)
     /// </summary>
-    public void UpdateStatus(string status)
+    public void UpdateStatus(TicketStatus status)
     {
-        var statusMap = new Dictionary<string, TicketStatus>(StringComparer.OrdinalIgnoreCase)
+        Status = status.ToString();
+        UpdatedAt = DateTime.UtcNow;
+
+        if (status == TicketStatus.Completed && !CompletedAt.HasValue)
         {
-            { "pending", TicketStatus.Open },
-            { "open", TicketStatus.Open },
-            { "in-progress", TicketStatus.InProgress },
-            { "inprogress", TicketStatus.InProgress },
-            { "completed", TicketStatus.Completed },
-            { "cancelled", TicketStatus.Cancelled }
-        };
-
-        if (!statusMap.TryGetValue(status, out var ticketStatus))
-            throw new InvalidOperationException($"Invalid status: {status}");
-
-        UpdateStatus(ticketStatus);
+            CompletedAt = DateTime.UtcNow;
+        }
     }
 
     public void UpdatePriority(string priority)
@@ -277,7 +355,7 @@ public class RepairTicket
     /// </summary>
     public bool IsCompleted()
     {
-        return Status == TicketStatus.Completed;
+        return Status.Equals("Completed", StringComparison.OrdinalIgnoreCase);
     }
 
     /// <summary>
@@ -285,7 +363,7 @@ public class RepairTicket
     /// </summary>
     public bool IsCancelled()
     {
-        return Status == TicketStatus.Cancelled;
+        return Status.Equals("Cancelled", StringComparison.OrdinalIgnoreCase);
     }
 
     /// <summary>
@@ -315,6 +393,143 @@ public class RepairTicket
     public int GetPartsUsedCount()
     {
         return PartsUsed.Count;
+    }
+
+    /// <summary>
+    /// Sets device hierarchy (Category, Brand, Model, Variant)
+    /// </summary>
+    public void SetDeviceHierarchy(Guid? categoryId, Guid? brandId, Guid? modelId, Guid? variantId)
+    {
+        DeviceCategoryId = categoryId;
+        DeviceBrandId = brandId;
+        DeviceModelId = modelId;
+        DeviceVariantId = variantId;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Sets the device problem
+    /// </summary>
+    public void SetDeviceProblem(Guid? problemId)
+    {
+        DeviceProblemId = problemId;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Updates device identification
+    /// </summary>
+    public void UpdateDeviceIdentification(string? imei, string? serialNumber)
+    {
+        IMEI = imei;
+        SerialNumber = serialNumber;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Updates security information
+    /// </summary>
+    public void UpdateSecurityInfo(string? passcode, string? patternLock)
+    {
+        Passcode = passcode;
+        PatternLock = patternLock;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Sets warranty information
+    /// </summary>
+    public void SetWarrantyInfo(bool isWarrantyApplicable, int warrantyDays)
+    {
+        IsWarrantyApplicable = isWarrantyApplicable;
+        WarrantyDays = warrantyDays;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Updates repair charges
+    /// </summary>
+    public void UpdateRepairCharges(decimal repairCharges)
+    {
+        if (repairCharges < 0)
+            throw new ArgumentException("Repair charges cannot be negative", nameof(repairCharges));
+
+        RepairCharges = repairCharges;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Marks as rush job
+    /// </summary>
+    public void MarkAsRushJob(bool isRush)
+    {
+        IsRushJob = isRush;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Updates physical location
+    /// </summary>
+    public void UpdatePhysicalLocation(string? location)
+    {
+        if (location != null && location.Length > 200)
+            throw new ArgumentException("Physical location cannot exceed 200 characters", nameof(location));
+
+        PhysicalLocation = location;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Updates task type
+    /// </summary>
+    public void UpdateTaskType(string taskType)
+    {
+        if (string.IsNullOrWhiteSpace(taskType))
+            throw new ArgumentException("Task type cannot be empty", nameof(taskType));
+        if (taskType.Length > 50)
+            throw new ArgumentException("Task type cannot exceed 50 characters", nameof(taskType));
+
+        TaskType = taskType;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Updates network status
+    /// </summary>
+    public void UpdateNetworkStatus(string? networkStatus)
+    {
+        if (networkStatus != null && networkStatus.Length > 200)
+            throw new ArgumentException("Network status cannot exceed 200 characters", nameof(networkStatus));
+
+        NetworkStatus = networkStatus;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Updates diagnostic note
+    /// </summary>
+    public void UpdateDiagnosticNote(string? note)
+    {
+        DiagnosticNote = note;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Updates private comment
+    /// </summary>
+    public void UpdatePrivateComment(string? comment)
+    {
+        PrivateComment = comment;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Updates additional note
+    /// </summary>
+    public void UpdateAdditionalNote(string? note)
+    {
+        AdditionalNote = note;
+        UpdatedAt = DateTime.UtcNow;
     }
 }
 

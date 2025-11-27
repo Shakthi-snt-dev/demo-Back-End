@@ -9,25 +9,26 @@ public class InventoryItem
     public Guid Id { get; set; } = Guid.NewGuid();
 
     [Required]
-    public Guid StoreId { get; set; }
+    public Guid ProductId { get; set; }
 
-    [Required, MaxLength(200)]
-    public string Name { get; set; } = string.Empty;
+    public Product? Product { get; set; }
+
+    [Required]
+    public Guid StoreId { get; set; }
+    // Note: Store is in Store context - reference by ID only, no navigation property
+
+    public int QuantityOnHand { get; set; }
+
+    public int QuantityReserved { get; set; }
+
+    public int ReorderLevel { get; set; }
 
     [MaxLength(200)]
-    public string? SKU { get; set; }
+    public string? Location { get; set; }
 
-    [Column(TypeName = "decimal(18,2)")]
-    public decimal CostPrice { get; set; }
+    public ICollection<SerialNumber> Serials { get; set; } = new List<SerialNumber>();
 
-    [Column(TypeName = "decimal(18,2)")]
-    public decimal SellPrice { get; set; }
-
-    public int QuantityOnHand { get; set; } = 0;
-
-    // Note: PartsUsed are in Service context - reference by InventoryItemId only, no navigation property
-
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public ICollection<InventoryTransaction> Transactions { get; set; } = new List<InventoryTransaction>();
 
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
@@ -36,21 +37,26 @@ public class InventoryItem
     // ===========================
 
     /// <summary>
-    /// Updates the inventory item information
+    /// Updates the location of the inventory item
     /// </summary>
-    public void UpdateItemInfo(string name, string? sku, decimal costPrice, decimal sellPrice)
+    public void UpdateLocation(string? location)
     {
-        if (string.IsNullOrWhiteSpace(name))
-            throw new ArgumentException("Name cannot be empty", nameof(name));
-        if (costPrice < 0)
-            throw new ArgumentException("Cost price cannot be negative", nameof(costPrice));
-        if (sellPrice < 0)
-            throw new ArgumentException("Sell price cannot be negative", nameof(sellPrice));
+        if (location != null && location.Length > 200)
+            throw new ArgumentException("Location cannot exceed 200 characters", nameof(location));
 
-        Name = name;
-        SKU = sku;
-        CostPrice = costPrice;
-        SellPrice = sellPrice;
+        Location = location;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Updates the reorder level
+    /// </summary>
+    public void UpdateReorderLevel(int reorderLevel)
+    {
+        if (reorderLevel < 0)
+            throw new ArgumentException("Reorder level cannot be negative", nameof(reorderLevel));
+
+        ReorderLevel = reorderLevel;
         UpdatedAt = DateTime.UtcNow;
     }
 
@@ -93,30 +99,6 @@ public class InventoryItem
     }
 
     /// <summary>
-    /// Updates the cost price
-    /// </summary>
-    public void UpdateCostPrice(decimal costPrice)
-    {
-        if (costPrice < 0)
-            throw new ArgumentException("Cost price cannot be negative", nameof(costPrice));
-
-        CostPrice = costPrice;
-        UpdatedAt = DateTime.UtcNow;
-    }
-
-    /// <summary>
-    /// Updates the sell price
-    /// </summary>
-    public void UpdateSellPrice(decimal sellPrice)
-    {
-        if (sellPrice < 0)
-            throw new ArgumentException("Sell price cannot be negative", nameof(sellPrice));
-
-        SellPrice = sellPrice;
-        UpdatedAt = DateTime.UtcNow;
-    }
-
-    /// <summary>
     /// Checks if the item is in stock
     /// </summary>
     public bool IsInStock()
@@ -130,6 +112,50 @@ public class InventoryItem
     public bool HasSufficientQuantity(int requiredQuantity)
     {
         return QuantityOnHand >= requiredQuantity;
+    }
+
+    /// <summary>
+    /// Checks if the item is below reorder level
+    /// </summary>
+    public bool IsBelowReorderLevel()
+    {
+        return QuantityOnHand <= ReorderLevel;
+    }
+
+    /// <summary>
+    /// Gets the available quantity (on hand minus reserved)
+    /// </summary>
+    public int GetQuantityAvailable()
+    {
+        return QuantityOnHand - QuantityReserved;
+    }
+
+    /// <summary>
+    /// Reserves quantity
+    /// </summary>
+    public void ReserveQuantity(int quantity)
+    {
+        if (quantity <= 0)
+            throw new InvalidOperationException("Quantity must be greater than zero");
+        if (GetQuantityAvailable() < quantity)
+            throw new InvalidOperationException("Insufficient available quantity");
+
+        QuantityReserved += quantity;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
+    /// Releases reserved quantity
+    /// </summary>
+    public void ReleaseReservedQuantity(int quantity)
+    {
+        if (quantity <= 0)
+            throw new InvalidOperationException("Quantity must be greater than zero");
+        if (QuantityReserved < quantity)
+            throw new InvalidOperationException("Cannot release more than reserved");
+
+        QuantityReserved -= quantity;
+        UpdatedAt = DateTime.UtcNow;
     }
 }
 

@@ -320,34 +320,89 @@ namespace Flowtap_Infrastructure.Migrations
                     b.ToTable("Integrations");
                 });
 
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.BarcodeTemplate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("StoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("TemplateJson")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TemplateName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BarcodeTemplates");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.InventoryAdjustment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("EmployeeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("InventoryItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("NewQuantity")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("OldQuantity")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasMaxLength(400)
+                        .HasColumnType("character varying(400)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InventoryItemId");
+
+                    b.ToTable("InventoryAdjustments");
+                });
+
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.InventoryItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<decimal>("CostPrice")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
+                    b.Property<string>("Location")
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("QuantityOnHand")
                         .HasColumnType("integer");
 
-                    b.Property<string>("SKU")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                    b.Property<int>("QuantityReserved")
+                        .HasColumnType("integer");
 
-                    b.Property<decimal>("SellPrice")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("ReorderLevel")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("StoreId")
                         .HasColumnType("uuid");
@@ -357,15 +412,94 @@ namespace Flowtap_Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SKU");
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("StoreId");
 
-                    b.HasIndex("StoreId", "SKU")
-                        .IsUnique()
-                        .HasFilter("[SKU] IS NOT NULL");
+                    b.HasIndex("ProductId", "StoreId");
 
                     b.ToTable("InventoryItems");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.InventorySettings", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("AllowNegativeInventory")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("AutoAdjustInventoryOnTicketCompletion")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("AutoGenerateSKU")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("DefaultReorderLevel")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DefaultReorderQuantity")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("EnableLowStockAlerts")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("LowStockAlertEmail")
+                        .HasMaxLength(320)
+                        .HasColumnType("character varying(320)");
+
+                    b.Property<bool>("RequireSerialScanOnSale")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("StoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("TrackSerialNumbersByDefault")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InventorySettings");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.InventoryTransaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("InventoryItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ReferenceNumber")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<string>("ReferenceType")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("UnitCost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InventoryItemId");
+
+                    b.ToTable("InventoryTransactions");
                 });
 
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.Product", b =>
@@ -374,55 +508,225 @@ namespace Flowtap_Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Category")
+                    b.Property<string>("Brand")
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<decimal>("Cost")
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Condition")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<decimal>("CostPrice")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("MinStock")
-                        .HasColumnType("integer");
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("InventoryValuationMethod")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<decimal>("MinimumPrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
-                    b.Property<decimal>("Price")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("ProductType")
+                        .HasColumnType("integer");
 
                     b.Property<string>("SKU")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<int>("Stock")
-                        .HasColumnType("integer");
+                    b.Property<decimal>("SalePrice")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid>("StoreId")
+                    b.Property<bool>("ShowOnPOS")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid?>("SubCategoryId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<Guid?>("SupplierId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("TaxClass")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<bool>("TrackSerials")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Category");
+                    b.HasIndex("CategoryId");
 
-                    b.HasIndex("StoreId");
+                    b.HasIndex("SKU");
 
-                    b.HasIndex("StoreId", "Category");
+                    b.HasIndex("SubCategoryId");
 
-                    b.HasIndex("StoreId", "SKU")
-                        .IsUnique();
+                    b.HasIndex("SupplierId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.ProductCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductCategories");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.ProductSubCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("ProductSubCategories");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.ProductVariant", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AttributeName")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("AttributeValue")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductVariants");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.SerialNumber", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("InventoryItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Serial")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InventoryItemId");
+
+                    b.ToTable("SerialNumbers");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.StockTransfer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ApprovedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("FromStoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("RequestedById")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("ToStoreId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StockTransfers");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.StockTransferItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("InventoryItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("StockTransferId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InventoryItemId");
+
+                    b.HasIndex("StockTransferId");
+
+                    b.ToTable("StockTransferItems");
                 });
 
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Owner.Entities.AppUser", b =>
@@ -497,6 +801,149 @@ namespace Flowtap_Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppUsers");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Procurement.Entities.PurchaseOrder", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("PONumber")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("StoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SupplierId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("PurchaseOrders");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Procurement.Entities.PurchaseOrderLine", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("PurchaseOrderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("UnitCost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PurchaseOrderId");
+
+                    b.ToTable("PurchaseOrderLines");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Procurement.Entities.Supplier", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("ContactPerson")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(320)
+                        .HasColumnType("character varying(320)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Suppliers");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Procurement.Entities.SupplierReturn", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("StoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SupplierId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("SupplierReturns");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Procurement.Entities.SupplierReturnItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("InventoryItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("SupplierReturnId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SupplierReturnId");
+
+                    b.ToTable("SupplierReturnItems");
                 });
 
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.Entities.Customer", b =>
@@ -873,6 +1320,125 @@ namespace Flowtap_Infrastructure.Migrations
                     b.ToTable("Devices");
                 });
 
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceBrand", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("DeviceBrands");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsLaborBillable")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<string>("PictureUrl")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DeviceCategories");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("BrandId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
+
+                    b.ToTable("DeviceModels");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceProblem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<Guid>("ModelId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ServiceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ModelId");
+
+                    b.ToTable("DeviceProblems");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceVariant", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Attribute")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<Guid>("ModelId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ModelId");
+
+                    b.ToTable("DeviceVariants");
+                });
+
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.PartUsed", b =>
                 {
                     b.Property<Guid>("Id")
@@ -903,6 +1469,37 @@ namespace Flowtap_Infrastructure.Migrations
                     b.ToTable("PartsUsed");
                 });
 
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.PreCheckItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("StoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PreCheckItems");
+                });
+
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.RepairTicket", b =>
                 {
                     b.Property<Guid>("Id")
@@ -912,6 +1509,9 @@ namespace Flowtap_Infrastructure.Migrations
                     b.Property<decimal?>("ActualCost")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("AdditionalNote")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CompletedAt")
                         .HasColumnType("timestamp with time zone");
@@ -938,12 +1538,30 @@ namespace Flowtap_Infrastructure.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<Guid?>("DeviceBrandId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("DeviceCategoryId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("DeviceDescription")
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
                     b.Property<Guid?>("DeviceId")
                         .HasColumnType("uuid");
+
+                    b.Property<Guid?>("DeviceModelId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("DeviceProblemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("DeviceVariantId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("DiagnosticNote")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("DueDate")
                         .HasColumnType("timestamp with time zone");
@@ -955,8 +1573,34 @@ namespace Flowtap_Infrastructure.Migrations
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("IMEI")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<bool>("IsRushJob")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsWarrantyApplicable")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("NetworkStatus")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
                     b.Property<string>("Notes")
                         .HasColumnType("text");
+
+                    b.Property<string>("Passcode")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("PatternLock")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("PhysicalLocation")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("Priority")
                         .ValueGeneratedOnAdd()
@@ -964,13 +1608,23 @@ namespace Flowtap_Infrastructure.Migrations
                         .HasColumnType("character varying(50)")
                         .HasDefaultValue("medium");
 
+                    b.Property<string>("PrivateComment")
+                        .HasColumnType("text");
+
                     b.Property<string>("ProblemDescription")
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
 
+                    b.Property<decimal>("RepairCharges")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("ResolutionNotes")
                         .HasMaxLength(500)
                         .HasColumnType("character varying(500)");
+
+                    b.Property<string>("SerialNumber")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -982,16 +1636,26 @@ namespace Flowtap_Infrastructure.Migrations
                     b.Property<Guid>("StoreId")
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime?>("TaskDueDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("TaskType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
                     b.Property<Guid?>("TechnicianId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("TicketNumber")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("WarrantyDays")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -999,7 +1663,17 @@ namespace Flowtap_Infrastructure.Migrations
 
                     b.HasIndex("CustomerId");
 
+                    b.HasIndex("DeviceBrandId");
+
+                    b.HasIndex("DeviceCategoryId");
+
                     b.HasIndex("DeviceId");
+
+                    b.HasIndex("DeviceModelId");
+
+                    b.HasIndex("DeviceProblemId");
+
+                    b.HasIndex("DeviceVariantId");
 
                     b.HasIndex("EstimatedCompletionAt");
 
@@ -1020,6 +1694,293 @@ namespace Flowtap_Infrastructure.Migrations
                     b.HasIndex("StoreId", "TechnicianId");
 
                     b.ToTable("RepairTickets");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.Service", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("BasePrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeviceSpecific")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<bool>("ShowOnPOS")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("ShowOnWidget")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("StoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("TaxClass")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.ServiceDiagnosis", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("LoggedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<Guid?>("RecommendedServiceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("RequiresAdvancedRepair")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("TicketId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TicketId");
+
+                    b.ToTable("ServiceDiagnoses");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.ServiceLabor", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Cost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Label")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<Guid>("ServiceId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("ServiceLabors");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.ServicePart", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("ServiceId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("ServiceParts");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.ServicePriceMatrix", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("BrandId")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal?>("CustomPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("ModelId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("ServiceId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ServicePriceMatrices");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.ServiceWarranty", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ServiceId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("WarrantyDays")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("ServiceWarranties");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.SpecialOrderPart", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("CreatePurchaseOrder")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("DeviceModelId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsTaxExclusive")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("ItemName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<Guid?>("ManufacturerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<DateTime?>("OrderDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("OrderLink")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<DateTime?>("ReceivedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("RequiredQty")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("RetailPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("StoreId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("SupplierId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("TrackingId")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<decimal>("UnitCost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SpecialOrderParts");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.TicketConditionImage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("RepairTicketId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RepairTicketId");
+
+                    b.ToTable("TicketConditionImages");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.TicketPreCheck", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CheckedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("Passed")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("PreCheckItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("RepairTicketId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PreCheckItemId");
+
+                    b.HasIndex("RepairTicketId");
+
+                    b.ToTable("TicketPreChecks");
                 });
 
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Store.Entities.Store", b =>
@@ -1273,6 +2234,106 @@ namespace Flowtap_Infrastructure.Migrations
                     b.Navigation("Address");
                 });
 
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.InventoryAdjustment", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Inventory.Entities.InventoryItem", "InventoryItem")
+                        .WithMany()
+                        .HasForeignKey("InventoryItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InventoryItem");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.InventoryItem", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Inventory.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.InventoryTransaction", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Inventory.Entities.InventoryItem", "InventoryItem")
+                        .WithMany("Transactions")
+                        .HasForeignKey("InventoryItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InventoryItem");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.Product", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Inventory.Entities.ProductCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Inventory.Entities.ProductSubCategory", "SubCategory")
+                        .WithMany()
+                        .HasForeignKey("SubCategoryId");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("SubCategory");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.ProductSubCategory", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Inventory.Entities.ProductCategory", "Category")
+                        .WithMany("SubCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.ProductVariant", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Inventory.Entities.Product", "Product")
+                        .WithMany("Variants")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.SerialNumber", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Inventory.Entities.InventoryItem", "InventoryItem")
+                        .WithMany("Serials")
+                        .HasForeignKey("InventoryItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InventoryItem");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.StockTransferItem", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Inventory.Entities.InventoryItem", "InventoryItem")
+                        .WithMany()
+                        .HasForeignKey("InventoryItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Inventory.Entities.StockTransfer", "StockTransfer")
+                        .WithMany("Items")
+                        .HasForeignKey("StockTransferId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InventoryItem");
+
+                    b.Navigation("StockTransfer");
+                });
+
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Owner.Entities.AppUser", b =>
                 {
                     b.OwnsOne("Flowtap_Domain.SharedKernel.ValueObjects.Address", "Address", b1 =>
@@ -1319,6 +2380,50 @@ namespace Flowtap_Infrastructure.Migrations
                         });
 
                     b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Procurement.Entities.PurchaseOrder", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Procurement.Entities.Supplier", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Procurement.Entities.PurchaseOrderLine", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Procurement.Entities.PurchaseOrder", "PurchaseOrder")
+                        .WithMany("Lines")
+                        .HasForeignKey("PurchaseOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PurchaseOrder");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Procurement.Entities.SupplierReturn", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Procurement.Entities.Supplier", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Procurement.Entities.SupplierReturnItem", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Procurement.Entities.SupplierReturn", "SupplierReturn")
+                        .WithMany("Items")
+                        .HasForeignKey("SupplierReturnId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SupplierReturn");
                 });
 
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.Entities.Customer", b =>
@@ -1411,6 +2516,50 @@ namespace Flowtap_Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceBrand", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceCategory", "Category")
+                        .WithMany("Brands")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceModel", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceBrand", "Brand")
+                        .WithMany("Models")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceProblem", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceModel", "Model")
+                        .WithMany("Problems")
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Model");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceVariant", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceModel", "Model")
+                        .WithMany("Variants")
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Model");
+                });
+
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.PartUsed", b =>
                 {
                     b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.RepairTicket", "RepairTicket")
@@ -1424,12 +2573,116 @@ namespace Flowtap_Infrastructure.Migrations
 
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.RepairTicket", b =>
                 {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceBrand", "DeviceBrand")
+                        .WithMany()
+                        .HasForeignKey("DeviceBrandId");
+
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceCategory", "DeviceCategory")
+                        .WithMany()
+                        .HasForeignKey("DeviceCategoryId");
+
                     b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.Device", "Device")
                         .WithMany("RepairTickets")
                         .HasForeignKey("DeviceId")
                         .OnDelete(DeleteBehavior.Restrict);
 
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceModel", "DeviceModel")
+                        .WithMany()
+                        .HasForeignKey("DeviceModelId");
+
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceProblem", "DeviceProblem")
+                        .WithMany()
+                        .HasForeignKey("DeviceProblemId");
+
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceVariant", "DeviceVariant")
+                        .WithMany()
+                        .HasForeignKey("DeviceVariantId");
+
                     b.Navigation("Device");
+
+                    b.Navigation("DeviceBrand");
+
+                    b.Navigation("DeviceCategory");
+
+                    b.Navigation("DeviceModel");
+
+                    b.Navigation("DeviceProblem");
+
+                    b.Navigation("DeviceVariant");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.ServiceDiagnosis", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.RepairTicket", "Ticket")
+                        .WithMany()
+                        .HasForeignKey("TicketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ticket");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.ServiceLabor", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.Service", "Service")
+                        .WithMany("Labor")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.ServicePart", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.Service", "Service")
+                        .WithMany("Parts")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.ServiceWarranty", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.Service", "Service")
+                        .WithMany("Warranties")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.TicketConditionImage", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.RepairTicket", "RepairTicket")
+                        .WithMany("ConditionImages")
+                        .HasForeignKey("RepairTicketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RepairTicket");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.TicketPreCheck", b =>
+                {
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.PreCheckItem", "PreCheckItem")
+                        .WithMany()
+                        .HasForeignKey("PreCheckItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Flowtap_Domain.BoundedContexts.Service.Entities.RepairTicket", "RepairTicket")
+                        .WithMany("PreChecks")
+                        .HasForeignKey("RepairTicketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PreCheckItem");
+
+                    b.Navigation("RepairTicket");
                 });
 
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Store.Entities.Store", b =>
@@ -1534,6 +2787,38 @@ namespace Flowtap_Infrastructure.Migrations
                     b.Navigation("DefaultAddress");
                 });
 
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.InventoryItem", b =>
+                {
+                    b.Navigation("Serials");
+
+                    b.Navigation("Transactions");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.Product", b =>
+                {
+                    b.Navigation("Variants");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.ProductCategory", b =>
+                {
+                    b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Inventory.Entities.StockTransfer", b =>
+                {
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Procurement.Entities.PurchaseOrder", b =>
+                {
+                    b.Navigation("Lines");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Procurement.Entities.SupplierReturn", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Sales.Entities.Customer", b =>
                 {
                     b.Navigation("Invoices");
@@ -1556,9 +2841,39 @@ namespace Flowtap_Infrastructure.Migrations
                     b.Navigation("RepairTickets");
                 });
 
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceBrand", b =>
+                {
+                    b.Navigation("Models");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceCategory", b =>
+                {
+                    b.Navigation("Brands");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.DeviceModel", b =>
+                {
+                    b.Navigation("Problems");
+
+                    b.Navigation("Variants");
+                });
+
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.RepairTicket", b =>
                 {
+                    b.Navigation("ConditionImages");
+
                     b.Navigation("PartsUsed");
+
+                    b.Navigation("PreChecks");
+                });
+
+            modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Service.Entities.Service", b =>
+                {
+                    b.Navigation("Labor");
+
+                    b.Navigation("Parts");
+
+                    b.Navigation("Warranties");
                 });
 
             modelBuilder.Entity("Flowtap_Domain.BoundedContexts.Store.Entities.Store", b =>

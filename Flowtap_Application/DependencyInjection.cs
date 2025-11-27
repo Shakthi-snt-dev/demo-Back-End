@@ -18,7 +18,20 @@ namespace Flowtap_Application
             // services.AddScoped<IOrderService, OrderService>();
 
             // Inventory Context
-            // services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IInventoryItemService, InventoryItemService>();
+            
+            // Procurement Context
+            services.AddScoped<ISupplierService, SupplierService>();
+            services.AddScoped<IPurchaseOrderService, PurchaseOrderService>();
+
+            // Service Context
+            services.AddScoped<IDeviceCategoryService, DeviceCategoryService>();
+            services.AddScoped<IDeviceBrandService, DeviceBrandService>();
+            services.AddScoped<IDeviceModelService, DeviceModelService>();
+            services.AddScoped<IServiceService, ServiceService>();
+            services.AddScoped<IPreCheckItemService, PreCheckItemService>();
+            services.AddScoped<ISpecialOrderPartService, SpecialOrderPartService>();
 
             // Service Context
             // services.AddScoped<IRepairTicketService, RepairTicketService>();

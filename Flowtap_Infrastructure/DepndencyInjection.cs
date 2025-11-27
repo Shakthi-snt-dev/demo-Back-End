@@ -9,6 +9,7 @@ using Flowtap_Domain.BoundedContexts.HR.Interfaces;
 using Flowtap_Domain.BoundedContexts.Audit.Interfaces;
 using Flowtap_Domain.BoundedContexts.Sales.Interfaces;
 using Flowtap_Domain.BoundedContexts.Inventory.Interfaces;
+using Flowtap_Domain.BoundedContexts.Procurement.Interfaces;
 using Flowtap_Domain.BoundedContexts.Service.Interfaces;
 using Flowtap_Infrastructure.Data;
 using Flowtap_Infrastructure.Repositories;
@@ -64,9 +65,27 @@ namespace Flowtap_Infrastructure
             
             // Inventory Context
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IInventoryItemRepository, InventoryItemRepository>();
+            services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+            services.AddScoped<IProductSubCategoryRepository, ProductSubCategoryRepository>();
+            services.AddScoped<ISerialNumberRepository, SerialNumberRepository>();
+            services.AddScoped<IInventoryTransactionRepository, InventoryTransactionRepository>();
+            services.AddScoped<IStockTransferRepository, StockTransferRepository>();
+            
+            // Procurement Context
+            services.AddScoped<ISupplierRepository, SupplierRepository>();
+            services.AddScoped<IPurchaseOrderRepository, PurchaseOrderRepository>();
             
         // Service Context
         services.AddScoped<IRepairTicketRepository, RepairTicketRepository>();
+        services.AddScoped<IDeviceCategoryRepository, DeviceCategoryRepository>();
+        services.AddScoped<IDeviceBrandRepository, DeviceBrandRepository>();
+        services.AddScoped<IDeviceModelRepository, DeviceModelRepository>();
+        services.AddScoped<IDeviceVariantRepository, DeviceVariantRepository>();
+        services.AddScoped<IDeviceProblemRepository, DeviceProblemRepository>();
+        services.AddScoped<IServiceRepository, ServiceRepository>();
+        services.AddScoped<IPreCheckItemRepository, PreCheckItemRepository>();
+        services.AddScoped<ISpecialOrderPartRepository, SpecialOrderPartRepository>();
 
         // Integration Context
         services.AddScoped<Flowtap_Domain.BoundedContexts.Integration.Interfaces.IIntegrationRepository, IntegrationRepository>();

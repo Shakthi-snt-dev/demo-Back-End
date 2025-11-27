@@ -1,118 +1,175 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Flowtap_Domain.SharedKernel.Enums;
 
 namespace Flowtap_Domain.BoundedContexts.Inventory.Entities;
 
 public class Product
 {
     [Key]
-    public Guid Id { get; set; }
-
-    [Required]
-    public Guid StoreId { get; set; }
-
-    [Required, MaxLength(100)]
-    public string SKU { get; set; } = string.Empty;
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     [Required, MaxLength(200)]
     public string Name { get; set; } = string.Empty;
 
     [MaxLength(100)]
-    public string? Category { get; set; }
+    public string? SKU { get; set; }
 
-    public int Stock { get; set; } = 0;
+    [MaxLength(100)]
+    public string? Brand { get; set; }
 
-    public int MinStock { get; set; } = 0;
+    public string? Description { get; set; }
+
+    public Guid? CategoryId { get; set; }
+    public ProductCategory? Category { get; set; }
+
+    public Guid? SubCategoryId { get; set; }
+    public ProductSubCategory? SubCategory { get; set; }
 
     [Column(TypeName = "decimal(18,2)")]
-    public decimal Price { get; set; } = 0;
+    public decimal CostPrice { get; set; }
 
     [Column(TypeName = "decimal(18,2)")]
-    public decimal Cost { get; set; } = 0;
+    public decimal SalePrice { get; set; }
+
+    public ProductType ProductType { get; set; } = ProductType.InventoryPart;
+
+    public bool TrackSerials { get; set; } = false;
+
+    public bool IsActive { get; set; } = true;
+
+    public Guid? SupplierId { get; set; }
+
+    [MaxLength(100)]
+    public string? Condition { get; set; } // New, Used, Refurbished, etc.
+
+    [MaxLength(50)]
+    public string? InventoryValuationMethod { get; set; } // FIFO, LIFO, Average Cost
+
+    [Column(TypeName = "decimal(18,2)")]
+    public decimal MinimumPrice { get; set; } = 0; // Minimum selling price
+
+    [MaxLength(50)]
+    public string? TaxClass { get; set; } // Tax classification
+
+    public bool ShowOnPOS { get; set; } = true; // Show on POS toggle
+    // Note: Supplier is in Procurement context - reference by ID only, no navigation property
+
+    public ICollection<ProductVariant> Variants { get; set; } = new List<ProductVariant>();
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    // ===========================
+    // DOMAIN METHODS - Business Logic
+    // ===========================
 
-    // Domain methods
-    public void UpdateStock(int quantity)
+    /// <summary>
+    /// Updates the product information
+    /// </summary>
+    public void UpdateProductInfo(string name, string? sku, string? brand, string? description, decimal costPrice, decimal salePrice, 
+        string? condition = null, string? inventoryValuationMethod = null, decimal? minimumPrice = null, 
+        string? taxClass = null, bool? showOnPOS = null)
     {
-        if (quantity < 0)
-            throw new InvalidOperationException("Stock quantity cannot be negative");
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Name cannot be empty", nameof(name));
+        if (costPrice < 0)
+            throw new ArgumentException("Cost price cannot be negative", nameof(costPrice));
+        if (salePrice < 0)
+            throw new ArgumentException("Sale price cannot be negative", nameof(salePrice));
+        if (minimumPrice.HasValue && minimumPrice.Value < 0)
+            throw new ArgumentException("Minimum price cannot be negative", nameof(minimumPrice));
 
-        Stock = quantity;
-        UpdatedAt = DateTime.UtcNow;
+        Name = name;
+        SKU = sku;
+        Brand = brand;
+        Description = description;
+        CostPrice = costPrice;
+        SalePrice = salePrice;
+
+        if (condition != null)
+            Condition = condition;
+        if (inventoryValuationMethod != null)
+            InventoryValuationMethod = inventoryValuationMethod;
+        if (minimumPrice.HasValue)
+            MinimumPrice = minimumPrice.Value;
+        if (taxClass != null)
+            TaxClass = taxClass;
+        if (showOnPOS.HasValue)
+            ShowOnPOS = showOnPOS.Value;
     }
 
-    public void AddStock(int quantity)
+    /// <summary>
+    /// Updates the cost price
+    /// </summary>
+    public void UpdateCostPrice(decimal costPrice)
     {
-        if (quantity <= 0)
-            throw new InvalidOperationException("Quantity must be greater than zero");
+        if (costPrice < 0)
+            throw new ArgumentException("Cost price cannot be negative", nameof(costPrice));
 
-        Stock += quantity;
-        UpdatedAt = DateTime.UtcNow;
+        CostPrice = costPrice;
     }
 
-    public void RemoveStock(int quantity)
+    /// <summary>
+    /// Updates the sale price
+    /// </summary>
+    public void UpdateSalePrice(decimal salePrice)
     {
-        if (quantity <= 0)
-            throw new InvalidOperationException("Quantity must be greater than zero");
+        if (salePrice < 0)
+            throw new ArgumentException("Sale price cannot be negative", nameof(salePrice));
 
-        if (Stock < quantity)
-            throw new InvalidOperationException("Insufficient stock");
-
-        Stock -= quantity;
-        UpdatedAt = DateTime.UtcNow;
+        SalePrice = salePrice;
     }
 
-    public void UpdatePrice(decimal price)
+    /// <summary>
+    /// Sets the category for the product
+    /// </summary>
+    public void SetCategory(Guid? categoryId, Guid? subCategoryId)
     {
-        if (price < 0)
-            throw new InvalidOperationException("Price cannot be negative");
-
-        Price = price;
-        UpdatedAt = DateTime.UtcNow;
+        CategoryId = categoryId;
+        SubCategoryId = subCategoryId;
     }
 
-    public void UpdateCost(decimal cost)
+    /// <summary>
+    /// Sets the supplier for the product
+    /// </summary>
+    public void SetSupplier(Guid? supplierId)
     {
-        if (cost < 0)
-            throw new InvalidOperationException("Cost cannot be negative");
-
-        Cost = cost;
-        UpdatedAt = DateTime.UtcNow;
+        SupplierId = supplierId;
     }
 
-    public void UpdateMinStock(int minStock)
+    /// <summary>
+    /// Enables or disables serial number tracking
+    /// </summary>
+    public void SetTrackSerials(bool trackSerials)
     {
-        if (minStock < 0)
-            throw new InvalidOperationException("Minimum stock cannot be negative");
-
-        MinStock = minStock;
-        UpdatedAt = DateTime.UtcNow;
+        TrackSerials = trackSerials;
     }
 
-    public bool IsLowStock()
+    /// <summary>
+    /// Sets the product type (InventoryPart, ServicePart, or Service)
+    /// </summary>
+    public void SetProductType(ProductType productType)
     {
-        return Stock <= MinStock;
+        ProductType = productType;
     }
 
-    public bool IsInStock()
-    {
-        return Stock > 0;
-    }
-
-    public bool HasSufficientStock(int quantity)
-    {
-        return Stock >= quantity;
-    }
-
+    /// <summary>
+    /// Calculates the profit margin percentage
+    /// </summary>
     public decimal GetProfitMargin()
     {
-        if (Price == 0)
+        if (SalePrice == 0)
             return 0;
 
-        return ((Price - Cost) / Price) * 100;
+        return ((SalePrice - CostPrice) / SalePrice) * 100;
+    }
+
+    /// <summary>
+    /// Calculates the profit amount
+    /// </summary>
+    public decimal GetProfitAmount()
+    {
+        return SalePrice - CostPrice;
     }
 }
 

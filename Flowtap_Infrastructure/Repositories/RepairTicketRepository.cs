@@ -35,15 +35,11 @@ public class RepairTicketRepository : IRepairTicketRepository
 
     public async Task<IEnumerable<RepairTicket>> GetByStatusAsync(string status)
     {
-        // Convert string to enum for backward compatibility
-        if (Enum.TryParse<TicketStatus>(status, true, out var ticketStatus))
-        {
-            return await _context.RepairTickets
-                .Where(t => t.Status == ticketStatus)
-                .OrderByDescending(t => t.CreatedAt)
-                .ToListAsync();
-        }
-        return new List<RepairTicket>();
+        // Status is now a string field, not enum
+        return await _context.RepairTickets
+            .Where(t => t.Status == status)
+            .OrderByDescending(t => t.CreatedAt)
+            .ToListAsync();
     }
 
     public async Task<IEnumerable<RepairTicket>> GetByPriorityAsync(string priority)
@@ -68,8 +64,8 @@ public class RepairTicketRepository : IRepairTicketRepository
         return await _context.RepairTickets
             .Where(t => (t.EstimatedCompletionAt.HasValue && t.EstimatedCompletionAt.Value < now) ||
                        (t.DueDate.HasValue && t.DueDate.Value < now) &&
-                       t.Status != TicketStatus.Completed &&
-                       t.Status != TicketStatus.Cancelled)
+                       t.Status != "Completed" &&
+                       t.Status != "Cancelled")
             .OrderBy(t => t.EstimatedCompletionAt ?? t.DueDate)
             .ToListAsync();
     }
