@@ -67,7 +67,10 @@ public class MappingProfile : Profile
         // Product mappings
         CreateMap<Product, ProductResponseDto>()
             .ForMember(dest => dest.Variants, opt => opt.MapFrom(src => src.Variants))
-            .ForMember(dest => dest.ProductType, opt => opt.MapFrom(src => src.ProductType.ToString()));
+            .ForMember(dest => dest.ProductType, opt => opt.MapFrom(src => src.ProductType.ToString()))
+            .ForMember(dest => dest.ShowOnPOS, opt => opt.MapFrom(src => src.ShowOnPOS))
+            .ForMember(dest => dest.OnHandQty, opt => opt.Ignore()) // Calculated manually in service
+            .ForMember(dest => dest.StockWarning, opt => opt.Ignore()); // Calculated manually in service
         
         CreateMap<ProductVariant, ProductVariantResponseDto>();
         

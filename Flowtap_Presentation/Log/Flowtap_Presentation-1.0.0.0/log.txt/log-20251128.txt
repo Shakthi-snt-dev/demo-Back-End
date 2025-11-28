@@ -1,0 +1,74 @@
+2025-11-28 21:23:31.769 +05:30 [INF] User profile is available. Using 'C:\Users\Rajan\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-28 21:23:32.940 +05:30 [WRN] The WebRootPath was not found: D:\Git\demo-Back-End\Flowtap_Presentation\wwwroot. Static files may be unavailable.
+2025-11-28 21:23:33.008 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-28 21:23:33.018 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-28 21:23:33.020 +05:30 [INF] Hosting environment: Development
+2025-11-28 21:23:33.022 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-28 21:23:43.230 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/index.html - null null
+2025-11-28 21:23:43.487 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/index.html - 200 null text/html;charset=utf-8 259.306ms
+2025-11-28 21:23:43.646 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - null null
+2025-11-28 21:23:44.466 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 820.029ms
+2025-11-28 21:24:33.383 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/Auth/login - application/json 66
+2025-11-28 21:24:33.407 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-11-28 21:24:33.415 +05:30 [INF] CORS policy execution successful.
+2025-11-28 21:24:33.881 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation)'
+2025-11-28 21:24:33.940 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Application.DtoModel.ApiResponseDto`1[Flowtap_Application.DtoModel.Response.LoginResponseDto]]] Login(Flowtap_Application.DtoModel.Request.LoginRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-28 21:24:37.237 +05:30 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-11-28 21:24:37.304 +05:30 [WRN] The property 'AppUser.StoreIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-28 21:24:37.311 +05:30 [WRN] The property 'Store.EmployeeIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-28 21:24:39.083 +05:30 [INF] Executed DbCommand (124ms) [Parameters=[@__email_0='testflowtap@yopmail.com'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-28 21:24:39.534 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@p17='9e4c1d17-14c1-4e4e-81d1-17bd0657fde2', @p0='4c9abb05-d1e9-4fc7-928d-225f2c687ce2' (Nullable = true), @p1='2025-11-21T04:18:55.1076720Z' (DbType = DateTime), @p2='testflowtap@yopmail.com' (Nullable = false), @p3=NULL, @p4=NULL (DbType = DateTime), @p5='e60b7257-5782-4fcd-98f2-8f2636f0c5bd' (Nullable = true), @p6=NULL, @p7=NULL, @p8='True', @p9='True', @p10='2025-11-28T15:54:39.3172205Z' (Nullable = true) (DbType = DateTime), @p11='2iq6QxI7/tSlDD0TYAvFlc50//3XJCciHQXNh3KAotg=' (Nullable = false), @p12='X5tbMrzbtaL6pKpauGSVhw==', @p13='False', @p14='2025-11-28T15:54:39.3173239Z' (DbType = DateTime), @p15='1', @p16='Flowtap'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-28 21:24:39.642 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__id_0='4c9abb05-d1e9-4fc7-928d-225f2c687ce2'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."BusinessName", a."Country", a."CreatedAt", a."Currency", a."DefaultStoreId", a."Email", a."FirstName", a."Language", a."LastName", a."PhoneNumber", a."StoreIds", a."SubscriptionId", a."TimeZone", a."TrialEndDate", a."TrialStartDate", a."TrialStatus", a."UpdatedAt", a."City", a."PostalCode", a."State", a."StreetName", a."StreetNumber"
+FROM "AppUsers" AS a
+WHERE a."Id" = @__id_0
+LIMIT 1
+2025-11-28 21:24:39.882 +05:30 [INF] Successful login for email: testflowtap@yopmail.com, UserId: "9e4c1d17-14c1-4e4e-81d1-17bd0657fde2"
+2025-11-28 21:24:39.915 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Application.DtoModel.ApiResponseDto`1[[Flowtap_Application.DtoModel.Response.LoginResponseDto, Flowtap_Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-28 21:24:39.992 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation) in 6035.5147ms
+2025-11-28 21:24:39.999 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation)'
+2025-11-28 21:24:40.023 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/Auth/login - 200 null application/json; charset=utf-8 6639.6872ms
+2025-11-28 21:33:29.518 +05:30 [INF] Application is shutting down...
+2025-11-28 21:34:02.158 +05:30 [INF] User profile is available. Using 'C:\Users\Rajan\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-11-28 21:34:02.440 +05:30 [WRN] The WebRootPath was not found: D:\Git\demo-Back-End\Flowtap_Presentation\wwwroot. Static files may be unavailable.
+2025-11-28 21:34:02.525 +05:30 [INF] Now listening on: http://localhost:5113
+2025-11-28 21:34:02.537 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-11-28 21:34:02.542 +05:30 [INF] Hosting environment: Development
+2025-11-28 21:34:02.550 +05:30 [INF] Content root path: D:\Git\demo-Back-End\Flowtap_Presentation
+2025-11-28 21:34:03.794 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/index.html - null null
+2025-11-28 21:34:04.216 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/index.html - 200 null text/html;charset=utf-8 426.7232ms
+2025-11-28 21:34:04.395 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - null null
+2025-11-28 21:34:05.344 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5113/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 948.7971ms
+2025-11-28 21:34:41.647 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5113/api/Auth/login - application/json 66
+2025-11-28 21:34:41.675 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-11-28 21:34:41.720 +05:30 [INF] CORS policy execution successful.
+2025-11-28 21:34:41.921 +05:30 [INF] Executing endpoint 'Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation)'
+2025-11-28 21:34:41.994 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[Flowtap_Application.DtoModel.ApiResponseDto`1[Flowtap_Application.DtoModel.Response.LoginResponseDto]]] Login(Flowtap_Application.DtoModel.Request.LoginRequestDto) on controller Flowtap_Presentation.Controllers.AuthController (Flowtap_Presentation).
+2025-11-28 21:34:45.707 +05:30 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-11-28 21:34:45.827 +05:30 [WRN] The property 'AppUser.StoreIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-28 21:34:45.846 +05:30 [WRN] The property 'Store.EmployeeIds' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-11-28 21:34:47.727 +05:30 [INF] Executed DbCommand (112ms) [Parameters=[@__email_0='testflowtap@yopmail.com'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."AppUserId", u."CreatedAt", u."Email", u."EmailVerificationToken", u."EmailVerificationTokenExpiry", u."EmployeeId", u."ExternalProvider", u."ExternalProviderId", u."IsActive", u."IsEmailVerified", u."LastLoginAt", u."PasswordHash", u."PasswordSalt", u."TwoFactorEnabled", u."UpdatedAt", u."UserType", u."Username"
+FROM "UserAccounts" AS u
+WHERE u."Email" = @__email_0
+LIMIT 1
+2025-11-28 21:34:48.320 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@p17='9e4c1d17-14c1-4e4e-81d1-17bd0657fde2', @p0='4c9abb05-d1e9-4fc7-928d-225f2c687ce2' (Nullable = true), @p1='2025-11-21T04:18:55.1076720Z' (DbType = DateTime), @p2='testflowtap@yopmail.com' (Nullable = false), @p3=NULL, @p4=NULL (DbType = DateTime), @p5='e60b7257-5782-4fcd-98f2-8f2636f0c5bd' (Nullable = true), @p6=NULL, @p7=NULL, @p8='True', @p9='True', @p10='2025-11-28T16:04:48.0693251Z' (Nullable = true) (DbType = DateTime), @p11='2iq6QxI7/tSlDD0TYAvFlc50//3XJCciHQXNh3KAotg=' (Nullable = false), @p12='X5tbMrzbtaL6pKpauGSVhw==', @p13='False', @p14='2025-11-28T16:04:48.0694332Z' (DbType = DateTime), @p15='1', @p16='Flowtap'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "UserAccounts" SET "AppUserId" = @p0, "CreatedAt" = @p1, "Email" = @p2, "EmailVerificationToken" = @p3, "EmailVerificationTokenExpiry" = @p4, "EmployeeId" = @p5, "ExternalProvider" = @p6, "ExternalProviderId" = @p7, "IsActive" = @p8, "IsEmailVerified" = @p9, "LastLoginAt" = @p10, "PasswordHash" = @p11, "PasswordSalt" = @p12, "TwoFactorEnabled" = @p13, "UpdatedAt" = @p14, "UserType" = @p15, "Username" = @p16
+WHERE "Id" = @p17;
+2025-11-28 21:34:48.470 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__id_0='4c9abb05-d1e9-4fc7-928d-225f2c687ce2'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."BusinessName", a."Country", a."CreatedAt", a."Currency", a."DefaultStoreId", a."Email", a."FirstName", a."Language", a."LastName", a."PhoneNumber", a."StoreIds", a."SubscriptionId", a."TimeZone", a."TrialEndDate", a."TrialStartDate", a."TrialStatus", a."UpdatedAt", a."City", a."PostalCode", a."State", a."StreetName", a."StreetNumber"
+FROM "AppUsers" AS a
+WHERE a."Id" = @__id_0
+LIMIT 1
+2025-11-28 21:34:48.721 +05:30 [INF] Successful login for email: testflowtap@yopmail.com, UserId: "9e4c1d17-14c1-4e4e-81d1-17bd0657fde2"
+2025-11-28 21:34:48.767 +05:30 [INF] Executing OkObjectResult, writing value of type 'Flowtap_Application.DtoModel.ApiResponseDto`1[[Flowtap_Application.DtoModel.Response.LoginResponseDto, Flowtap_Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-11-28 21:34:48.870 +05:30 [INF] Executed action Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation) in 6865.358ms
+2025-11-28 21:34:48.873 +05:30 [INF] Executed endpoint 'Flowtap_Presentation.Controllers.AuthController.Login (Flowtap_Presentation)'
+2025-11-28 21:34:48.904 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5113/api/Auth/login - 200 null application/json; charset=utf-8 7257.0272ms
+2025-11-28 21:35:40.755 +05:30 [INF] Application is shutting down...

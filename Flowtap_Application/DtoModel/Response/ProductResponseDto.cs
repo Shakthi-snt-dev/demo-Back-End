@@ -24,6 +24,8 @@ public class ProductResponseDto
     public string? TaxClass { get; set; }
     public bool ShowOnPOS { get; set; }
     public string? UPCCode { get; set; }
+    public int OnHandQty { get; set; } // Total quantity across all stores
+    public int StockWarning { get; set; } // Minimum reorder level (stock warning threshold) across all stores
     public List<ProductVariantResponseDto> Variants { get; set; } = new();
     public decimal ProfitMargin { get; set; }
     public decimal ProfitAmount { get; set; }

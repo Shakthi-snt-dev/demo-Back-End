@@ -14,6 +14,7 @@ public class ProductService : IProductService
     private readonly IProductRepository _productRepository;
     private readonly IProductCategoryRepository _categoryRepository;
     private readonly IProductSubCategoryRepository _subCategoryRepository;
+    private readonly IInventoryItemRepository _inventoryItemRepository;
     private readonly IMapper _mapper;
     private readonly ILogger<ProductService> _logger;
 
@@ -21,12 +22,14 @@ public class ProductService : IProductService
         IProductRepository productRepository,
         IProductCategoryRepository categoryRepository,
         IProductSubCategoryRepository subCategoryRepository,
+        IInventoryItemRepository inventoryItemRepository,
         IMapper mapper,
         ILogger<ProductService> logger)
     {
         _productRepository = productRepository;
         _categoryRepository = categoryRepository;
         _subCategoryRepository = subCategoryRepository;
+        _inventoryItemRepository = inventoryItemRepository;
         _mapper = mapper;
         _logger = logger;
     }
@@ -182,6 +185,15 @@ public class ProductService : IProductService
             var subCategory = await _subCategoryRepository.GetByIdAsync(product.SubCategoryId.Value);
             dto.SubCategoryName = subCategory?.Name;
         }
+
+        // Calculate total quantity on hand across all stores
+        var inventoryItems = await _inventoryItemRepository.GetByProductIdAsync(product.Id);
+        dto.OnHandQty = inventoryItems.Sum(item => item.QuantityOnHand);
+        
+        // Calculate stock warning (minimum reorder level across all stores, or 0 if no inventory items)
+        dto.StockWarning = inventoryItems.Any() 
+            ? inventoryItems.Min(item => item.ReorderLevel) 
+            : 0;
 
         dto.ProfitMargin = product.GetProfitMargin();
         dto.ProfitAmount = product.GetProfitAmount();
