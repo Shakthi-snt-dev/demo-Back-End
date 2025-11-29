@@ -61,6 +61,18 @@ public class InventoryItem
     }
 
     /// <summary>
+    /// Updates the stock warning level (reorder level)
+    /// </summary>
+    public void UpdateStockWarning(int stockWarning)
+    {
+        if (stockWarning < 0)
+            throw new ArgumentException("Stock warning level cannot be negative", nameof(stockWarning));
+
+        ReorderLevel = stockWarning;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
+    /// <summary>
     /// Updates the quantity on hand
     /// </summary>
     public void UpdateQuantity(int quantity)

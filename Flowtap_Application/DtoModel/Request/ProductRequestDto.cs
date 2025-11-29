@@ -47,12 +47,16 @@ public class CreateProductRequestDto
 
     public bool ShowOnPOS { get; set; } = true;
 
+    public bool IsActive { get; set; } = true;
+
     // Stock Controls
     public int? OnHandQty { get; set; }
 
     public int? StockWarning { get; set; }
 
     public int? ReorderLevel { get; set; }
+
+    public Guid? StoreId { get; set; } // Required when OnHandQty/StockWarning/ReorderLevel are provided
 
     // Warranty
     public int? WarrantyDays { get; set; }
@@ -106,6 +110,15 @@ public class UpdateProductRequestDto
     public bool? ShowOnPOS { get; set; }
 
     public Guid? SupplierId { get; set; }
+
+    // Stock Controls (requires StoreId to identify which InventoryItem to update)
+    public int? OnHandQty { get; set; }
+
+    public int? StockWarning { get; set; }
+
+    public int? ReorderLevel { get; set; }
+
+    public Guid? StoreId { get; set; } // Required when OnHandQty/StockWarning/ReorderLevel are provided
 }
 
 public class CreateSpecialOrderPartRequestDto

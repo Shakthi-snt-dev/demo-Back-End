@@ -2,6 +2,7 @@ using AutoMapper;
 using Flowtap_Application.Interfaces;
 using Flowtap_Domain.BoundedContexts.Inventory.Entities;
 using Flowtap_Domain.BoundedContexts.Inventory.Interfaces;
+using Flowtap_Domain.BoundedContexts.Store.Interfaces;
 using Flowtap_Application.DtoModel.Request;
 using Flowtap_Application.DtoModel.Response;
 using Flowtap_Domain.Exceptions;
@@ -15,6 +16,7 @@ public class ProductService : IProductService
     private readonly IProductCategoryRepository _categoryRepository;
     private readonly IProductSubCategoryRepository _subCategoryRepository;
     private readonly IInventoryItemRepository _inventoryItemRepository;
+    private readonly IStoreRepository _storeRepository;
     private readonly IMapper _mapper;
     private readonly ILogger<ProductService> _logger;
 
@@ -23,6 +25,7 @@ public class ProductService : IProductService
         IProductCategoryRepository categoryRepository,
         IProductSubCategoryRepository subCategoryRepository,
         IInventoryItemRepository inventoryItemRepository,
+        IStoreRepository storeRepository,
         IMapper mapper,
         ILogger<ProductService> logger)
     {
@@ -30,6 +33,7 @@ public class ProductService : IProductService
         _categoryRepository = categoryRepository;
         _subCategoryRepository = subCategoryRepository;
         _inventoryItemRepository = inventoryItemRepository;
+        _storeRepository = storeRepository;
         _mapper = mapper;
         _logger = logger;
     }
@@ -48,9 +52,63 @@ public class ProductService : IProductService
         var product = _mapper.Map<Product>(request);
         product.Id = Guid.NewGuid();
         product.CreatedAt = DateTime.UtcNow;
+        // Set IsActive from request (mapper sets default to true, but we allow override)
+        product.IsActive = request.IsActive;
 
         var createdProduct = await _productRepository.CreateAsync(product);
         _logger.LogInformation("Created product {ProductId}", createdProduct.Id);
+
+        // Create InventoryItem if stock fields are provided
+        if (request.OnHandQty.HasValue || request.StockWarning.HasValue || request.ReorderLevel.HasValue)
+        {
+            if (!request.StoreId.HasValue)
+            {
+                throw new ArgumentException("StoreId is required when OnHandQty, StockWarning, or ReorderLevel are provided");
+            }
+
+            // Validate store exists
+            var store = await _storeRepository.GetByIdAsync(request.StoreId.Value);
+            if (store == null)
+            {
+                throw new EntityNotFoundException("Store", request.StoreId.Value);
+            }
+
+            // Check if inventory item already exists
+            var existingInventoryItem = await _inventoryItemRepository.GetByProductIdAndStoreIdAsync(
+                createdProduct.Id, request.StoreId.Value);
+            
+            if (existingInventoryItem != null)
+            {
+                // Update existing inventory item
+                if (request.OnHandQty.HasValue)
+                    existingInventoryItem.UpdateQuantity(request.OnHandQty.Value);
+                if (request.ReorderLevel.HasValue)
+                    existingInventoryItem.UpdateReorderLevel(request.ReorderLevel.Value);
+                else if (request.StockWarning.HasValue)
+                    existingInventoryItem.UpdateStockWarning(request.StockWarning.Value);
+                
+                await _inventoryItemRepository.UpdateAsync(existingInventoryItem);
+                _logger.LogInformation("Updated inventory item for product {ProductId} in store {StoreId}", 
+                    createdProduct.Id, request.StoreId.Value);
+            }
+            else
+            {
+                // Create new inventory item
+                var inventoryItem = new InventoryItem
+                {
+                    Id = Guid.NewGuid(),
+                    ProductId = createdProduct.Id,
+                    StoreId = request.StoreId.Value,
+                    QuantityOnHand = request.OnHandQty ?? 0,
+                    ReorderLevel = request.ReorderLevel ?? request.StockWarning ?? 0,
+                    UpdatedAt = DateTime.UtcNow
+                };
+
+                await _inventoryItemRepository.CreateAsync(inventoryItem);
+                _logger.LogInformation("Created inventory item for product {ProductId} in store {StoreId}", 
+                    createdProduct.Id, request.StoreId.Value);
+            }
+        }
 
         return await MapToResponseDto(createdProduct);
     }
@@ -147,10 +205,69 @@ public class ProductService : IProductService
         if (request.TrackSerials.HasValue)
             product.SetTrackSerials(request.TrackSerials.Value);
 
-        // ProductType is set via mapper, but we can also set it explicitly if needed
-        // IsActive is set via mapper
+        if (request.ProductType.HasValue)
+            product.SetProductType(request.ProductType.Value);
+
+        // Update IsActive if provided
+        if (request.IsActive.HasValue)
+        {
+            product.IsActive = request.IsActive.Value;
+        }
 
         var updatedProduct = await _productRepository.UpdateAsync(product);
+
+        // Update InventoryItem if stock fields are provided
+        if (request.OnHandQty.HasValue || request.StockWarning.HasValue || request.ReorderLevel.HasValue)
+        {
+            if (!request.StoreId.HasValue)
+            {
+                throw new ArgumentException("StoreId is required when OnHandQty, StockWarning, or ReorderLevel are provided");
+            }
+
+            // Validate store exists
+            var store = await _storeRepository.GetByIdAsync(request.StoreId.Value);
+            if (store == null)
+            {
+                throw new EntityNotFoundException("Store", request.StoreId.Value);
+            }
+
+            // Get or create inventory item
+            var inventoryItem = await _inventoryItemRepository.GetByProductIdAndStoreIdAsync(
+                id, request.StoreId.Value);
+
+            if (inventoryItem == null)
+            {
+                // Create new inventory item if it doesn't exist
+                inventoryItem = new InventoryItem
+                {
+                    Id = Guid.NewGuid(),
+                    ProductId = id,
+                    StoreId = request.StoreId.Value,
+                    QuantityOnHand = request.OnHandQty ?? 0,
+                    ReorderLevel = request.ReorderLevel ?? request.StockWarning ?? 0,
+                    UpdatedAt = DateTime.UtcNow
+                };
+
+                await _inventoryItemRepository.CreateAsync(inventoryItem);
+                _logger.LogInformation("Created inventory item for product {ProductId} in store {StoreId}", 
+                    id, request.StoreId.Value);
+            }
+            else
+            {
+                // Update existing inventory item
+                if (request.OnHandQty.HasValue)
+                    inventoryItem.UpdateQuantity(request.OnHandQty.Value);
+                if (request.ReorderLevel.HasValue)
+                    inventoryItem.UpdateReorderLevel(request.ReorderLevel.Value);
+                else if (request.StockWarning.HasValue)
+                    inventoryItem.UpdateStockWarning(request.StockWarning.Value);
+
+                await _inventoryItemRepository.UpdateAsync(inventoryItem);
+                _logger.LogInformation("Updated inventory item for product {ProductId} in store {StoreId}", 
+                    id, request.StoreId.Value);
+            }
+        }
+
         return await MapToResponseDto(updatedProduct);
     }
 
