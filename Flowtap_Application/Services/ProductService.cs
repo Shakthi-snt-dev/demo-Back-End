@@ -17,6 +17,7 @@ public class ProductService : IProductService
     private readonly IProductSubCategoryRepository _subCategoryRepository;
     private readonly IInventoryItemRepository _inventoryItemRepository;
     private readonly IStoreRepository _storeRepository;
+    private readonly IHttpAccessorService _httpAccessorService;
     private readonly IMapper _mapper;
     private readonly ILogger<ProductService> _logger;
 
@@ -26,6 +27,7 @@ public class ProductService : IProductService
         IProductSubCategoryRepository subCategoryRepository,
         IInventoryItemRepository inventoryItemRepository,
         IStoreRepository storeRepository,
+        IHttpAccessorService httpAccessorService,
         IMapper mapper,
         ILogger<ProductService> logger)
     {
@@ -34,6 +36,7 @@ public class ProductService : IProductService
         _subCategoryRepository = subCategoryRepository;
         _inventoryItemRepository = inventoryItemRepository;
         _storeRepository = storeRepository;
+        _httpAccessorService = httpAccessorService;
         _mapper = mapper;
         _logger = logger;
     }
@@ -61,21 +64,23 @@ public class ProductService : IProductService
         // Create InventoryItem if stock fields are provided
         if (request.OnHandQty.HasValue || request.StockWarning.HasValue || request.ReorderLevel.HasValue)
         {
-            if (!request.StoreId.HasValue)
+            // Get StoreId from token
+            var storeId = _httpAccessorService.GetStoreId();
+            if (!storeId.HasValue)
             {
-                throw new ArgumentException("StoreId is required when OnHandQty, StockWarning, or ReorderLevel are provided");
+                throw new UnauthorizedAccessException("StoreId is required in token when OnHandQty, StockWarning, or ReorderLevel are provided");
             }
 
             // Validate store exists
-            var store = await _storeRepository.GetByIdAsync(request.StoreId.Value);
+            var store = await _storeRepository.GetByIdAsync(storeId.Value);
             if (store == null)
             {
-                throw new EntityNotFoundException("Store", request.StoreId.Value);
+                throw new EntityNotFoundException("Store", storeId.Value);
             }
 
             // Check if inventory item already exists
             var existingInventoryItem = await _inventoryItemRepository.GetByProductIdAndStoreIdAsync(
-                createdProduct.Id, request.StoreId.Value);
+                createdProduct.Id, storeId.Value);
             
             if (existingInventoryItem != null)
             {
@@ -89,7 +94,7 @@ public class ProductService : IProductService
                 
                 await _inventoryItemRepository.UpdateAsync(existingInventoryItem);
                 _logger.LogInformation("Updated inventory item for product {ProductId} in store {StoreId}", 
-                    createdProduct.Id, request.StoreId.Value);
+                    createdProduct.Id, storeId.Value);
             }
             else
             {
@@ -98,7 +103,7 @@ public class ProductService : IProductService
                 {
                     Id = Guid.NewGuid(),
                     ProductId = createdProduct.Id,
-                    StoreId = request.StoreId.Value,
+                    StoreId = storeId.Value,
                     QuantityOnHand = request.OnHandQty ?? 0,
                     ReorderLevel = request.ReorderLevel ?? request.StockWarning ?? 0,
                     UpdatedAt = DateTime.UtcNow
@@ -106,7 +111,7 @@ public class ProductService : IProductService
 
                 await _inventoryItemRepository.CreateAsync(inventoryItem);
                 _logger.LogInformation("Created inventory item for product {ProductId} in store {StoreId}", 
-                    createdProduct.Id, request.StoreId.Value);
+                    createdProduct.Id, storeId.Value);
             }
         }
 
@@ -219,21 +224,23 @@ public class ProductService : IProductService
         // Update InventoryItem if stock fields are provided
         if (request.OnHandQty.HasValue || request.StockWarning.HasValue || request.ReorderLevel.HasValue)
         {
-            if (!request.StoreId.HasValue)
+            // Get StoreId from token
+            var storeId = _httpAccessorService.GetStoreId();
+            if (!storeId.HasValue)
             {
-                throw new ArgumentException("StoreId is required when OnHandQty, StockWarning, or ReorderLevel are provided");
+                throw new UnauthorizedAccessException("StoreId is required in token when OnHandQty, StockWarning, or ReorderLevel are provided");
             }
 
             // Validate store exists
-            var store = await _storeRepository.GetByIdAsync(request.StoreId.Value);
+            var store = await _storeRepository.GetByIdAsync(storeId.Value);
             if (store == null)
             {
-                throw new EntityNotFoundException("Store", request.StoreId.Value);
+                throw new EntityNotFoundException("Store", storeId.Value);
             }
 
             // Get or create inventory item
             var inventoryItem = await _inventoryItemRepository.GetByProductIdAndStoreIdAsync(
-                id, request.StoreId.Value);
+                id, storeId.Value);
 
             if (inventoryItem == null)
             {
@@ -242,7 +249,7 @@ public class ProductService : IProductService
                 {
                     Id = Guid.NewGuid(),
                     ProductId = id,
-                    StoreId = request.StoreId.Value,
+                    StoreId = storeId.Value,
                     QuantityOnHand = request.OnHandQty ?? 0,
                     ReorderLevel = request.ReorderLevel ?? request.StockWarning ?? 0,
                     UpdatedAt = DateTime.UtcNow
@@ -250,7 +257,7 @@ public class ProductService : IProductService
 
                 await _inventoryItemRepository.CreateAsync(inventoryItem);
                 _logger.LogInformation("Created inventory item for product {ProductId} in store {StoreId}", 
-                    id, request.StoreId.Value);
+                    id, storeId.Value);
             }
             else
             {
@@ -264,7 +271,7 @@ public class ProductService : IProductService
 
                 await _inventoryItemRepository.UpdateAsync(inventoryItem);
                 _logger.LogInformation("Updated inventory item for product {ProductId} in store {StoreId}", 
-                    id, request.StoreId.Value);
+                    id, storeId.Value);
             }
         }
 
