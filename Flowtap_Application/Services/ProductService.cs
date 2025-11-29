@@ -219,6 +219,18 @@ public class ProductService : IProductService
             product.IsActive = request.IsActive.Value;
         }
 
+        // Update UPCCode if provided
+        if (request.UPCCode != null)
+        {
+            product.UPCCode = request.UPCCode;
+        }
+
+        // Update WarrantyDays if provided
+        if (request.WarrantyDays.HasValue)
+        {
+            product.WarrantyDays = request.WarrantyDays.Value;
+        }
+
         var updatedProduct = await _productRepository.UpdateAsync(product);
 
         // Update InventoryItem if stock fields are provided

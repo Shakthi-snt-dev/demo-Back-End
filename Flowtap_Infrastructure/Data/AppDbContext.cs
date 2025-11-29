@@ -417,6 +417,7 @@ public class AppDbContext : DbContext
             entity.Property(e => e.CostPrice).HasPrecision(18, 2);
             entity.Property(e => e.SalePrice).HasPrecision(18, 2);
             entity.Property(e => e.MinimumPrice).HasPrecision(18, 2);
+            entity.Property(e => e.UPCCode).HasMaxLength(100);
             entity.HasIndex(e => e.SKU);
             entity.HasIndex(e => e.CategoryId);
             entity.HasIndex(e => e.SubCategoryId);

@@ -119,6 +119,13 @@ public class UpdateProductRequestDto
     public int? ReorderLevel { get; set; }
 
     public Guid? StoreId { get; set; } // Required when OnHandQty/StockWarning/ReorderLevel are provided
+
+    // Warranty
+    public int? WarrantyDays { get; set; }
+
+    // UPC Code
+    [MaxLength(100)]
+    public string? UPCCode { get; set; }
 }
 
 public class CreateSpecialOrderPartRequestDto

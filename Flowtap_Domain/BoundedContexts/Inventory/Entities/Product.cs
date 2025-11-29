@@ -53,6 +53,12 @@ public class Product
     public string? TaxClass { get; set; } // Tax classification
 
     public bool ShowOnPOS { get; set; } = true; // Show on POS toggle
+    
+    [MaxLength(100)]
+    public string? UPCCode { get; set; } // Universal Product Code / Barcode
+
+    public int? WarrantyDays { get; set; } // Warranty period in days
+    
     // Note: Supplier is in Procurement context - reference by ID only, no navigation property
 
     public ICollection<ProductVariant> Variants { get; set; } = new List<ProductVariant>();

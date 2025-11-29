@@ -572,6 +572,13 @@ namespace Flowtap_Infrastructure.Migrations
                     b.Property<bool>("TrackSerials")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("UPCCode")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<int?>("WarrantyDays")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
